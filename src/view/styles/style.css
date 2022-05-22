@@ -1458,6 +1458,12 @@
   #CartPage .cart__products--payment .payment--total span {
     font-size: 16px;
   }
+  #SearchPage .search__header p {
+    font-size: 16px;
+  }
+  #SearchPage .search__header p span {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 576px) and (min-width: 400px) {
@@ -1698,6 +1704,12 @@
   }
   #CartPage .cart__products--payment .payment--total span {
     font-size: 15px;
+  }
+  #SearchPage .search__header p {
+    font-size: 14px;
+  }
+  #SearchPage .search__header p span {
+    font-size: 14px;
   }
 }
 
@@ -1984,6 +1996,12 @@
     font-size: 13px;
   }
   #CartPage .cart__products--payment .payment--total span {
+    font-size: 14px;
+  }
+  #SearchPage .search__header p {
+    font-size: 13px;
+  }
+  #SearchPage .search__header p span {
     font-size: 14px;
   }
 }

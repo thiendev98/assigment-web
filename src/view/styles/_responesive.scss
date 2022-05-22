@@ -409,6 +409,16 @@
       }
     }
   }
+  #SearchPage {
+    .search__header {
+      p {
+        font-size: 16px;
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }
 @media (max-width: 576px) and (min-width: 400px) {
   #HomePage {
@@ -636,6 +646,16 @@
           span {
             font-size: 15px;
           }
+        }
+      }
+    }
+  }
+  #SearchPage {
+    .search__header {
+      p {
+        font-size: 14px;
+        span {
+          font-size: 14px;
         }
       }
     }
@@ -896,6 +916,16 @@
           span {
             font-size: 14px;
           }
+        }
+      }
+    }
+  }
+  #SearchPage {
+    .search__header {
+      p {
+        font-size: 13px;
+        span {
+          font-size: 14px;
         }
       }
     }
