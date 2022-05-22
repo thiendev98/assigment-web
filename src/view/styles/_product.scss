@@ -1,0 +1,218 @@
+@mixin centerItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#ProductPage {
+  .product__header {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    span {
+      line-height: 40px;
+      cursor: pointer;
+      transition-duration: 0.1s;
+    }
+    span:hover {
+      color: #fcaf17;
+    }
+    margin-bottom: 10px;
+  }
+  .product__content {
+    ul,
+    li {
+      padding: 0;
+    }
+    .row {
+      margin: 0;
+    }
+    overflow: hidden;
+    &--item {
+      @include centerItem();
+      flex-direction: column;
+      margin: 10px 0;
+      p {
+        width: 228px;
+        margin: 6px;
+        padding: 0;
+        font-size: 14px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        text-transform: capitalize;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      span {
+        width: 228px;
+        margin: 0 6px;
+        font-size: 16px;
+        cursor: pointer;
+        color: #f08522;
+      }
+      .item__list {
+        position: relative;
+        object-fit: contain;
+        .list__img {
+          height: 304px;
+          width: 228px;
+          cursor: pointer;
+        }
+      }
+      .list__img--hover {
+        position: absolute;
+        height: 304px;
+        width: 228px;
+        left: 0;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        transition: all 0.8s ease-in;
+        opacity: 0;
+      }
+      .item__list:hover .list__img--hover {
+        opacity: 1;
+      }
+    }
+    .detail--item {
+      padding-bottom: 24px;
+      padding-top: 6px;
+      .row {
+        padding: 0;
+        margin: 0;
+      }
+      .detail__info {
+        h3 {
+          font-size: 22px;
+          text-transform: capitalize;
+          font-weight: bold;
+        }
+        &--code {
+          font-size: 16px;
+        }
+        &--price {
+          font-size: 20px;
+          color: #f08522;
+        }
+        &--color {
+          font-size: 16px;
+          span {
+            font-size: 20px;
+          }
+        }
+        &--img {
+          padding: 0;
+          margin-right: 8px;
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        &--size {
+          padding: 12px 0 0;
+          font-size: 16px;
+          span {
+            font-size: 20px;
+          }
+        }
+        &--size__list {
+          display: flex;
+          .item--size {
+            position: relative;
+            min-width: 48px;
+            @include centerItem();
+            height: 48px;
+            border: 1px solid #dde1ef;
+            white-space: nowrap;
+            font-size: 16px;
+            text-align: center;
+            line-height: 48px;
+            border-radius: 2px;
+            cursor: pointer;
+            margin-right: 6px;
+          }
+        }
+        &--button {
+          padding: 20px 0;
+          button {
+            width: 264px;
+            height: 52px;
+            border: 1px solid #fff;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #fff;
+            transition-duration: 0.5s;
+          }
+          button:hover {
+            transform: translate3d(0, -3px, 2px);
+            opacity: 0.8;
+          }
+          .btn--add__cart {
+            margin-right: 6px;
+            background-color: #0c8796;
+          }
+          .btn--buy__now {
+            margin-left: 6px;
+            background-color: #f08522;
+          }
+        }
+      }
+      .detail__img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .item--img {
+          width: 72%;
+          border-radius: 4px;
+        }
+      }
+
+      &__info {
+        .information--item {
+          @include centerItem();
+          margin: 4px 0;
+        }
+        p {
+          margin: 0;
+          font-size: 13px;
+          cursor: pointer;
+        }
+        .service__img {
+          width: 52px;
+          height: 52px;
+        }
+      }
+      .detail--service__info {
+        display: none;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 9999;
+        &--item {
+          position: relative;
+          max-width: 800px;
+          margin: auto;
+          background: white;
+          padding: 30px;
+          top: 50%;
+          transform: translateY(-50%);
+          .icon__cancel {
+            position: absolute;
+            right: 10px;
+            top: 6px;
+            width: 16px;
+            height: 16px;
+          }
+          p {
+            text-align: justify;
+          }
+        }
+      }
+    }
+  }
+}

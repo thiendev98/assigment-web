@@ -1,0 +1,125 @@
+@mixin centerItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#SearchPage {
+  .search__header {
+    height: 100px;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    span {
+      font-size: 14px;
+      text-align: center;
+      margin: 0 2px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+    }
+    &--home:hover,
+    &--search:hover {
+      color: #fcaf17;
+    }
+    p {
+      @include centerItem();
+      text-align: center;
+      font-size: 17px;
+      font-weight: bold;
+      text-transform: capitalize;
+      color: #fcaf17;
+      margin: 4px 0;
+      span {
+        color: #fcaf17;
+        font-size: 18px;
+        text-transform: initial;
+      }
+    }
+  }
+  .search__content {
+    ul,
+    li {
+      padding: 0;
+    }
+    .row {
+      margin: 0;
+    }
+    padding: 12px 0;
+    overflow: hidden;
+    &--item {
+      @include centerItem();
+      flex-direction: column;
+      margin: 10px 0;
+      p {
+        width: 228px;
+        margin: 6px;
+        padding: 0;
+        font-size: 14px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        text-transform: capitalize;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      span {
+        width: 228px;
+        margin: 0 6px;
+        font-size: 16px;
+        cursor: pointer;
+        color: #f08522;
+      }
+      .item__list {
+        position: relative;
+        object-fit: contain;
+        .list__img {
+          height: 304px;
+          width: 228px;
+          cursor: pointer;
+        }
+      }
+      .list__img--hover {
+        position: absolute;
+        height: 304px;
+        width: 228px;
+        left: 0;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        transition: all 0.8s ease-in;
+        opacity: 0;
+      }
+      .item__list:hover .list__img--hover {
+        opacity: 1;
+      }
+    }
+  }
+  .search__empty {
+    min-height: 264px;
+    @include centerItem();
+    flex-direction: column;
+    p {
+      span {
+        font-size: 17px;
+        color: #fcaf17;
+      }
+    }
+    &--image {
+      width: 100px;
+      height: 100px;
+    }
+    &--again {
+      font-size: 17px;
+      margin: 6px 0;
+      color: #22215b;
+      text-transform: uppercase;
+    }
+    span {
+      font-size: 14px;
+    }
+    &--result {
+      margin: 6px 0;
+      font-size: 14px;
+    }
+  }
+}

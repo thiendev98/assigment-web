@@ -1,0 +1,212 @@
+#LoginPage {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  .form--login {
+    height: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50vw;
+    max-width: 600px;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    max-height: 95vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .icon__cancel {
+      position: absolute;
+      right: 24px;
+      top: 12px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    li {
+      margin: 12px 0;
+      span {
+        cursor: pointer;
+      }
+    }
+    h4 {
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .form--warning {
+      color: red;
+      justify-content: center;
+      align-items: center;
+      display: none;
+    }
+    .form--item {
+      display: flex;
+      flex-direction: column;
+      padding: 6px 0;
+      label {
+        float: left;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 600;
+        font-size: 16px;
+      }
+      input {
+        width: 100%;
+        height: 40px;
+        padding: 0 12px;
+        font-size: 14px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        outline: none;
+        cursor: pointer;
+      }
+    }
+    .button--login {
+      .row {
+        padding: 0;
+      }
+      width: 100%;
+      height: 40px;
+      text-align: center;
+      border-radius: 8px;
+      margin: 12px 0;
+      vertical-align: middle;
+      background-color: rgb(27, 26, 26);
+      border: 1px solid #ddd;
+      color: #fff;
+      transition-duration: 1s;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .button--login:hover {
+      transform: translate3d(0, -1px, 1px);
+      background-color: #d9d9d9;
+      color: #000;
+    }
+    .button--login__gg {
+      .icon__gg {
+        width: 28px;
+        height: 28px;
+        margin-right: 4px;
+      }
+      width: 100%;
+      height: 40px;
+      text-align: center;
+      border-radius: 8px;
+      margin: 12px 0;
+      vertical-align: middle;
+      background: #e5e5e5;
+      border: 1px solid #ddd;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .form--login__select {
+      padding: 8px 0;
+      position: relative;
+      color: #ccc;
+      text-align: center;
+    }
+
+    .form--login__select::before {
+      background-color: #e5e5e5;
+      position: absolute;
+      left: 0;
+      content: "";
+      width: 45%;
+      height: 1px;
+      top: 47%;
+    }
+    .form--login__select::after {
+      right: 0;
+      position: absolute;
+      background: #e5e5e5;
+      content: "";
+      width: 45%;
+      height: 1px;
+      top: 47%;
+    }
+  }
+  .form--register {
+    height: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50vw;
+    max-width: 600px;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    max-height: 95vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .icon__cancel {
+      position: absolute;
+      right: 24px;
+      top: 12px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    h4 {
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .form--item {
+      display: flex;
+      flex-direction: column;
+      padding: 6px 0;
+      label {
+        float: left;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 600;
+        font-size: 16px;
+      }
+      input {
+        width: 100%;
+        height: 40px;
+        padding: 0 12px;
+        font-size: 14px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        outline: none;
+        cursor: pointer;
+      }
+    }
+    .button--register {
+      width: 100%;
+      height: 40px;
+      text-align: center;
+      border-radius: 8px;
+      margin: 12px 0;
+      vertical-align: middle;
+      background-color: rgb(27, 26, 26);
+      border: 1px solid #ddd;
+      color: #fff;
+      transition-duration: 1s;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .button--register:hover {
+      transform: translate3d(0, -1px, 1px);
+      background-color: #d9d9d9;
+      color: #000;
+    }
+    p {
+      padding-top: 6px;
+      text-align: center;
+      span {
+        cursor: pointer;
+      }
+    }
+  }
+}

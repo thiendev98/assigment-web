@@ -1,0 +1,616 @@
+@media (min-width: 1200px) {
+  #header {
+    .navbar {
+      &__logo {
+        cursor: pointer;
+        .logo--img {
+          width: 90px;
+          height: 45px;
+        }
+      }
+      &__user {
+        lord-icon {
+          width: 36px;
+          height: 36px;
+          cursor: pointer;
+        }
+      }
+    }
+    .col-xl-0 {
+      display: none;
+    }
+  }
+  .footer {
+    .col-xl-0 {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 992px) {
+  #header {
+    .navbar {
+      &__logo {
+        cursor: pointer;
+        .logo--img {
+          float: right;
+          margin: 0 12px;
+          width: 100px;
+          height: 50px;
+        }
+      }
+      &__user {
+        lord-icon {
+          width: 36px;
+          height: 36px;
+          cursor: pointer;
+        }
+      }
+    }
+    .col-lg-0 {
+      display: none;
+    }
+    .bars__list--product {
+      .icon__bars {
+        float: left;
+        height: 24px;
+        width: 24px;
+        opacity: 0.8;
+        cursor: pointer;
+        margin: 0 6px;
+      }
+      .background__sidebars {
+        display: none;
+        background: rgba(0, 0, 0, 0.6);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9999;
+      }
+      .sidebar__list {
+        background-color: #fff;
+        height: 100%;
+        position: fixed;
+        top: 0 !important;
+        left: 0;
+        z-index: 99999;
+        width: 280px;
+        transform: translateX(-100%);
+        transition-duration: 0.8s;
+        transform-style: linear;
+        opacity: 1;
+        .sidebar__logo {
+          padding: 12px;
+          img {
+            width: 50%;
+            height: 30%;
+          }
+        }
+        .sidebar__link {
+          padding: 0 24px;
+          .item__icon {
+            display: none;
+          }
+          &--item {
+            margin: 12px 0;
+            &__img {
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+            span {
+              margin: 0 12px;
+              font-size: 16px;
+              cursor: pointer;
+              transition-duration: 0.25s;
+            }
+            span:hover {
+              color: $primary--color;
+            }
+          }
+        }
+      }
+    }
+    .col-lg-2 {
+      img {
+        width: 120px;
+        height: 60px;
+      }
+    }
+  }
+  .footer {
+    .col-xl-0 {
+      display: none;
+    }
+  }
+}
+@media (max-width: 992px) and (min-width: 768px) {
+  #header {
+    .navbar {
+      &__logo {
+        cursor: pointer;
+        .logo--img {
+          float: left;
+          width: 100px;
+          height: 50px;
+        }
+      }
+      &__user {
+        lord-icon {
+          width: 36px;
+          height: 36px;
+          cursor: pointer;
+        }
+      }
+    }
+    .col-md-0 {
+      display: none;
+    }
+    .bars__list--product {
+      .icon__bars {
+        float: right;
+        height: 24px;
+        width: 24px;
+        opacity: 0.8;
+        cursor: pointer;
+      }
+      .background__sidebars {
+        display: none;
+        background: rgba(0, 0, 0, 0.6);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9999;
+      }
+      .sidebar__list {
+        background-color: #fff;
+        height: 100%;
+        position: fixed;
+        top: 0 !important;
+        left: 0;
+        z-index: 99999;
+        width: 280px;
+        transform: translateX(-100%);
+        transition-duration: 0.8s;
+        transform-style: linear;
+        opacity: 1;
+        .sidebar__logo {
+          padding: 12px;
+          img {
+            width: 50%;
+            height: 30%;
+          }
+        }
+        .sidebar__link {
+          padding: 0 24px;
+          .item__icon {
+            display: none;
+          }
+          &--item {
+            margin: 12px 0;
+            &__img {
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+            span {
+              margin: 0 12px;
+              font-size: 16px;
+              cursor: pointer;
+              transition-duration: 0.25s;
+            }
+            span:hover {
+              color: $primary--color;
+            }
+          }
+        }
+      }
+    }
+    .col-lg-2 {
+      img {
+        width: 120px;
+        height: 60px;
+      }
+    }
+  }
+  .footer {
+    &__logo {
+      display: none;
+    }
+    .col-lg-0 {
+      display: none;
+    }
+  }
+}
+@media (max-width: 768px) and (min-width: 576px) {
+  #header {
+    .navbar {
+      &__logo {
+        cursor: pointer;
+        .logo--img {
+          float: left;
+          width: 84px;
+          height: 42px;
+        }
+      }
+      &__user {
+        lord-icon {
+          width: 36px;
+          height: 36px;
+          cursor: pointer;
+        }
+      }
+    }
+    .col-sm-0 {
+      display: none;
+    }
+    .bars__list--product {
+      .icon__bars {
+        float: right;
+        height: 24px;
+        width: 24px;
+        opacity: 0.8;
+        cursor: pointer;
+      }
+      .background__sidebars {
+        display: none;
+        background: rgba(0, 0, 0, 0.6);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9999;
+      }
+      .sidebar__list {
+        background-color: #fff;
+        height: 100%;
+        position: fixed;
+        top: 0 !important;
+        left: 0;
+        z-index: 99999;
+        width: 280px;
+        transform: translateX(-100%);
+        transition-duration: 0.8s;
+        transform-style: linear;
+        opacity: 1;
+        .sidebar__logo {
+          padding: 12px;
+          img {
+            width: 50%;
+            height: 30%;
+          }
+        }
+        .sidebar__link {
+          padding: 0 24px;
+          .item__icon {
+            display: none;
+          }
+          &--item {
+            margin: 12px 0;
+            &__img {
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+            span {
+              margin: 0 12px;
+              font-size: 16px;
+              cursor: pointer;
+              transition-duration: 0.25s;
+            }
+            span:hover {
+              color: $primary--color;
+            }
+          }
+        }
+      }
+    }
+    .col-lg-2 {
+      img {
+        width: 120px;
+        height: 60px;
+      }
+    }
+  }
+  .footer {
+    &__logo {
+      display: none;
+    }
+    &__about,
+    &__support,
+    &__info {
+      font-size: 16px;
+    }
+    &__info {
+      .info--item {
+        &__img {
+          height: 28px;
+          width: 28px;
+        }
+      }
+    }
+    .col-md-0 {
+      display: none;
+    }
+  }
+}
+@media (max-width: 576px) and (min-width: 400px) {
+  #header {
+    .navbar {
+      &__user {
+        display: flex;
+        justify-content: left;
+        .user--customer {
+          display: none;
+        }
+        .user--cart {
+          margin-left: 4px;
+        }
+        lord-icon {
+          width: 36px;
+          height: 36px;
+          cursor: pointer;
+        }
+      }
+      &__search {
+        .btn--search {
+          width: 42px;
+        }
+        .search__in {
+          height: 32px;
+          font-size: 12px;
+        }
+        .btn--search {
+          height: 32px;
+          img {
+            display: flex;
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+      &__logo {
+        cursor: pointer;
+        .logo--img {
+          float: left;
+          width: 72px;
+          height: 36px;
+        }
+      }
+    }
+    .col-0 {
+      display: none;
+    }
+    .bars__list--product {
+      .icon__bars {
+        float: right;
+        height: 24px;
+        width: 24px;
+        opacity: 0.8;
+        cursor: pointer;
+      }
+      .background__sidebars {
+        display: none;
+        background: rgba(0, 0, 0, 0.6);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9999;
+      }
+      .sidebar__list {
+        background-color: #fff;
+        height: 100%;
+        position: fixed;
+        top: 0 !important;
+        left: 0;
+        z-index: 99999;
+        width: 260px;
+        transform: translateX(-100%);
+        transition-duration: 0.8s;
+        transform-style: linear;
+        opacity: 1;
+        .sidebar__logo {
+          padding: 12px;
+          img {
+            width: 50%;
+            height: 30%;
+          }
+        }
+        .sidebar__link {
+          padding: 0 24px;
+          &--item {
+            margin: 12px 0;
+            &__img {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+            span {
+              margin: 0 12px;
+              font-size: 14px;
+              cursor: pointer;
+              transition-duration: 0.25s;
+            }
+            span:hover {
+              color: $primary--color;
+            }
+          }
+        }
+      }
+    }
+    .col-lg-2 {
+      img {
+        width: 120px;
+        height: 60px;
+      }
+    }
+  }
+  .footer {
+    .col-0 {
+      display: none;
+    }
+    &__logo {
+      display: none;
+    }
+    &__about,
+    &__support,
+    &__info {
+      font-size: 13px;
+    }
+    &__info {
+      .info--item {
+        &__img {
+          height: 28px;
+          width: 28px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 400px) {
+  #header {
+    .navbar {
+      &__user {
+        display: flex;
+        justify-content: left;
+        .user--customer {
+          display: none;
+        }
+        .user--cart {
+          margin-left: 0;
+        }
+        lord-icon {
+          width: 28px;
+          height: 28px;
+          cursor: pointer;
+        }
+      }
+      &__search {
+        .btn--search {
+          width: 42px;
+        }
+        .search__in {
+          height: 28px;
+          font-size: 10px;
+        }
+        .btn--search {
+          height: 28px;
+          img {
+            display: flex;
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+      &__logo {
+        cursor: pointer;
+        .logo--img {
+          float: left;
+          width: 72px;
+          height: 36px;
+        }
+      }
+    }
+    .col-0 {
+      display: none;
+    }
+    .bars__list--product {
+      .icon__bars {
+        float: right;
+        height: 18px;
+        width: 18px;
+        opacity: 0.8;
+        cursor: pointer;
+      }
+      .background__sidebars {
+        display: none;
+        background: rgba(0, 0, 0, 0.6);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9999;
+      }
+      .sidebar__list {
+        background-color: #fff;
+        height: 100%;
+        position: fixed;
+        top: 0 !important;
+        left: 0;
+        z-index: 99999;
+        width: 240px;
+        transform: translateX(-100%);
+        transition-duration: 0.8s;
+        transform-style: linear;
+        opacity: 1;
+        .sidebar__logo {
+          padding: 12px;
+          img {
+            width: 50%;
+            height: 30%;
+          }
+        }
+        .sidebar__link {
+          padding: 0 24px;
+          &--item {
+            margin: 12px 0;
+            &__img {
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+            span {
+              margin: 0 12px;
+              font-size: 13px;
+              cursor: pointer;
+              transition-duration: 0.25s;
+            }
+            span:hover {
+              color: $primary--color;
+            }
+          }
+        }
+      }
+    }
+    .col-lg-2 {
+      img {
+        width: 120px;
+        height: 60px;
+      }
+    }
+  }
+  .footer {
+    .col-0 {
+      display: none;
+    }
+    &__logo {
+      display: none;
+    }
+    &__about,
+    &__support,
+    &__info {
+      font-size: 12px;
+    }
+    &__info {
+      .info--item {
+        &__img {
+          height: 24px;
+          width: 24px;
+        }
+      }
+    }
+  }
+}
