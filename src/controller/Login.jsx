@@ -26,15 +26,15 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
     },
   ];
   const [loginAccount, setLoginAccount] = useState({
-    userName: "",
-    password: "",
+    userName: "chau",
+    password: "123",
   });
   const [registerAccount, setRegisterAccount] = useState({
     name: "",
-    userName: "",
+    userName: "chau",
     phone: "",
-    email: "",
-    password: "",
+    email: "chau",
+    password: "123",
   });
 
   const buttonRegister = () => {
