@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import $ from "jquery";
 import Home from "../view/components/Home";
 import TShirt from "../view/components/TShirt";
@@ -39,6 +39,9 @@ export default function Controller({ setAdmin }) {
   const [page, setPage] = useState(PAGE_HOME);
   const [user, setUser] = useState(false);
   const [searchProduct, setSearchProduct] = useState("");
+  //
+
+  //
   const nextPage = (pages) => {
     setSearchProduct("");
     setPage(pages);

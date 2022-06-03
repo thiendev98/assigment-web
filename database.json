@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "key": "281176c5-e8c9-4bc8-a58c-9bddf4d2249a",
+      "name": "hoang thien",
+      "userName": "dht",
+      "phone": "123456",
+      "email": "123456@gmail.com",
+      "password": "123456",
+      "avatar": null,
+      "cart": null,
+      "address": "",
+      "id": 1
+    },
+    {
+      "key": "281176c5-e8c9-4bc8-a58c-9bddf4d2249a",
+      "name": "nino",
+      "userName": "nino",
+      "phone": "123456",
+      "email": "123456@gmail.com",
+      "password": "123456",
+      "avatar": null,
+      "cart": null,
+      "address": "",
+      "id": 2
+    }
+  ]
+}

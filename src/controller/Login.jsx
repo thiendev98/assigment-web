@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/style.css";
 import $ from "jquery";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { postApiUsers, getApiUsers } from "../api/todo.api";
 import { FaGooglePlusG, FaTimes } from "react-icons/fa";
 export default function Login({ user, setUser, nextPage, setAdmin }) {
-  const [login, setLogin] = useState(true);
   const adminUser = [
     {
       userName: "admin",
@@ -15,29 +16,28 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
       password: "123456",
     },
   ];
-  const customerUser = [
-    {
-      userName: "customer",
-      password: "123456",
-    },
-    {
-      userName: "client",
-      password: "123456",
-    },
-  ];
+  const [customerUser, setCustomerUser] = useState();
+  const [login, setLogin] = useState(true);
   const [loginAccount, setLoginAccount] = useState({
     userName: "",
     password: "",
   });
   const [registerAccount, setRegisterAccount] = useState({
+    key: uuidv4(),
     name: "",
     userName: "",
     phone: "",
     email: "",
     password: "",
+    avatar: null,
+    cart: null,
+    address: "",
   });
-
+  useEffect(() => {
+    getApiUsers().then((users) => setCustomerUser(users));
+  }, [login]);
   const buttonRegister = () => {
+    setLogin(true);
     // const registerData = new FormData();
     // registerData.append("name", registerAccount.name);
     // registerData.append("userName", registerAccount.userName);
@@ -53,6 +53,7 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
     //   })
     //   .then((response) => console.log(response.data))
     //   .catch((err) => console.log(err));
+    postApiUsers(registerAccount);
   };
   const buttonLogin = () => {
     adminUser.forEach((admin) => {
@@ -67,7 +68,6 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
       }
     });
     customerUser.forEach((customer) => {
-      console.log(customer);
       if (
         customer.userName === loginAccount.userName &&
         customer.password === loginAccount.password
