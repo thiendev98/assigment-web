@@ -3,7 +3,38 @@ import "./styles/style.css";
 import $ from "jquery";
 import axios from "axios";
 import { FaGooglePlusG, FaTimes } from "react-icons/fa";
+import  handleForgot  from "./Forgot";
+import GoogleLogin from 'react-google-login';
+import { useGoogleLogin } from 'react-google-login';
+import customerData from './customerData.json';
+
 export default function Login({ user, setUser, nextPage, setAdmin }) {
+  const handleFailure = (result) => {
+    alert(result);
+  };
+  const handleLogin = (googleData) => {
+    console.log(googleData);
+   
+  };
+ 
+  const handleForgot=()=>{
+    return (
+        <div id="LoginPage">
+        <div className="row container-fluid">
+          <div className="form--register">
+          <FaTimes
+              className="icon__cancel"
+              onClick={() => {
+                $("#LoginPage").css("display", "none");
+               
+              }}
+            />
+           <h1 style={{color: "green"}}>GeeksForGeeks</h1>
+            </div>
+        </div>
+        </div>
+    );
+};
   const [login, setLogin] = useState(true);
   const adminUser = [
     {
@@ -15,26 +46,17 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
       password: "123456",
     },
   ];
-  const customerUser = [
-    {
-      userName: "customer",
-      password: "123456",
-    },
-    {
-      userName: "client",
-      password: "123456",
-    },
-  ];
+  var customerUser = customerData;
   const [loginAccount, setLoginAccount] = useState({
-    userName: "chau",
-    password: "123",
+    userName: "",
+    password: "",
   });
   const [registerAccount, setRegisterAccount] = useState({
     name: "",
-    userName: "chau",
+    userName: "",
     phone: "",
-    email: "chau",
-    password: "123",
+    email: "",
+    password: "",
   });
 
   const buttonRegister = () => {
@@ -53,7 +75,32 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
     //   })
     //   .then((response) => console.log(response.data))
     //   .catch((err) => console.log(err));
+   
+    const obj ={
+      name: registerAccount.name,
+      userName:registerAccount.userName,
+      email:registerAccount.email,
+      phone:registerAccount.phone,
+      password:registerAccount.password,
+      
+    };
+    
+    axios.post(`http://localhost/src/controller/insert.php`,obj)
+    .then(res=> console.log(res.data))
+    .catch(error => {
+      console.log(error.response)
+    });
+    setRegisterAccount({
+      name: '',
+      userName: '',
+      email:'',
+      phone:'',
+      password:'',
+   
+    })
+    customerUser=customerData;
   };
+  
   const buttonLogin = () => {
     adminUser.forEach((admin) => {
       if (
@@ -79,6 +126,45 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
         $(".form--warning").css("display", "flex");
       }
     });
+
+    /*const obj ={
+      userName:loginAccount.userName,
+      password:loginAccount.password,
+      
+    };
+    axios.post(`http://localhost/src/controller/read.php`,obj)
+    .then(
+      (res) => {
+        customerUser.forEach((customer) => {
+          
+          if (
+            customer.userName === loginAccount.userName &&
+            customer.password === loginAccount.password
+          ) {
+            console.log(customer);
+            $("#LoginPage").css("display", "none");
+            setUser(true);
+            nextPage("home");
+          } else {
+            
+            $(".form--warning").css("display", "flex");
+          }
+        });
+
+        adminUser.forEach((admin) => {
+          if (
+            admin.userName === loginAccount.userName &&
+            admin.password === loginAccount.password
+          ) {
+            $("#LoginPage").css("display", "none");
+            setAdmin(true);
+          } else {
+            $(".form--warning").css("display", "flex");
+          }
+        });
+      
+    })
+    .catch((error) => console.log(error.data))*/
   };
   return (
     <div id="LoginPage">
@@ -136,10 +222,23 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
             <div className="form--login__select">
               <span>Hoặc</span>
             </div>
+
+            
             <button className="button--login__gg">
               <FaGooglePlusG className="icon__gg" />
               <span> Đăng nhập bằng google</span>
-            </button>
+              </button>
+              
+            {/*<GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              buttonText="Đăng nhập bằng google"
+              onSuccess={handleLogin}
+              onFailure={handleFailure}
+              cookiePolicy={'single_host_origin'}
+              className='button--login__gg'
+              />*/}
+              
+            
             <ul className="row container-fluid">
               <li className="col-6">
                 <span onClick={() => setLogin(false)}>
@@ -147,11 +246,12 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
                 </span>
               </li>
               <li className="col-6">
-                <span style={{ float: "right" }}>Quên mật khẩu?</span>
+                <span style={{ float: "right" }} onClick={() => handleForgot()}>Quên mật khẩu?</span>
               </li>
             </ul>
           </div>
         </div>
+
       )}
       {login === false && (
         <div className="row container-fluid">
