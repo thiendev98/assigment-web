@@ -168,6 +168,7 @@ export default function Controller({ setAdmin }) {
           <ul className="navbar__list col-xl-5 col-lg-0 col-md-0 col-sm-0 col-0">
             {sideBarList.map((list) => (
               <li
+                key={list.key}
                 className="navbar__link"
                 onClick={() => nextPage(`${list.type}`)}
               >
@@ -236,7 +237,7 @@ export default function Controller({ setAdmin }) {
               </div>
               <ul className="sidebar__link">
                 {sideBarList.map((list) => (
-                  <li className="sidebar__link--item">
+                  <li key={list.key} className="sidebar__link--item">
                     <img className="sidebar__link--item__img" src={list.img} />
                     <span
                       onClick={() => {
@@ -355,7 +356,9 @@ export default function Controller({ setAdmin }) {
               Về Loza
             </li>
             {aboutLoza.map((about) => (
-              <li className="about--item">{about.content}</li>
+              <li key={about.key} className="about--item">
+                {about.content}
+              </li>
             ))}
           </ul>
           <ul className="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6 footer__support">
@@ -363,12 +366,14 @@ export default function Controller({ setAdmin }) {
               Hỗ trợ khách hàng
             </li>
             {supportCustomer.map((support) => (
-              <li className="support--item">{support.content}</li>
+              <li key={support.key} className="support--item">
+                {support.content}
+              </li>
             ))}
           </ul>
           <ul className="col-xl-4 col-lg-4 col-md-6 col-sm-10 col-12 footer__info">
             {infoContact.map((info) => (
-              <li className="info--item">
+              <li key={info.key} className="info--item">
                 <img className="info--item__img" src={info.logo} />
                 {info.info}
               </li>
