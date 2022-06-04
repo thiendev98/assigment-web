@@ -1,7 +1,9 @@
 import React from "react";
+import { postApiCart, putApiUserCart } from "../../api/todo.api";
 import { FaTrash } from "react-icons/fa";
 import { loadAnimation } from "lottie-web";
 import { defineLordIconElement } from "lord-icon-element";
+import { setUseProxies } from "immer";
 defineLordIconElement(loadAnimation);
 export default function Cart({ cart, setCart, nextPage, onClick, user }) {
   const getTotalSum = () => {
@@ -24,6 +26,11 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
   const removeFromCart = (productToRemove) => {
     setCart(cart.filter((product) => product !== productToRemove));
   };
+  const handleSubmitCart = () => {
+    user.cart = cart;
+    console.log(user.cart);
+    putApiUserCart(user);
+  };
   return (
     <div id="CartPage">
       {cart.length === 0 && (
@@ -32,7 +39,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
             className="cart__empty--img"
             src="https://bizweb.dktcdn.net/100/438/408/themes/848101/assets/blank_cart.svg?1646575637708"
           />
-          {user === true ? (
+          {user.login === true ? (
             <>
               <p>Giỏ hàng của bạn trống</p>
               <button onClick={() => nextPage("shirt")}>
@@ -167,7 +174,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
                   <p>{getTotalSum() - 150000} đ </p>
                 </div>
               )}
-              <button>Đặt hàng</button>
+              <button onClick={() => handleSubmitCart()}>Đặt hàng</button>
             </div>
           </div>
         </div>

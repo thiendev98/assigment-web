@@ -78,7 +78,7 @@ export default function Product({
     setDetail(false);
   };
   const addToCart = (product) => {
-    if (user === false) alert("Bạn cần đăng nhập để mua hàng!!!");
+    if (user.login === false) alert("Bạn cần đăng nhập để mua hàng!!!");
     else {
       var products = {
         code: product.code,
@@ -112,7 +112,7 @@ export default function Product({
     }
   };
   const goToCart = (product) => {
-    if (user === false) {
+    if (user.login === false) {
       alert("Bạn cần đăng nhập để mua hàng!!!");
     } else {
       var products = {

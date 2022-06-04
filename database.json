@@ -1,28 +1,50 @@
 {
   "users": [
     {
-      "key": "281176c5-e8c9-4bc8-a58c-9bddf4d2249a",
-      "name": "hoang thien",
+      "key": "565beb10-4b4a-400a-a376-0de895f28da8",
+      "name": "Hoàng Thiên",
       "userName": "dht",
       "phone": "123456",
       "email": "123456@gmail.com",
       "password": "123456",
       "avatar": null,
-      "cart": null,
+      "cart": [
+        {
+          "code": "LQ302001",
+          "name": "Quần short nữ xếp ly",
+          "price": 375000,
+          "link": "/static/media/short_pleated1.9d8d6446cb43c39066b1.jpg",
+          "color": "Nâu",
+          "size": "M",
+          "quantity": 1
+        }
+      ],
       "address": "",
-      "id": 1
+      "id": 1,
+      "login": true
     },
     {
-      "key": "281176c5-e8c9-4bc8-a58c-9bddf4d2249a",
-      "name": "nino",
-      "userName": "nino",
+      "key": "8015f7b3-138e-4e2d-a80c-bacecdc8930e",
+      "name": "Hoàng  Thiên",
+      "userName": "ht",
       "phone": "123456",
-      "email": "123456@gmail.com",
+      "email": "12345@gmail.com",
       "password": "123456",
       "avatar": null,
-      "cart": null,
+      "cart": [
+        {
+          "code": "PT302037",
+          "name": "Áo phông nữ phom rộng in hình I can & I will",
+          "price": 240000,
+          "link": "/static/media/ican2.b5b51451baaefbaf55e9.jpg",
+          "color": "Đen",
+          "size": "M",
+          "quantity": 1
+        }
+      ],
       "address": "",
-      "id": 2
+      "id": 2,
+      "login": true
     }
   ]
 }

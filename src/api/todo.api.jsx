@@ -13,6 +13,14 @@ export const postApiUsers = async (user) => {
     console.error("Axios post: ", err);
   }
 };
+export const putApiUserCart = async (user) => {
+  console.log(user);
+  try {
+    await axiosClient.put(`/users/${user.id}`, user);
+  } catch (err) {
+    console.error("Axios put: ", err);
+  }
+};
 export const getApiUsers = async () => {
   try {
     const response = await axiosClient.get("/users");

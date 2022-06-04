@@ -5,7 +5,14 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { postApiUsers, getApiUsers } from "../api/todo.api";
 import { FaGooglePlusG, FaTimes } from "react-icons/fa";
-export default function Login({ user, setUser, nextPage, setAdmin }) {
+export default function Login({
+  user,
+  setUser,
+  userCustomer,
+  setUserCustomer,
+  nextPage,
+  setAdmin,
+}) {
   const adminUser = [
     {
       userName: "admin",
@@ -16,7 +23,6 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
       password: "123456",
     },
   ];
-  const [customerUser, setCustomerUser] = useState();
   const [login, setLogin] = useState(true);
   const [loginAccount, setLoginAccount] = useState({
     userName: "",
@@ -24,6 +30,7 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
   });
   const [registerAccount, setRegisterAccount] = useState({
     key: uuidv4(),
+    login: Boolean,
     name: "",
     userName: "",
     phone: "",
@@ -34,7 +41,7 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
     address: "",
   });
   useEffect(() => {
-    getApiUsers().then((users) => setCustomerUser(users));
+    getApiUsers().then((users) => setUserCustomer(users));
   }, [login]);
   const buttonRegister = () => {
     setLogin(true);
@@ -67,13 +74,14 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
         $(".form--warning").css("display", "flex");
       }
     });
-    customerUser.forEach((customer) => {
+    userCustomer.forEach((customer) => {
       if (
         customer.userName === loginAccount.userName &&
         customer.password === loginAccount.password
       ) {
         $("#LoginPage").css("display", "none");
-        setUser(true);
+        customer.login = true;
+        setUser(customer);
         nextPage("home");
       } else {
         $(".form--warning").css("display", "flex");

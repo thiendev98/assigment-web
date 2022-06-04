@@ -26,6 +26,7 @@ import skirt from "./images/skirt.jpg";
 import trousers from "./images/trousers.jpg";
 import vest from "./images/vest.jpg";
 import tshirt from "./images/tshirt.jpg";
+import { getApiCarts } from "../api/todo.api";
 defineLordIconElement(loadAnimation);
 const PAGE_HOME = "home";
 const PAGE_VEST = "vest";
@@ -37,7 +38,19 @@ const PAGE_CART = "cart";
 export default function Controller({ setAdmin }) {
   const [cart, setCart] = useState([]);
   const [page, setPage] = useState(PAGE_HOME);
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState({
+    key: "",
+    login: Boolean,
+    name: "",
+    userName: "",
+    phone: "",
+    email: "",
+    password: "",
+    avatar: null,
+    cart: Object,
+    address: "",
+  });
+  const [userCustomer, setUserCustomer] = useState([]);
   const [searchProduct, setSearchProduct] = useState("");
   //
 
@@ -52,7 +65,7 @@ export default function Controller({ setAdmin }) {
     setPage(pages);
   };
   const handleLogin = () => {
-    user === true
+    user.login === true
       ? nextPage("userInformation")
       : $("#LoginPage").css("display", "block") &&
         $(".form--warning").css("display", "none");
@@ -169,9 +182,9 @@ export default function Controller({ setAdmin }) {
             <img className="logo--img" src={logo} />
           </div>
           <ul className="navbar__list col-xl-5 col-lg-0 col-md-0 col-sm-0 col-0">
-            {sideBarList.map((list) => (
+            {sideBarList.map((list, index) => (
               <li
-                key={list.key}
+                key={index}
                 className="navbar__link"
                 onClick={() => nextPage(`${list.type}`)}
               >
@@ -211,6 +224,8 @@ export default function Controller({ setAdmin }) {
               <Login
                 user={user}
                 setUser={setUser}
+                userCustomer={userCustomer}
+                setUserCustomer={setUserCustomer}
                 nextPage={nextPage}
                 setAdmin={setAdmin}
               />
@@ -239,8 +254,8 @@ export default function Controller({ setAdmin }) {
                 />
               </div>
               <ul className="sidebar__link">
-                {sideBarList.map((list) => (
-                  <li key={list.key} className="sidebar__link--item">
+                {sideBarList.map((list, index) => (
+                  <li key={index} className="sidebar__link--item">
                     <img className="sidebar__link--item__img" src={list.img} />
                     <span
                       onClick={() => {
@@ -256,7 +271,7 @@ export default function Controller({ setAdmin }) {
                     className="sidebar__link--item__img"
                     src="https://thumbs.dreamstime.com/b/user-icon-trendy-flat-style-isolated-grey-background-user-symbol-user-icon-trendy-flat-style-isolated-grey-background-123663211.jpg"
                   />
-                  <span>{user === true ? "Tài khoản" : "Đăng nhập"}</span>
+                  <span>{user.login === true ? "Tài khoản" : "Đăng nhập"}</span>
                 </li>
               </ul>
             </div>
@@ -368,15 +383,15 @@ export default function Controller({ setAdmin }) {
             <li style={{ textTransform: "uppercase", fontWeight: "600" }}>
               Hỗ trợ khách hàng
             </li>
-            {supportCustomer.map((support) => (
-              <li key={support.key} className="support--item">
+            {supportCustomer.map((support, index) => (
+              <li key={index} className="support--item">
                 {support.content}
               </li>
             ))}
           </ul>
           <ul className="col-xl-4 col-lg-4 col-md-6 col-sm-10 col-12 footer__info">
-            {infoContact.map((info) => (
-              <li key={info.key} className="info--item">
+            {infoContact.map((info, index) => (
+              <li key={index} className="info--item">
                 <img className="info--item__img" src={info.logo} />
                 {info.info}
               </li>

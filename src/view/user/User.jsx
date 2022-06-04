@@ -49,12 +49,11 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
               src="https://i.pinimg.com/236x/a8/3f/c7/a83fc7871e75ca709d3107e0115af253.jpg"
               alt="avatar"
             />
-            <p>nino nanako</p>
+            <p>{user.name}</p>
             <button
               onClick={() => {
-                setUser(false);
+                user.login = false;
                 nextPage("home");
-                setCart([]);
               }}
             >
               Đăng xuất
@@ -74,9 +73,9 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
             <span>{nameInfo}</span>
           </div>
           <div className="user__content--detail__content">
-            {pageInfo === "information" && <Information />}
-            {pageInfo === "orderlist" && <OrderList />}
-            {pageInfo === "address" && <Address />}
+            {pageInfo === "information" && <Information user={user} />}
+            {pageInfo === "orderlist" && <OrderList user={user} />}
+            {pageInfo === "address" && <Address user={user} />}
           </div>
         </div>
       </div>
