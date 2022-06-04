@@ -6,7 +6,7 @@ import { FaGooglePlusG, FaTimes } from "react-icons/fa";
 import  handleForgot  from "./Forgot";
 import GoogleLogin from 'react-google-login';
 import { useGoogleLogin } from 'react-google-login';
-import customerData from './customerData.json';
+import customerData from '../php/customerData.json';
 
 export default function Login({ user, setUser, nextPage, setAdmin }) {
   const handleFailure = (result) => {
@@ -47,6 +47,7 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
     },
   ];
   var customerUser = customerData;
+  
   const [loginAccount, setLoginAccount] = useState({
     userName: "",
     password: "",
@@ -85,7 +86,7 @@ export default function Login({ user, setUser, nextPage, setAdmin }) {
       
     };
     
-    axios.post(`http://localhost/src/controller/insert.php`,obj)
+    axios.post(`http://localhost/src/php/insert.php`,obj)
     .then(res=> console.log(res.data))
     .catch(error => {
       console.log(error.response)
