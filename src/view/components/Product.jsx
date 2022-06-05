@@ -78,7 +78,7 @@ export default function Product({
     setDetail(false);
   };
   const addToCart = (product) => {
-    if (user === false) alert("Bạn cần đăng nhập để mua hàng!!!");
+    if (!user.login) alert("Bạn cần đăng nhập để mua hàng!!!");
     else {
       var products = {
         code: product.code,
@@ -112,7 +112,7 @@ export default function Product({
     }
   };
   const goToCart = (product) => {
-    if (user === false) {
+    if (!user.login) {
       alert("Bạn cần đăng nhập để mua hàng!!!");
     } else {
       var products = {
@@ -202,10 +202,7 @@ export default function Product({
           return (
             <>
               {current === 0 && detail === false && (
-                <li
-                  key={index}
-                  className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 c-12 product__content--item"
-                >
+                <li className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 c-12 product__content--item">
                   <div className="item__list">
                     <img
                       className="list__img"
@@ -246,7 +243,6 @@ export default function Product({
                       >
                         {product.link.map((img, i) => (
                           <img
-                            key={i}
                             className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 detail__info--img"
                             src={img}
                             onClick={() => handleClickImages(i)}
@@ -259,7 +255,6 @@ export default function Product({
                       <ul className="detail__info--size__list" ref={myRefSize}>
                         {product.size.map((s, i) => (
                           <li
-                            key={i}
                             className="item--size"
                             onClick={() => handleClickSize(i)}
                           >
@@ -284,10 +279,7 @@ export default function Product({
 
                       <div className="detail--item__info row container-fluid">
                         {listSevice.map((service, i) => (
-                          <div
-                            key={i}
-                            className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 row container-fluid information--item"
-                          >
+                          <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 row container-fluid information--item">
                             <img
                               className="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 service__img"
                               src={service.img}

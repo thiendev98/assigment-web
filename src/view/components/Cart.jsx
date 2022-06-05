@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import { loadAnimation } from "lottie-web";
 import { defineLordIconElement } from "lord-icon-element";
@@ -24,6 +25,25 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
   const removeFromCart = (productToRemove) => {
     setCart(cart.filter((product) => product !== productToRemove));
   };
+  const handleOrderClick=()=>{
+     user.login && setTimeout(()=>{
+      const order = {
+        name: user.name,
+        phone: user.phone,
+        address: user.address,
+        cost: getTotalSum()
+      }
+      axios.post(`http://localhost/assigment-web-demo/src/php/insertOrder.php`,order)
+      .then(res=> {})
+      .catch(error => {
+        console.log(error.response)
+      });
+      alert("Đặt hàng thành công. Tiếp tục mua sắm.")
+      setCart([])
+      nextPage('shirt')
+     },1000)
+  } 
+
   return (
     <div id="CartPage">
       {cart.length === 0 && (
@@ -32,7 +52,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
             className="cart__empty--img"
             src="https://bizweb.dktcdn.net/100/438/408/themes/848101/assets/blank_cart.svg?1646575637708"
           />
-          {user === true ? (
+          {user.login ? (
             <>
               <p>Giỏ hàng của bạn trống</p>
               <button onClick={() => nextPage("shirt")}>
@@ -167,7 +187,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
                   <p>{getTotalSum() - 150000} đ </p>
                 </div>
               )}
-              <button>Đặt hàng</button>
+              <button onClick={()=>handleOrderClick()}>Đặt hàng</button>
             </div>
           </div>
         </div>
