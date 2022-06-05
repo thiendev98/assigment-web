@@ -861,6 +861,13 @@
 
 #LoginPage .form--login li span {
   cursor: pointer;
+  -webkit-transition-duration: 0.6s;
+          transition-duration: 0.6s;
+}
+
+#LoginPage .form--login li span:hover {
+  font-weight: 500;
+  color: #fcaf17;
 }
 
 #LoginPage .form--login h4 {
@@ -943,13 +950,12 @@
   border-radius: 8px;
   margin: 12px 0;
   vertical-align: middle;
-  background: #e5e5e5;
   border: 1px solid #ddd;
   font-weight: bold;
   font-size: 16px;
 }
 
-#LoginPage .form--login .button--login__gg .icon__gg {
+#LoginPage .form--login .icon__gg {
   width: 28px;
   height: 28px;
   margin-right: 4px;
@@ -1075,5 +1081,12 @@
 
 #LoginPage .form--register p span {
   cursor: pointer;
+  -webkit-transition-duration: 0.6s;
+          transition-duration: 0.6s;
+}
+
+#LoginPage .form--register p span:hover {
+  font-weight: 500;
+  color: #fcaf17;
 }
 /*# sourceMappingURL=style.css.map */

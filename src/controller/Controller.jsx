@@ -37,20 +37,18 @@ const PAGE_CART = "cart";
 export default function Controller({ setAdmin }) {
   const [cart, setCart] = useState([]);
   const [page, setPage] = useState(PAGE_HOME);
-  const [user, setUser] = useState(
-    {
-      key: "",
-      login: false,
-      name: "",
-      userName: "",
-      phone: "",
-      email: "",
-      password: "",
-      avatar: null,
-      cart: Object,
-      address: "",
-    }
-  );
+  const [user, setUser] = useState({
+    key: "",
+    login: false,
+    name: "",
+    userName: "",
+    phone: "",
+    email: "",
+    password: "",
+    avatar: null,
+    cart: Object,
+    address: "",
+  });
   const [userCustomer, setUserCustomer] = useState([]);
   const [searchProduct, setSearchProduct] = useState("");
   const nextPage = (pages) => {
@@ -180,8 +178,9 @@ export default function Controller({ setAdmin }) {
             <img className="logo--img" src={logo} />
           </div>
           <ul className="navbar__list col-xl-5 col-lg-0 col-md-0 col-sm-0 col-0">
-            {sideBarList.map((list) => (
+            {sideBarList.map((list, index) => (
               <li
+                key={index}
                 className="navbar__link"
                 onClick={() => nextPage(`${list.type}`)}
               >
@@ -251,8 +250,8 @@ export default function Controller({ setAdmin }) {
                 />
               </div>
               <ul className="sidebar__link">
-                {sideBarList.map((list) => (
-                  <li className="sidebar__link--item">
+                {sideBarList.map((list, index) => (
+                  <li key={index} className="sidebar__link--item">
                     <img className="sidebar__link--item__img" src={list.img} />
                     <span
                       onClick={() => {
@@ -370,21 +369,25 @@ export default function Controller({ setAdmin }) {
             <li style={{ textTransform: "uppercase", fontWeight: "600" }}>
               Về Loza
             </li>
-            {aboutLoza.map((about) => (
-              <li className="about--item">{about.content}</li>
+            {aboutLoza.map((about, index) => (
+              <li key={index} className="about--item">
+                {about.content}
+              </li>
             ))}
           </ul>
           <ul className="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6 footer__support">
             <li style={{ textTransform: "uppercase", fontWeight: "600" }}>
               Hỗ trợ khách hàng
             </li>
-            {supportCustomer.map((support) => (
-              <li className="support--item">{support.content}</li>
+            {supportCustomer.map((support, index) => (
+              <li key={index} className="support--item">
+                {support.content}
+              </li>
             ))}
           </ul>
           <ul className="col-xl-4 col-lg-4 col-md-6 col-sm-10 col-12 footer__info">
-            {infoContact.map((info) => (
-              <li className="info--item">
+            {infoContact.map((info, index) => (
+              <li key={index} className="info--item">
                 <img className="info--item__img" src={info.logo} />
                 {info.info}
               </li>

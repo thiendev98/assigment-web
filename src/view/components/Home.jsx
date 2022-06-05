@@ -19,8 +19,8 @@ export default function Home({ nextPage }) {
     <div id="HomePage">
       <div className="wrapper">
         <Slider {...settings}>
-          {backgroundList.map((background) => (
-            <img className="wapper__img" src={background} />
+          {backgroundList.map((background, index) => (
+            <img key={index} className="wapper__img" src={background} />
           ))}
         </Slider>
       </div>
@@ -57,7 +57,10 @@ export default function Home({ nextPage }) {
         <h3>Mua gì hôm nay?</h3>
         <ul className="home__content row container-fluid">
           {HomeList.map((product, i) => (
-            <li className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 c-12 home__content--item">
+            <li
+              key={i}
+              className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 c-12 home__content--item"
+            >
               <div className="item__list">
                 <img
                   className="list__img"

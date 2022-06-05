@@ -52,9 +52,11 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
             <p>{user.name}</p>
             <button
               onClick={() => {
-                setUser({});
-                nextPage("home");
-                setCart([]);
+                setTimeout(() => {
+                  setUser({});
+                  nextPage("home");
+                  setCart([]);
+                }, 1000);
               }}
             >
               Đăng xuất
@@ -62,7 +64,7 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
           </div>
           <ul className="user__content--list__info">
             {listInfo.map((info, index) => (
-              <li>
+              <li key={index}>
                 <img src={info.img} />
                 <span onClick={() => handleClickInfo(index)}>{info.info}</span>
               </li>
@@ -75,8 +77,8 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
           </div>
           <div className="user__content--detail__content">
             {pageInfo === "information" && <Information user={user} />}
-            {pageInfo === "orderlist" && <OrderList user={user}/>}
-            {pageInfo === "address" && <Address user={user}/>}
+            {pageInfo === "orderlist" && <OrderList user={user} />}
+            {pageInfo === "address" && <Address user={user} />}
           </div>
         </div>
       </div>

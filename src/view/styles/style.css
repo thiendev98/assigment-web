@@ -1021,6 +1021,77 @@
   font-size: 14px;
 }
 
+#InfomationAccount .row {
+  padding: 0;
+  margin: 0;
+}
+
+#InfomationAccount .info__edit {
+  margin: 6px 0;
+  height: 24px;
+}
+
+#InfomationAccount .info__edit input {
+  width: 92%;
+  border: 1px solid #dde1ef;
+  padding-left: 8px;
+  padding-right: 2px;
+  border-radius: 4px;
+}
+
+#InfomationAccount .info__edit--title {
+  padding-right: 0;
+  line-height: 24px;
+  text-align: left;
+  font-size: 14px;
+}
+
+#InfomationAccount .info__edit--name {
+  letter-spacing: 1px;
+  line-height: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 0;
+}
+
+#InfomationAccount .info__edit--icon {
+  width: 10px;
+  height: 10px;
+  margin-left: -20px;
+  cursor: pointer;
+}
+
+#InfomationAccount .info__edit--icon__check {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#InfomationAccount .info__edit--icon__check span {
+  margin: 0 4px;
+  cursor: pointer;
+}
+
+#AddressPage .address__add {
+  width: 710px;
+  padding: 15px 0 20px;
+  max-height: 580px;
+  min-height: 400px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: fixed;
+  z-index: 99999;
+  display: none;
+  background: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  top: 20% !important;
+  left: 50%;
+  margin-left: -355px;
+  border-radius: 5px;
+}
+
 @media (min-width: 1200px) {
   .col-xl-0 {
     display: none;

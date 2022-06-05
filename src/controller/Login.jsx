@@ -2,54 +2,38 @@ import React, { useEffect, useState } from "react";
 import "./styles/style.css";
 import $ from "jquery";
 import axios from "axios";
-import {v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 import { FaGooglePlusG, FaTimes } from "react-icons/fa";
 // import  handleForgot  from "./Forgot";
 // import GoogleLogin from 'react-google-login';
 // import { useGoogleLogin } from 'react-google-login';
-import customerData from '../php/customerData.json';
+import customerData from "../php/customerData.json";
 
-export default function Login({ user, setUser, userCustomer, setUserCustomer, nextPage, setAdmin }) {
-  const handleFailure = (result) => {
-    alert(result);
-  };
-  const handleLogin = (googleData) => {
-  //  console.log(googleData);
-   
-  };
-
-  const handleForgot=()=>{
+export default function Login({
+  user,
+  setUser,
+  userCustomer,
+  setUserCustomer,
+  nextPage,
+  setAdmin,
+}) {
+  const handleForgot = () => {
     return (
-        <div id="LoginPage">
+      <div id="LoginPage">
         <div className="row container-fluid">
           <div className="form--register">
-          <FaTimes
+            <FaTimes
               className="icon__cancel"
               onClick={() => {
                 $("#LoginPage").css("display", "none");
-               
               }}
             />
-           <h1 style={{color: "green"}}>GeeksForGeeks</h1>
-            </div>
+            <h1 style={{ color: "green" }}>GeeksForGeeks</h1>
+          </div>
         </div>
-        </div>
+      </div>
     );
-};
-  const [login, setLogin] = useState(true);
-  const adminUser = [
-    {
-      userName: "admin",
-      password: "123456",
-    },
-    {
-      userName: "lozashop",
-      password: "123456",
-    },
-  ];
-  useEffect(()=>{setUserCustomer(customerData)},[login])
-  //var customerUser = customerData;
-  
+  };
   const [loginAccount, setLoginAccount] = useState({
     userName: "",
     password: "",
@@ -66,6 +50,24 @@ export default function Login({ user, setUser, userCustomer, setUserCustomer, ne
     cart: null,
     address: "",
   });
+  const [login, setLogin] = useState(true);
+  const adminUser = [
+    {
+      userName: "admin",
+      password: "123456",
+    },
+    {
+      userName: "lozashop",
+      password: "123456",
+    },
+  ];
+  useEffect(() => {
+    setUserCustomer(customerData);
+  }, [login]);
+  useEffect(() => {
+    $(".form--warning").css("display", "none");
+  }, [loginAccount]);
+
   const checkedNameVietnamese = (name) => {
     if (name === null || name === undefined) return name;
     name = name.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
@@ -122,31 +124,30 @@ export default function Login({ user, setUser, userCustomer, setUserCustomer, ne
     //   .catch((err) => console.log(err));
     checkErrorInForm() &&
       setTimeout(() => {
-       //
-       const obj ={
-        name: registerAccount.name,
-        userName:registerAccount.userName,
-        email:registerAccount.email,
-        phone:registerAccount.phone,
-        password:registerAccount.password,
-        
-      };
-      
-      axios.post(`http://localhost/assigment-web-demo/src/php/insert.php`,obj)
-      .then(res=> {})
-      .catch(error => {
-        console.log(error.response)
-      });
-     
-      setUserCustomer(customerData);
+        //
+        const obj = {
+          name: registerAccount.name,
+          userName: registerAccount.userName,
+          email: registerAccount.email,
+          phone: registerAccount.phone,
+          password: registerAccount.password,
+        };
 
-       //
+        axios
+          .post(`http://localhost/assigment-web-demo/src/php/insert.php`, obj)
+          .then((res) => {})
+          .catch((error) => {
+            console.log(error.response);
+          });
+
+        setUserCustomer(customerData);
+
+        //
         setRegisterAccount({});
         setLogin(true);
       }, 1500);
-   
   };
-  
+
   const buttonLogin = () => {
     adminUser.forEach((admin) => {
       if (
@@ -248,7 +249,7 @@ export default function Login({ user, setUser, userCustomer, setUserCustomer, ne
               <input
                 type="password"
                 name="password"
-                placeholder="Từ 8-15 ký tự, ít nhất 1 chữ số và 1 ký tự đặc biệt."
+                placeholder="Mật khẩu"
                 onChange={(event) =>
                   setLoginAccount({
                     ...loginAccount,
@@ -269,12 +270,11 @@ export default function Login({ user, setUser, userCustomer, setUserCustomer, ne
               <span>Hoặc</span>
             </div>
 
-            
             <button className="button--login__gg">
               <FaGooglePlusG className="icon__gg" />
               <span> Đăng nhập bằng google</span>
-              </button>
-              
+            </button>
+
             {/*<GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
               buttonText="Đăng nhập bằng google"
@@ -283,8 +283,7 @@ export default function Login({ user, setUser, userCustomer, setUserCustomer, ne
               cookiePolicy={'single_host_origin'}
               className='button--login__gg'
               />*/}
-              
-            
+
             <ul className="row container-fluid">
               <li className="col-6">
                 <span onClick={() => setLogin(false)}>
@@ -292,12 +291,13 @@ export default function Login({ user, setUser, userCustomer, setUserCustomer, ne
                 </span>
               </li>
               <li className="col-6">
-                <span style={{ float: "right" }} onClick={() => handleForgot()}>Quên mật khẩu?</span>
+                <span style={{ float: "right" }} onClick={() => handleForgot()}>
+                  Quên mật khẩu?
+                </span>
               </li>
             </ul>
           </div>
         </div>
-
       )}
       {login === false && (
         <div className="row container-fluid">
@@ -374,7 +374,7 @@ export default function Login({ user, setUser, userCustomer, setUserCustomer, ne
               <label>Mật khẩu</label>
               <input
                 type="password"
-                placeholder="Mật khẩu..."
+                placeholder="Từ 8-15 ký tự (ít nhất 1 chữ số và 1 ký tự đặc biệt)"
                 onChange={(event) =>
                   setRegisterAccount({
                     ...registerAccount,

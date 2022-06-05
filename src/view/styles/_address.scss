@@ -1,0 +1,19 @@
+#AddressPage {
+  .address__add {
+    width: 710px;
+    padding: 15px 0 20px;
+    max-height: 580px;
+    min-height: 400px;
+    height: fit-content;
+    position: fixed;
+    z-index: 99999;
+    display: none;
+    background: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    top: 20% !important;
+    left: 50%;
+    margin-left: -355px;
+    border-radius: 5px;
+  }
+}
