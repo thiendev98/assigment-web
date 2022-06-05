@@ -3,6 +3,7 @@ import Address from "./Address";
 import OrderList from "./OrderList";
 import Information from "./Information";
 import "../styles/style.css";
+import { putApiUsers } from "../../api/todo.api";
 export default function User({ user, setUser, nextPage, cart, setCart }) {
   const [pageInfo, setPageInfo] = useState("information");
   const [nameInfo, setnameInfo] = useState("Thông tin cá nhân");
@@ -19,6 +20,7 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
     } else {
     }
   };
+
   const listInfo = [
     {
       key: 1,
@@ -52,8 +54,11 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
             <p>{user.name}</p>
             <button
               onClick={() => {
-                user.login = false;
-                nextPage("home");
+                setTimeout(() => {
+                  user.login = false;
+                  putApiUsers(user);
+                  nextPage("home");
+                }, 1000);
               }}
             >
               Đăng xuất

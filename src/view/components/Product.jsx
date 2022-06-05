@@ -78,7 +78,7 @@ export default function Product({
     setDetail(false);
   };
   const addToCart = (product) => {
-    if (user.login === false) alert("Bạn cần đăng nhập để mua hàng!!!");
+    if (!user.login) alert("Bạn cần đăng nhập để mua hàng!!!");
     else {
       var products = {
         code: product.code,
@@ -112,7 +112,7 @@ export default function Product({
     }
   };
   const goToCart = (product) => {
-    if (user.login === false) {
+    if (!user.login) {
       alert("Bạn cần đăng nhập để mua hàng!!!");
     } else {
       var products = {
@@ -189,7 +189,7 @@ export default function Product({
 
   return (
     <div id="ProductPage">
-      {namePage === "search" && detail === false ? (
+      {namePage === "search" && !detail ? (
         <div style={{ padding: "12px 0" }}></div>
       ) : (
         <div className="product__header">
@@ -201,7 +201,7 @@ export default function Product({
         {ProductList.map((product, index) => {
           return (
             <>
-              {current === 0 && detail === false && (
+              {current === 0 && !detail && (
                 <li
                   key={index}
                   className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 c-12 product__content--item"
@@ -226,7 +226,7 @@ export default function Product({
                   </span>
                 </li>
               )}
-              {current === index && detail === true && (
+              {current === index && detail && (
                 <li className="detail--item">
                   <div className="row container-fluid">
                     <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 detail__img">

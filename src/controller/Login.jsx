@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./styles/style.css";
 import $ from "jquery";
 import axios from "axios";
@@ -28,6 +28,7 @@ export default function Login({
     userName: "",
     password: "",
   });
+  const [loginCkecked, setLoginChecked] = useState(false);
   const [registerAccount, setRegisterAccount] = useState({
     key: uuidv4(),
     login: Boolean,
@@ -43,8 +44,56 @@ export default function Login({
   useEffect(() => {
     getApiUsers().then((users) => setUserCustomer(users));
   }, [login]);
+  useEffect(() => {
+    $(".form--warning").css("display", "none");
+  }, [loginAccount]);
+  const checkedNameVietnamese = (name) => {
+    if (name === null || name === undefined) return name;
+    name = name.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+    name = name.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+    name = name.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+    name = name.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+    name = name.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+    name = name.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+    name = name.replace(/đ/g, "d");
+    return name;
+  };
+  const checkErrorInForm = () => {
+    const patternName = /^[a-z A-Z!@#\$%\^\&*\)\(+=._-]{6,}$/g;
+    const patternUserName = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/;
+    const patternEmail = /^[A-Za-z_.]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z.]{2,6}$/;
+    const patternPhone = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
+    const patternPassword =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9@#$%^&*]{8,15}$/;
+    if (!patternName.test(checkedNameVietnamese(registerAccount.name))) {
+      alert("Tên chưa hợp lệ");
+      return false;
+    } else if (!patternUserName.test(registerAccount.userName)) {
+      alert("Tên đăng nhập chưa hợp lệ");
+      return false;
+    } else if (!patternPhone.test(registerAccount.phone)) {
+      alert("Số điện thoại khộng hợp lệ");
+      return false;
+    } else if (!patternEmail.test(registerAccount.email)) {
+      alert("Email không hợp lệ");
+      return false;
+    } else if (!patternPassword.test(registerAccount.password)) {
+      alert("Mật khẩu không hợp lệ");
+      return false;
+    } else {
+      alert("Đăng ký tài khoản thành công");
+      return true;
+    }
+  };
+
   const buttonRegister = () => {
-    setLogin(true);
+    checkErrorInForm() &&
+      setTimeout(() => {
+        postApiUsers(registerAccount);
+        setRegisterAccount({});
+        setLogin(true);
+      }, 1500);
+    // setLogin(true);
     // const registerData = new FormData();
     // registerData.append("name", registerAccount.name);
     // registerData.append("userName", registerAccount.userName);
@@ -60,7 +109,7 @@ export default function Login({
     //   })
     //   .then((response) => console.log(response.data))
     //   .catch((err) => console.log(err));
-    postApiUsers(registerAccount);
+    // postApiUsers(registerAccount);
   };
   const buttonLogin = () => {
     adminUser.forEach((admin) => {
@@ -70,27 +119,29 @@ export default function Login({
       ) {
         $("#LoginPage").css("display", "none");
         setAdmin(true);
-      } else {
-        $(".form--warning").css("display", "flex");
       }
     });
-    userCustomer.forEach((customer) => {
+
+    userCustomer.forEach((customer, index) => {
       if (
         customer.userName === loginAccount.userName &&
         customer.password === loginAccount.password
       ) {
+        alert("Đăng nhập thành công");
+        setLoginChecked(true);
         $("#LoginPage").css("display", "none");
         customer.login = true;
         setUser(customer);
+        setLoginAccount({});
         nextPage("home");
-      } else {
+      } else if (index === userCustomer.length - 1) {
         $(".form--warning").css("display", "flex");
       }
     });
   };
   return (
     <div id="LoginPage">
-      {login === true && (
+      {login && (
         <div className="row container-fluid">
           <div className="form--login">
             <FaTimes
@@ -102,7 +153,7 @@ export default function Login({
             />
             <h4>Đăng nhập</h4>
             <span className="form--warning">
-              Email hoặc mật khẩu không chính xác
+              Tên tài khoản hoặc mật khẩu không chính xác
             </span>
             <div className="form--item">
               <label>Tên đăng nhập</label>
@@ -116,6 +167,7 @@ export default function Login({
                     userName: event.target.value,
                   })
                 }
+                required
                 value={loginAccount.userName}
               />
             </div>
@@ -150,7 +202,12 @@ export default function Login({
             </button>
             <ul className="row container-fluid">
               <li className="col-6">
-                <span onClick={() => setLogin(false)}>
+                <span
+                  onClick={() => {
+                    setLoginAccount({});
+                    setLogin(false);
+                  }}
+                >
                   Đăng ký tài khoản mới
                 </span>
               </li>
@@ -161,7 +218,7 @@ export default function Login({
           </div>
         </div>
       )}
-      {login === false && (
+      {!login && (
         <div className="row container-fluid">
           <div className="form--register">
             <FaTimes
@@ -191,7 +248,7 @@ export default function Login({
               <label>Tên đăng nhập</label>
               <input
                 type="text"
-                placeholder="Tên đăng nhập..."
+                placeholder="Tên đăng nhập (ít nhất 1 chữ số)"
                 onChange={(event) =>
                   setRegisterAccount({
                     ...registerAccount,
@@ -236,7 +293,7 @@ export default function Login({
               <label>Mật khẩu</label>
               <input
                 type="password"
-                placeholder="Mật khẩu..."
+                placeholder="Từ 8-15 ký tự (ít nhất 1 chữ số và 1 ký tự đặc biệt)"
                 onChange={(event) =>
                   setRegisterAccount({
                     ...registerAccount,
@@ -255,7 +312,14 @@ export default function Login({
             </button>
             <p>
               {`Bạn đã có tài khoản? `}
-              <span onClick={() => setLogin(true)}>Đăng nhập ngay</span>
+              <span
+                onClick={() => {
+                  setRegisterAccount({});
+                  setLogin(true);
+                }}
+              >
+                Đăng nhập ngay
+              </span>
             </p>
           </div>
         </div>

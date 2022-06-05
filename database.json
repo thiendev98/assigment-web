@@ -1,50 +1,56 @@
 {
   "users": [
     {
-      "key": "565beb10-4b4a-400a-a376-0de895f28da8",
-      "name": "Hoàng Thiên",
-      "userName": "dht",
-      "phone": "123456",
-      "email": "123456@gmail.com",
-      "password": "123456",
+      "key": "7dd89a34-39ac-48f9-967c-fc09adec9e82",
+      "name": "dsadasdasd",
+      "userName": "dasdadas212",
+      "phone": "0899999999",
+      "email": "dasdasd@fdf.hjhj",
+      "password": "1312sdasdad$%",
       "avatar": null,
-      "cart": [
-        {
-          "code": "LQ302001",
-          "name": "Quần short nữ xếp ly",
-          "price": 375000,
-          "link": "/static/media/short_pleated1.9d8d6446cb43c39066b1.jpg",
-          "color": "Nâu",
-          "size": "M",
-          "quantity": 1
-        }
-      ],
+      "cart": null,
       "address": "",
-      "id": 1,
-      "login": true
+      "id": 1
     },
     {
-      "key": "8015f7b3-138e-4e2d-a80c-bacecdc8930e",
-      "name": "Hoàng  Thiên",
-      "userName": "ht",
-      "phone": "123456",
-      "email": "12345@gmail.com",
-      "password": "123456",
+      "key": "7dd89a34-39ac-48f9-967c-fc09adec9e82",
+      "name": "dsadasdasd",
+      "userName": "dasdadas212",
+      "phone": "0899999999",
+      "email": "dasdasd@fdf.hjhj",
+      "password": "1312sdasdad$%",
       "avatar": null,
-      "cart": [
-        {
-          "code": "PT302037",
-          "name": "Áo phông nữ phom rộng in hình I can & I will",
-          "price": 240000,
-          "link": "/static/media/ican2.b5b51451baaefbaf55e9.jpg",
-          "color": "Đen",
-          "size": "M",
-          "quantity": 1
-        }
-      ],
+      "cart": null,
       "address": "",
-      "id": 2,
-      "login": true
+      "id": 2
+    },
+    {
+      "name": "hoàng thien",
+      "userName": "dht1234",
+      "phone": "0899999999",
+      "email": "thien.dh@gmail.com",
+      "password": "qwer123@sa",
+      "id": 3
+    },
+    {
+      "name": "hoangthein",
+      "userName": "hoangthien123",
+      "phone": "0876543211",
+      "email": "thien.do@gmail.com",
+      "password": "vbnghf12@",
+      "id": 4
+    },
+    {
+      "key": "c249663d-1c45-408f-9f58-001c83a4c66b",
+      "name": "asdsdddddddddd",
+      "userName": "aaaaaa12",
+      "phone": "0812345678",
+      "email": "sdads@adsad.cvv",
+      "password": "3A@dasfsfgsg",
+      "avatar": null,
+      "cart": null,
+      "address": "",
+      "id": 5
     }
   ]
 }

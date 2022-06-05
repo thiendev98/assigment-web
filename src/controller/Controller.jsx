@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import $ from "jquery";
 import Home from "../view/components/Home";
 import TShirt from "../view/components/TShirt";
@@ -26,7 +26,6 @@ import skirt from "./images/skirt.jpg";
 import trousers from "./images/trousers.jpg";
 import vest from "./images/vest.jpg";
 import tshirt from "./images/tshirt.jpg";
-import { getApiCarts } from "../api/todo.api";
 defineLordIconElement(loadAnimation);
 const PAGE_HOME = "home";
 const PAGE_VEST = "vest";
@@ -40,7 +39,7 @@ export default function Controller({ setAdmin }) {
   const [page, setPage] = useState(PAGE_HOME);
   const [user, setUser] = useState({
     key: "",
-    login: Boolean,
+    login: false,
     name: "",
     userName: "",
     phone: "",
@@ -65,7 +64,7 @@ export default function Controller({ setAdmin }) {
     setPage(pages);
   };
   const handleLogin = () => {
-    user.login === true
+    user.login
       ? nextPage("userInformation")
       : $("#LoginPage").css("display", "block") &&
         $(".form--warning").css("display", "none");
@@ -218,7 +217,7 @@ export default function Controller({ setAdmin }) {
             <li className="user--customer">
               <lord-icon
                 onClick={() => handleLogin()}
-                trigger="hover"
+                trigger=""
                 src="https://cdn.lordicon.com/dxjqoygy.json"
               ></lord-icon>
               <Login
@@ -271,7 +270,7 @@ export default function Controller({ setAdmin }) {
                     className="sidebar__link--item__img"
                     src="https://thumbs.dreamstime.com/b/user-icon-trendy-flat-style-isolated-grey-background-user-symbol-user-icon-trendy-flat-style-isolated-grey-background-123663211.jpg"
                   />
-                  <span>{user.login === true ? "Tài khoản" : "Đăng nhập"}</span>
+                  <span>{user.login ? "Tài khoản" : "Đăng nhập"}</span>
                 </li>
               </ul>
             </div>

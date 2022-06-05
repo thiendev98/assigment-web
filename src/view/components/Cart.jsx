@@ -1,9 +1,7 @@
-import React from "react";
-import { postApiCart, putApiUserCart } from "../../api/todo.api";
+import { putApiUserCart } from "../../api/todo.api";
 import { FaTrash } from "react-icons/fa";
 import { loadAnimation } from "lottie-web";
 import { defineLordIconElement } from "lord-icon-element";
-import { setUseProxies } from "immer";
 defineLordIconElement(loadAnimation);
 export default function Cart({ cart, setCart, nextPage, onClick, user }) {
   const getTotalSum = () => {
@@ -27,9 +25,15 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
     setCart(cart.filter((product) => product !== productToRemove));
   };
   const handleSubmitCart = () => {
-    user.cart = cart;
-    console.log(user.cart);
-    putApiUserCart(user);
+    if (user.login) {
+      user.cart = cart;
+      putApiUserCart(user);
+      setTimeout(() => {
+        alert("Đặt hàng thành công. Tiếp tục mua sắm");
+        setCart([]);
+        nextPage("shirt");
+      }, 1000);
+    }
   };
   return (
     <div id="CartPage">
@@ -39,7 +43,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
             className="cart__empty--img"
             src="https://bizweb.dktcdn.net/100/438/408/themes/848101/assets/blank_cart.svg?1646575637708"
           />
-          {user.login === true ? (
+          {user.login ? (
             <>
               <p>Giỏ hàng của bạn trống</p>
               <button onClick={() => nextPage("shirt")}>
