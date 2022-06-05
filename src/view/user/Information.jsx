@@ -40,9 +40,7 @@ export default function Information({ user }) {
               )}
             </span>
             <span className="col-xl-1 info__edit--icon">
-              {!isEditName ? (
-                <FaPencilAlt onClick={() => handleEditClick(info, index)} />
-              ) : (
+              {isEditName && index === indexEdit ? (
                 <div className="info__edit--icon__check">
                   <span>
                     <FaCheck onClick={() => handleSaveClick(info, index)} />
@@ -51,6 +49,8 @@ export default function Information({ user }) {
                     <FaTimes onClick={() => handleCancelClick(info, index)} />
                   </span>
                 </div>
+              ) : (
+                <FaPencilAlt onClick={() => handleEditClick(info, index)} />
               )}
             </span>
           </p>
