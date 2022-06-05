@@ -20,9 +20,20 @@
       "email": "dasdasd@fdf.hjhj",
       "password": "1312sdasdad$%",
       "avatar": null,
-      "cart": null,
+      "cart": [
+        {
+          "code": "LS071006HT",
+          "name": "Áo sơ mi họa tiết phối cổ",
+          "price": 239000,
+          "link": "/static/media/neck.654ddc207df88143aeb9.jpg",
+          "color": "Họa tiết",
+          "size": "L",
+          "quantity": 1
+        }
+      ],
       "address": "",
-      "id": 2
+      "id": 2,
+      "login": true
     },
     {
       "name": "hoàng thien",
@@ -51,6 +62,18 @@
       "cart": null,
       "address": "",
       "id": 5
+    },
+    {
+      "key": "e3a498c7-5f63-42c3-9c08-4181df629bf9",
+      "name": "Hoàng thiên",
+      "userName": "dht1234",
+      "phone": "0888888888",
+      "email": "thjashdb@ghhakf.cksa",
+      "password": "asdfs123@@",
+      "avatar": null,
+      "cart": null,
+      "address": "",
+      "id": 6
     }
   ]
 }

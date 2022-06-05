@@ -28,7 +28,6 @@ export default function Login({
     userName: "",
     password: "",
   });
-  const [loginCkecked, setLoginChecked] = useState(false);
   const [registerAccount, setRegisterAccount] = useState({
     key: uuidv4(),
     login: Boolean,
@@ -128,7 +127,6 @@ export default function Login({
         customer.password === loginAccount.password
       ) {
         alert("Đăng nhập thành công");
-        setLoginChecked(true);
         $("#LoginPage").css("display", "none");
         customer.login = true;
         setUser(customer);
