@@ -25,24 +25,29 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
   const removeFromCart = (productToRemove) => {
     setCart(cart.filter((product) => product !== productToRemove));
   };
-  const handleOrderClick=()=>{
-     user.login && setTimeout(()=>{
-      const order = {
-        name: user.name,
-        phone: user.phone,
-        address: user.address,
-        cost: getTotalSum()
-      }
-      axios.post(`http://localhost/assigment-web-demo/src/php/insertOrder.php`,order)
-      .then(res=> {})
-      .catch(error => {
-        console.log(error.response)
-      });
-      alert("Đặt hàng thành công. Tiếp tục mua sắm.")
-      setCart([])
-      nextPage('shirt')
-     },1000)
-  } 
+  const handleOrderClick = () => {
+    user.login &&
+      setTimeout(() => {
+        const order = {
+          name: user.name,
+          phone: user.phone,
+          address: user.address,
+          cost: getTotalSum(),
+        };
+        axios
+          .post(
+            `http://localhost/assigment-web-demo/src/php/insertOrder.php`,
+            order
+          )
+          .then((res) => {})
+          .catch((error) => {
+            console.log(error.response);
+          });
+        alert("Đặt hàng thành công. Tiếp tục mua sắm.");
+        setCart([]);
+        nextPage("shirt");
+      }, 1000);
+  };
 
   return (
     <div id="CartPage">
@@ -50,6 +55,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
         <div className="cart__empty">
           <img
             className="cart__empty--img"
+            alt="cart__empty--img"
             src="https://bizweb.dktcdn.net/100/438/408/themes/848101/assets/blank_cart.svg?1646575637708"
           />
           {user.login ? (
@@ -99,6 +105,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
                 >
                   <div className="col-xl-6 col-lg-6 col-md-6 col-sm-7 col-6 row container-fluid">
                     <img
+                      alt="class__img"
                       className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-0"
                       src={product.link}
                     />
@@ -187,7 +194,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
                   <p>{getTotalSum() - 150000} đ </p>
                 </div>
               )}
-              <button onClick={()=>handleOrderClick()}>Đặt hàng</button>
+              <button onClick={() => handleOrderClick()}>Đặt hàng</button>
             </div>
           </div>
         </div>

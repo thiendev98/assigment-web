@@ -34,6 +34,7 @@ export default function SearchPage({
         <div className="search__empty">
           <img
             className="search__empty--image"
+            alt="search__empty--image"
             src="https://bizweb.dktcdn.net/100/438/408/themes/848101/assets/search-page.svg?1646731994406"
           />
           <p className="search__empty--result">

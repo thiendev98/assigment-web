@@ -20,7 +20,12 @@ export default function Home({ nextPage }) {
       <div className="wrapper">
         <Slider {...settings}>
           {backgroundList.map((background, index) => (
-            <img key={index} className="wapper__img" src={background} />
+            <img
+              key={index}
+              className="wapper__img"
+              alt="wapper__img"
+              src={background}
+            />
           ))}
         </Slider>
       </div>
@@ -64,11 +69,13 @@ export default function Home({ nextPage }) {
               <div className="item__list">
                 <img
                   className="list__img"
+                  alt="list__img"
                   src={product.link[0]}
                   onClick={() => nextPage(product.type)}
                 />
                 <img
                   className="list__img--hover"
+                  alt="list__img--hover"
                   src={product.link[1]}
                   onClick={() => nextPage(product.type)}
                 />

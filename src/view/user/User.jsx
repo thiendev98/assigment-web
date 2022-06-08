@@ -65,7 +65,7 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
           <ul className="user__content--list__info">
             {listInfo.map((info, index) => (
               <li key={index}>
-                <img src={info.img} />
+                <img src={info.img} alt="avatar" />
                 <span onClick={() => handleClickInfo(index)}>{info.info}</span>
               </li>
             ))}

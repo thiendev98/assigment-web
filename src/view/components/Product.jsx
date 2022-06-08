@@ -211,11 +211,13 @@ export default function Product({
                   <div className="item__list">
                     <img
                       className="list__img"
+                      alt="list__img"
                       src={product.link[0]}
                       onClick={() => handleClick(index, product.type)}
                     />
                     <img
                       className="list__img--hover"
+                      alt="list__img--hover"
                       src={product.link[1]}
                       onClick={() => handleClick(index, product.type)}
                     />
@@ -232,7 +234,11 @@ export default function Product({
                 <li key={index} className="detail--item">
                   <div className="row container-fluid">
                     <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 detail__img">
-                      <img className="item--img" src={product.link[position]} />
+                      <img
+                        className="item--img"
+                        alt="item--img"
+                        src={product.link[position]}
+                      />
                     </div>
 
                     <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 detail__info">
@@ -251,6 +257,7 @@ export default function Product({
                             key={i}
                             className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 detail__info--img"
                             src={img}
+                            alt="detail__info--img"
                             onClick={() => handleClickImages(i)}
                           />
                         ))}
@@ -291,6 +298,7 @@ export default function Product({
                             className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 row container-fluid information--item"
                           >
                             <img
+                              alt="service__img"
                               className="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 service__img"
                               src={service.img}
                             />
