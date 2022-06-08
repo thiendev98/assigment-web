@@ -27,7 +27,7 @@ export default function ListUser() {
         formData.append('link',inputs.link);
         formData.append('color',inputs.color);
         //formData.append('size',inputs.size);
-        axios.post('http://localhost/src/php/product/save', formData).then(function(response){
+        axios.post('http://localhost/assigment-web/src/php/product/save', formData).then(function(response){
         console.log(inputs.type);
         console.log(response.data);
             navigate('/');
