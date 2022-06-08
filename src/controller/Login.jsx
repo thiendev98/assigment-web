@@ -134,7 +134,7 @@ export default function Login({
         };
 
         axios
-          .post(`http://localhost/assigment-web-demo/src/php/insert.php`, obj)
+          .post(`http://localhost/src/php/insert.php`, obj)
           .then((res) => {})
           .catch((error) => {
             console.log(error.response);
@@ -173,45 +173,6 @@ export default function Login({
         $(".form--warning").css("display", "flex");
       }
     });
-
-    /*const obj ={
-      userName:loginAccount.userName,
-      password:loginAccount.password,
-      
-    };
-    axios.post(`http://localhost/src/controller/read.php`,obj)
-    .then(
-      (res) => {
-        customerUser.forEach((customer) => {
-          
-          if (
-            customer.userName === loginAccount.userName &&
-            customer.password === loginAccount.password
-          ) {
-            console.log(customer);
-            $("#LoginPage").css("display", "none");
-            setUser(true);
-            nextPage("home");
-          } else {
-            
-            $(".form--warning").css("display", "flex");
-          }
-        });
-
-        adminUser.forEach((admin) => {
-          if (
-            admin.userName === loginAccount.userName &&
-            admin.password === loginAccount.password
-          ) {
-            $("#LoginPage").css("display", "none");
-            setAdmin(true);
-          } else {
-            $(".form--warning").css("display", "flex");
-          }
-        });
-      
-    })
-    .catch((error) => console.log(error.data))*/
   };
   return (
     <div id="LoginPage">

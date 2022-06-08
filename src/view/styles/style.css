@@ -2076,4 +2076,24 @@
     font-size: 14px;
   }
 }
+#EditProduct, #CreateProduct{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#EditProduct h2, #CreateProduct h2{
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+#EditProduct th, #CreateProduct th{
+  padding: 15px;
+}
+#EditProduct td, #CreateProduct td{
+  text-align: left;
+}
+#EditProduct .save, #CreateProduct .save{
+  text-align: right;
+}
 /*# sourceMappingURL=style.css.map */
