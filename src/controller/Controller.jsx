@@ -19,6 +19,7 @@ import {
   FaTwitter,
   FaBars,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 import "./styles/style.css";
 import logo from "./images/logo.png";
 import shirt from "./images/shirt.jpg";
@@ -165,6 +166,7 @@ export default function Controller({ setAdmin }) {
       info: "sale@loza.vn",
     },
   ];
+  const notify = () => toast("Wow so easy!");
   return (
     <div id="Controller">
       <div id="header">
@@ -175,7 +177,7 @@ export default function Controller({ setAdmin }) {
               nextPage(PAGE_HOME);
             }}
           >
-            <img className="logo--img" src={logo} />
+            <img className="logo--img" alt="logo--img" src={logo} />
           </div>
           <ul className="navbar__list col-xl-5 col-lg-0 col-md-0 col-sm-0 col-0">
             {sideBarList.map((list, index) => (
@@ -207,7 +209,10 @@ export default function Controller({ setAdmin }) {
               className="btn btn--search"
               onClick={() => searchProductFunction()}
             >
-              <img src="https://bizweb.dktcdn.net/100/438/408/themes/848101/assets/search.svg" />
+              <img
+                src="https://bizweb.dktcdn.net/100/438/408/themes/848101/assets/search.svg"
+                alt="img"
+              />
             </button>
           </div>
           <ul className="navbar__user col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
@@ -246,13 +251,18 @@ export default function Controller({ setAdmin }) {
                 <img
                   className="sidebar__logo--img"
                   src={logo}
+                  alt="logo"
                   onClick={() => nextPageSideBar("home")}
                 />
               </div>
               <ul className="sidebar__link">
                 {sideBarList.map((list, index) => (
                   <li key={index} className="sidebar__link--item">
-                    <img className="sidebar__link--item__img" src={list.img} />
+                    <img
+                      className="sidebar__link--item__img"
+                      src={list.img}
+                      alt="logo"
+                    />
                     <span
                       onClick={() => {
                         nextPageSideBar(`${list.type}`);
@@ -265,6 +275,7 @@ export default function Controller({ setAdmin }) {
                 <li className="sidebar__link--item item__icon">
                   <img
                     className="sidebar__link--item__img"
+                    alt="img"
                     src="https://thumbs.dreamstime.com/b/user-icon-trendy-flat-style-isolated-grey-background-user-symbol-user-icon-trendy-flat-style-isolated-grey-background-123663211.jpg"
                   />
                   <span>{user.login ? "Tài khoản" : "Đăng nhập"}</span>

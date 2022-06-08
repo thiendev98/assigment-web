@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles/style.css";
 import $ from "jquery";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import { FaGooglePlusG, FaTimes } from "react-icons/fa";
 // import  handleForgot  from "./Forgot";
@@ -61,12 +62,27 @@ export default function Login({
       password: "123456",
     },
   ];
+  const [isLogin, setIsLogin] = useState(false);
+  const toastNotifyError = (value) => {
+    toast.info(value, {
+      autoClose: 2000,
+      type: "error",
+      position: "top-center",
+    });
+  };
+  const toastNotifySuccess = (value) => {
+    toast.info(value, {
+      autoClose: 2000,
+      type: "success",
+      position: "top-center",
+    });
+  };
   useEffect(() => {
     setUserCustomer(customerData);
   }, [login]);
-  useEffect(() => {
-    $(".form--warning").css("display", "none");
-  }, [loginAccount]);
+  // useEffect(() => {
+  //   $(".form--warning").css("display", "none");
+  // }, [loginAccount]);
 
   const checkedNameVietnamese = (name) => {
     if (name === null || name === undefined) return name;
@@ -87,41 +103,25 @@ export default function Login({
     const patternPassword =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9@#$%^&*]{8,15}$/;
     if (!patternName.test(checkedNameVietnamese(registerAccount.name))) {
-      alert("Tên chưa hợp lệ");
+      toastNotifyError("Tên chưa hợp lệ");
       return false;
     } else if (!patternUserName.test(registerAccount.userName)) {
-      alert("Tên đăng nhập chưa hợp lệ");
+      toastNotifyError("Tên đăng nhập chưa hợp lệ");
       return false;
     } else if (!patternPhone.test(registerAccount.phone)) {
-      alert("Số điện thoại khộng hợp lệ");
-      return false;
+      toastNotifyError("Số điện thoại khộng hợp lệ");
     } else if (!patternEmail.test(registerAccount.email)) {
-      alert("Email không hợp lệ");
+      toastNotifyError("Email không hợp lệ");
       return false;
     } else if (!patternPassword.test(registerAccount.password)) {
-      alert("Mật khẩu không hợp lệ");
+      toastNotifyError("Mật khẩu không hợp lệ");
       return false;
     } else {
-      alert("Đăng ký tài khoản thành công");
+      toastNotifySuccess("Đăng ký tài khoản thành công");
       return true;
     }
   };
   const buttonRegister = () => {
-    // const registerData = new FormData();
-    // registerData.append("name", registerAccount.name);
-    // registerData.append("userName", registerAccount.userName);
-    // registerData.append("phone", registerAccount.phone);
-    // registerData.append("email", registerAccount.email);
-    // registerData.append("password", registerAccount.password);
-    // let url = "http://127.0.0.1:8000/";
-    // axios
-    //   .post(url, registerData, {
-    //     headers: {
-    //       "content-type": "multipart/form-data",
-    //     },
-    //   })
-    //   .then((response) => console.log(response.data))
-    //   .catch((err) => console.log(err));
     checkErrorInForm() &&
       setTimeout(() => {
         //
@@ -145,33 +145,40 @@ export default function Login({
         //
         setRegisterAccount({});
         setLogin(true);
-      }, 1500);
+      }, 4000);
   };
-
   const buttonLogin = () => {
     adminUser.forEach((admin) => {
       if (
         admin.userName === loginAccount.userName &&
         admin.password === loginAccount.password
       ) {
-        $("#LoginPage").css("display", "none");
-        setAdmin(true);
-      } else {
-        $(".form--warning").css("display", "flex");
+        toastNotifySuccess("Chuẩn bị chuyển đến trang Admin!");
+        setTimeout(() => {
+          $("#LoginPage").css("display", "none");
+          setIsLogin(true);
+          setAdmin(true);
+        }, 3600);
       }
     });
-    userCustomer.forEach((customer) => {
+    userCustomer.forEach((customer, index) => {
       if (
         customer.userName === loginAccount.userName &&
         customer.password === loginAccount.password
       ) {
-        $("#LoginPage").css("display", "none");
-        customer.login = true;
-        setUser(customer);
-        nextPage("home");
-      } else {
-        $(".form--warning").css("display", "flex");
+        setIsLogin(true);
+        toastNotifySuccess("Đăng nhập thành công!!!");
+        setTimeout(() => {
+          $("#LoginPage").css("display", "none");
+          customer.login = true;
+          setUser(customer);
+          nextPage("home");
+        }, 3600);
       }
+      // else if (index === userCustomer.length - 1) {
+      //   isLogin &&
+      //     toastNotifyError("Tên đăng nhập hoặc mật khẩu không chính xác");
+      // }
     });
   };
   return (
