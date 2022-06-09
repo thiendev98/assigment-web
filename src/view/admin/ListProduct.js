@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button'
@@ -13,14 +13,14 @@ export default function Admin({ setAdmin }) {
   }, []);
 
   function getUsers() {
-      axios.get('http://localhost/src/php/products/').then(function(response) {
+      axios.get('http://localhost/assigment-web/src/php/products/').then(function(response) {
           console.log(response.data);
           setProducts(response.data);
       });
   }
 
   const deleteUser = (id) => {
-      axios.delete(`http://localhost/src/php/product/${id}/delete`).then(function(response){
+      axios.delete(`http://localhost/assigment-web/src/php/product/${id}/delete`).then(function(response){
           console.log(response.data);
           getUsers();
       });

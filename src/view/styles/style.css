@@ -2076,24 +2076,25 @@
     font-size: 14px;
   }
 }
-#EditProduct, #CreateProduct{
+#EditProduct, #CreateProduct, #EditOrder{
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#EditProduct h2, #CreateProduct h2{
+#EditProduct h2, #CreateProduct h2, #EditOrder h2{
   display: block;
   margin-bottom: 20px;
   margin-top: 20px;
 }
-#EditProduct th, #CreateProduct th{
+#EditProduct th, #CreateProduct th, #EditOrder th{
   padding: 15px;
 }
-#EditProduct td, #CreateProduct td{
+#EditProduct td, #CreateProduct td, #EditOrder td{
   text-align: left;
 }
-#EditProduct .save, #CreateProduct .save{
+#EditProduct .save, #CreateProduct .save, #EditOrder .save{
   text-align: right;
 }
+
 /*# sourceMappingURL=style.css.map */

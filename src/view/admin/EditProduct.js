@@ -15,7 +15,7 @@ export default function ListUser() {
     }, []);
 
     function getUser() {
-        axios.get(`http://localhost/src/php/product/${id}`).then(function(response) {
+        axios.get(`http://localhost/assigment-web/src/php/product/${id}`).then(function(response) {
             console.log(response.data);
             setInputs(response.data);
         });
@@ -40,7 +40,7 @@ export default function ListUser() {
         formData.append('price',inputs.price);
         formData.append('link',inputs.link);
         formData.append('color',inputs.color);
-        axios.post(`http://localhost/src/php/product/${id}/edit`, formData).then(function(response){
+        axios.post(`http://localhost/assigment-web/src/php/product/${id}/edit`, formData).then(function(response){
             console.log(response.data);
             console.log("inputs");
             console.log(inputs);
