@@ -14,10 +14,10 @@ switch($method) {
     case "GET":
         $sql = "SELECT * FROM orders";
         $path = explode('/', $_SERVER['REQUEST_URI']);
-        if(isset($path[5]) && is_numeric($path[5])) {
+        if(isset($path[6]) && is_numeric($path[6])) {
             $sql .= " WHERE id = :id";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':id', $path[5]);
+            $stmt->bindParam(':id', $path[6]);
             $stmt->execute();
             $order = $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
@@ -30,19 +30,11 @@ switch($method) {
         break;
     case "POST":
         $path = explode('/', $_SERVER['REQUEST_URI']);
-        if($path[5] != 'save'){
-            $sql = "UPDATE orders SET name =:name, phone =:phone, address =:address, cost =:cost, updated_at =:updated_at WHERE id = :id";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':id', $path[5]);
-            $updated_at = date('Y-m-d');
-            $stmt->bindParam(':updated_at', $updated_at);
-        }
-        else{
-            $sql = "INSERT INTO orders (id,name,phone,address,cost, created_at) VALUES (NULL,:name,:phone,:address,:cost,:created_at)";
-            $stmt = $conn->prepare($sql);
-            $created_at = date('Y-m-d');
-            $stmt->bindParam(':created_at', $created_at);
-        }
+        $sql = "UPDATE orders SET name =:name, phone =:phone, address =:address, cost =:cost, updated_at =:updated_at WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $path[6]);
+        $updated_at = date('Y-m-d');
+        $stmt->bindParam(':updated_at', $updated_at);
         $stmt->bindParam(':name', $_POST['name']);
         $stmt->bindParam(':phone', $_POST['phone']);
         $stmt->bindParam(':address', $_POST['address']);
@@ -61,7 +53,7 @@ switch($method) {
         $path = explode('/', $_SERVER['REQUEST_URI']);
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $path[5]);
+        $stmt->bindParam(':id', $path[6]);
 
         if($stmt->execute()) {
             $response = ['status' => 1, 'message' => 'Record deleted successfully.'];
