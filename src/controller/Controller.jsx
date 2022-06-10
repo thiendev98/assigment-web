@@ -35,7 +35,7 @@ const PAGE_TSHIRT = "tshirt";
 const PAGE_SKIRT = "skirt";
 const PAGE_TROUSERS = "trousers";
 const PAGE_CART = "cart";
-export default function Controller({ setAdmin }) {
+export default function Controller() {
   const [cart, setCart] = useState([]);
   const [page, setPage] = useState(PAGE_HOME);
   const [user, setUser] = useState({
@@ -166,7 +166,6 @@ export default function Controller({ setAdmin }) {
       info: "sale@loza.vn",
     },
   ];
-  const notify = () => toast("Wow so easy!");
   return (
     <div id="Controller">
       <div id="header">
@@ -198,6 +197,7 @@ export default function Controller({ setAdmin }) {
               placeholder="Tìm sản phẩm"
               onChange={(event) => {
                 $(".search__header").css("display", "flex");
+                event.preventDefault();
                 setSearchProduct(event.target.value);
               }}
               value={searchProduct}
@@ -219,7 +219,7 @@ export default function Controller({ setAdmin }) {
             <li className="user--customer">
               <lord-icon
                 onClick={() => handleLogin()}
-                trigger="hover"
+                trigger=""
                 src="https://cdn.lordicon.com/dxjqoygy.json"
               ></lord-icon>
               <Login
@@ -228,7 +228,6 @@ export default function Controller({ setAdmin }) {
                 userCustomer={userCustomer}
                 setUserCustomer={setUserCustomer}
                 nextPage={nextPage}
-                setAdmin={setAdmin}
               />
             </li>
             <li className="user--cart">

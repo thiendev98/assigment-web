@@ -9,14 +9,13 @@ import { FaGooglePlusG, FaTimes } from "react-icons/fa";
 // import GoogleLogin from 'react-google-login';
 // import { useGoogleLogin } from 'react-google-login';
 import customerData from "../php/customerData.json";
-
+import { useNavigate } from "react-router-dom";
 export default function Login({
   user,
   setUser,
   userCustomer,
   setUserCustomer,
   nextPage,
-  setAdmin,
 }) {
   const handleForgot = () => {
     return (
@@ -35,6 +34,7 @@ export default function Login({
       </div>
     );
   };
+  const navigate = useNavigate();
   const [loginAccount, setLoginAccount] = useState({
     userName: "",
     password: "",
@@ -96,7 +96,7 @@ export default function Login({
     return name;
   };
   const checkErrorInForm = () => {
-    const patternName = /^[a-z A-Z!@#\$%\^\&*\)\(+=._-]{6,}$/g;
+    const patternName = /^[a-z A-Z!@#$%^&*)(+=._-]{6,}$/g;
     const patternUserName = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/;
     const patternEmail = /^[A-Za-z_.]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z.]{2,6}$/;
     const patternPhone = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
@@ -157,7 +157,7 @@ export default function Login({
         setTimeout(() => {
           $("#LoginPage").css("display", "none");
           setIsLogin(true);
-          setAdmin(true);
+          navigate("/admin");
         }, 3600);
       }
     });
@@ -174,11 +174,9 @@ export default function Login({
           setUser(customer);
           nextPage("home");
         }, 3600);
+      } else if (isLogin && index === userCustomer.length - 1) {
+        toastNotifyError("Tên đăng nhập hoặc mật khẩu không chính xác");
       }
-      // else if (index === userCustomer.length - 1) {
-      //   isLogin &&
-      //     toastNotifyError("Tên đăng nhập hoặc mật khẩu không chính xác");
-      // }
     });
   };
   return (
