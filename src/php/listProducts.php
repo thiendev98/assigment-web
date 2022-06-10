@@ -14,10 +14,10 @@ switch($method) {
     case "GET":
         $sql = "SELECT * FROM products";
         $path = explode('/', $_SERVER['REQUEST_URI']);
-        if(isset($path[5]) && is_numeric($path[5])) {
+        if(isset($path[6]) && is_numeric($path[6])) {
             $sql .= " WHERE id = :id";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':id', $path[5]);
+            $stmt->bindParam(':id', $path[6]);
             $stmt->execute();
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
@@ -68,10 +68,10 @@ switch($method) {
         $tempname = $_FILES["link"]["tmp_name"];
         $folder = "./image/" . $link;
         
-        if($path[5] != 'save'){
+        if($path[6] != 'save'){
             $sql = "UPDATE products SET type =:type, code =:code, name =:name, price =:price, color =:color, link='$link', updated_at =:updated_at WHERE id = :id";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':id', $path[5]);
+            $stmt->bindParam(':id', $path[6]);
             $updated_at = date('Y-m-d');
             $stmt->bindParam(':updated_at', $updated_at);
         }
@@ -107,7 +107,7 @@ switch($method) {
         $path = explode('/', $_SERVER['REQUEST_URI']);
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $path[5]);
+        $stmt->bindParam(':id', $path[6]);
 
         if($stmt->execute()) {
             $response = ['status' => 1, 'message' => 'Record deleted successfully.'];

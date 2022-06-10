@@ -1,12 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 export default function ListUser() {
     const navigate = useNavigate();
 
     const [inputs, setInputs] = useState([]);
+
+    const {id} = useParams();
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    function getUser() {
+        axios.get(`http://localhost/assigment-web/src/php/listProducts.php/product/${id}`).then(function(response) {
+            console.log(response.data);
+            setInputs(response.data);
+        });
+    }
     const handleFileChange=(event) => {
         const name = event.target.name;
         const value = event.target.files[0];
@@ -20,26 +33,27 @@ export default function ListUser() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData();
+        //formData.append('id', id);
         formData.append('type',inputs.type);
         formData.append('code',inputs.code);
         formData.append('name',inputs.name);
         formData.append('price',inputs.price);
         formData.append('link',inputs.link);
         formData.append('color',inputs.color);
-        //formData.append('size',inputs.size);
-        axios.post('http://localhost/assigment-web/src/php/product/save', formData).then(function(response){
-        console.log(inputs.type);
-        console.log(response.data);
+        axios.post(`http://localhost/assigment-web/src/php/listProducts.php/product/${id}/edit`, formData).then(function(response){
+            console.log(response.data);
+            console.log("inputs");
+            console.log(inputs);
             navigate('/');
         });
         
     }
     return (
-        <div id="CreateProduct">
+        <div id="EditProduct">
             <div>
-                <h2>Create product</h2>
-                <form onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
-                    <table cellSpacing="10">
+                <h2>Edit product</h2>
+                <form onSubmit={handleSubmit}>
+                    <table cellSpacing="15" >
                         <tbody>
                             <tr>
                                 <th>
@@ -60,7 +74,7 @@ export default function ListUser() {
                                     <label>Code: </label>
                                 </th>
                                 <td> 
-                                    <input type="text" name="code" onChange={handleChange} />
+                                    <input value={inputs.code} type="text" name="code" onChange={handleChange} />
                                 </td>
                             </tr>
                             <tr>
@@ -68,7 +82,7 @@ export default function ListUser() {
                                     <label>Name: </label>
                                 </th>
                                 <td>
-                                    <input type="text" name="name" onChange={handleChange} />
+                                    <input value={inputs.name} type="text" name="name" onChange={handleChange} />
                                 </td>
                             </tr>
                             <tr>
@@ -76,7 +90,7 @@ export default function ListUser() {
                                     <label>Price: </label>
                                 </th>
                                 <td>
-                                    <input type="text" name="price" onChange={handleChange} />
+                                    <input value={inputs.price} type="text" name="price" onChange={handleChange} />
                                 </td>
                             </tr>
                             <tr>
@@ -84,8 +98,7 @@ export default function ListUser() {
                                     <label>Link: </label>
                                 </th>
                                 <td>
-                                    <input type="file" name="link" accept="image/*" onChange={handleFileChange} />
-                                    
+                                    <input type="file" name="link"  onChange={handleFileChange} />
                                 </td>
                             </tr>
                             <tr>
@@ -93,11 +106,11 @@ export default function ListUser() {
                                     <label>Color: </label>
                                 </th>
                                 <td>
-                                    <input type="text" name="color" onChange={handleChange} />
+                                    <input value={inputs.color} type="text" name="color" onChange={handleChange} />
                                 </td>
                             </tr>
                             <tr>
-                                <td colSpan="2" align ="right" className="save">
+                                <td colSpan="2" className="save">
                                     <button className="btn btn-success">Save</button>
                                 </td>
                             </tr>

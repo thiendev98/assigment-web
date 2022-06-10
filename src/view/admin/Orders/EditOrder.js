@@ -15,7 +15,7 @@ export default function ListUser() {
     }, []);
 
     function getUser() {
-        axios.get(`http://localhost/assigment-web/src/php/order/${id}`).then(function(response) {
+        axios.get(`http://localhost/assigment-web/src/php/listOrders.php/order/${id}`).then(function(response) {
             console.log(response.data);
             setInputs(response.data);
         });
@@ -33,7 +33,7 @@ export default function ListUser() {
         formData.append('phone',inputs.phone);
         formData.append('address',inputs.address);
         formData.append('cost',inputs.cost);
-        axios.post(`http://localhost/assigment-web/src/php/order/${id}/edit`, formData).then(function(response){
+        axios.post(`http://localhost/assigment-web/src/php/listOrders.php/order/${id}/edit`, formData).then(function(response){
             console.log(response.data);
             navigate('/');
         });    

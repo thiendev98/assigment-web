@@ -13,14 +13,14 @@ export default function Admin({ setAdmin }) {
   }, []);
 
   function getUsers() {
-      axios.get('http://localhost/assigment-web/src/php/products/').then(function(response) {
+      axios.get('http://localhost/assigment-web/src/php/listProducts.php/products/').then(function(response) {
           console.log(response.data);
           setProducts(response.data);
       });
   }
 
   const deleteUser = (id) => {
-      axios.delete(`http://localhost/assigment-web/src/php/product/${id}/delete`).then(function(response){
+      axios.delete(`http://localhost/assigment-web/src/php/listProducts.php/product/${id}/delete`).then(function(response){
           console.log(response.data);
           getUsers();
       });
