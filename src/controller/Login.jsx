@@ -20,7 +20,7 @@ export default function Login({
     password: "",
   });
   const [registerAccount, setRegisterAccount] = useState({
-    key: uuidv4(),
+    key: Number,
     login: Boolean,
     name: "",
     userName: "",
