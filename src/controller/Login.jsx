@@ -5,9 +5,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import { FaGooglePlusG, FaTimes } from "react-icons/fa";
-// import  handleForgot  from "./Forgot";
-// import GoogleLogin from 'react-google-login';
-// import { useGoogleLogin } from 'react-google-login';
 import customerData from "../php/customerData.json";
 import { useNavigate } from "react-router-dom";
 export default function Login({
@@ -17,23 +14,6 @@ export default function Login({
   setUserCustomer,
   nextPage,
 }) {
-  const handleForgot = () => {
-    return (
-      <div id="LoginPage">
-        <div className="row container-fluid">
-          <div className="form--register">
-            <FaTimes
-              className="icon__cancel"
-              onClick={() => {
-                $("#LoginPage").css("display", "none");
-              }}
-            />
-            <h1 style={{ color: "green" }}>GeeksForGeeks</h1>
-          </div>
-        </div>
-      </div>
-    );
-  };
   const navigate = useNavigate();
   const [loginAccount, setLoginAccount] = useState({
     userName: "",
@@ -62,7 +42,7 @@ export default function Login({
       password: "123456",
     },
   ];
-  const [isLogin, setIsLogin] = useState(false);
+
   const toastNotifyError = (value) => {
     toast.info(value, {
       autoClose: 2000,
@@ -77,12 +57,10 @@ export default function Login({
       position: "top-center",
     });
   };
-  useEffect(() => {
-    setUserCustomer(customerData);
-  }, [login]);
+
   // useEffect(() => {
-  //   $(".form--warning").css("display", "none");
-  // }, [loginAccount]);
+  //   setUserCustomer(customerData);
+  // }, [login]);
 
   const checkedNameVietnamese = (name) => {
     if (name === null || name === undefined) return name;
@@ -139,45 +117,42 @@ export default function Login({
           .catch((error) => {
             console.log(error.response);
           });
-
         setUserCustomer(customerData);
-
         //
         setRegisterAccount({});
         setLogin(true);
       }, 4000);
   };
   const buttonLogin = () => {
-    adminUser.forEach((admin) => {
-      if (
-        admin.userName === loginAccount.userName &&
-        admin.password === loginAccount.password
-      ) {
-        toastNotifySuccess("Chuẩn bị chuyển đến trang Admin!");
-        setTimeout(() => {
-          $("#LoginPage").css("display", "none");
-          setIsLogin(true);
-          navigate("/admin");
-        }, 3600);
-      }
-    });
-    userCustomer.forEach((customer, index) => {
-      if (
-        customer.userName === loginAccount.userName &&
-        customer.password === loginAccount.password
-      ) {
-        setIsLogin(true);
-        toastNotifySuccess("Đăng nhập thành công!!!");
-        setTimeout(() => {
-          $("#LoginPage").css("display", "none");
-          customer.login = true;
-          setUser(customer);
-          nextPage("home");
-        }, 3600);
-      } else if (isLogin && index === userCustomer.length - 1) {
-        toastNotifyError("Tên đăng nhập hoặc mật khẩu không chính xác");
-      }
-    });
+    let accountAdmin = adminUser.find(
+      (account) =>
+        account.userName === loginAccount.userName &&
+        account.password === loginAccount.password
+    );
+    let accountSignin = userCustomer.find(
+      (account) =>
+        account.userName === loginAccount.userName &&
+        account.password === loginAccount.password
+    );
+    if (accountAdmin) {
+      toastNotifySuccess("Chuẩn bị chuyển đến trang Admin!");
+      setTimeout(() => {
+        $("#LoginPage").css("display", "none");
+        navigate("/admin");
+        setLoginAccount({});
+      }, 3600);
+    } else if (accountSignin) {
+      toastNotifySuccess("Đăng nhập thành công!!!");
+      setTimeout(() => {
+        $("#LoginPage").css("display", "none");
+        accountSignin.login = true;
+        setUser(accountSignin);
+        nextPage("home");
+        setLoginAccount({});
+      }, 3600);
+    } else {
+      toastNotifyError("Tên đăng nhập hoặc mật khẩu không chính xác");
+    }
   };
   return (
     <div id="LoginPage">
@@ -192,9 +167,6 @@ export default function Login({
               }}
             />
             <h4>Đăng nhập</h4>
-            <span className="form--warning">
-              Tên đăng nhập hoặc mật khẩu không chính xác
-            </span>
             <div className="form--item">
               <label>Tên đăng nhập</label>
               <input
@@ -241,15 +213,6 @@ export default function Login({
               <span> Đăng nhập bằng google</span>
             </button>
 
-            {/*<GoogleLogin
-              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-              buttonText="Đăng nhập bằng google"
-              onSuccess={handleLogin}
-              onFailure={handleFailure}
-              cookiePolicy={'single_host_origin'}
-              className='button--login__gg'
-              />*/}
-
             <ul className="row container-fluid">
               <li className="col-6">
                 <span onClick={() => setLogin(false)}>
@@ -257,9 +220,7 @@ export default function Login({
                 </span>
               </li>
               <li className="col-6">
-                <span style={{ float: "right" }} onClick={() => handleForgot()}>
-                  Quên mật khẩu?
-                </span>
+                <span style={{ float: "right" }}>Quên mật khẩu?</span>
               </li>
             </ul>
           </div>

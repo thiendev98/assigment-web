@@ -4,8 +4,22 @@ import { FaTimes } from "react-icons/fa";
 import { loadAnimation } from "lottie-web";
 import { defineLordIconElement } from "lord-icon-element";
 import { useState, useRef } from "react";
-import { type } from "@testing-library/user-event/dist/type";
+import { toast } from "react-toastify";
 defineLordIconElement(loadAnimation);
+export const toastNotifyDefault = (value) => {
+  toast.info(value, {
+    autoClose: 2000,
+    type: "default",
+    position: "top-center",
+  });
+};
+export const toastNotifySuccess = (value) => {
+  toast.info(value, {
+    autoClose: 2000,
+    type: "success",
+    position: "top-center",
+  });
+};
 export default function Product({
   setCart,
   cart,
@@ -78,7 +92,7 @@ export default function Product({
     setDetail(false);
   };
   const addToCart = (product) => {
-    if (!user.login) alert("Bạn cần đăng nhập để mua hàng!!!");
+    if (!user.login) toastNotifyDefault("Bạn cần đăng nhập để mua hàng!!!");
     else {
       var products = {
         code: product.code,
@@ -88,7 +102,8 @@ export default function Product({
         color: product.color[color],
         size: product.size[size],
       };
-      if (size === 99) alert("Bạn vui lòng chọn size trước khi đặt hàng");
+      if (size === 99)
+        toastNotifyDefault("Bạn vui lòng chọn size trước khi đặt hàng");
       else {
         let newCart = [...cart];
         let itemInCart = newCart.find(
@@ -98,14 +113,14 @@ export default function Product({
             products.color === item.color
         );
         if (itemInCart) {
-          alert("Bạn đã thêm sản phẩm này vào giỏ hàng");
+          toastNotifyDefault("Bạn đã thêm sản phẩm này vào giỏ hàng");
         } else {
           itemInCart = {
             ...products,
             quantity: 1,
           };
           newCart.push(itemInCart);
-          alert("Bạn vừa thêm thành công sản phẩm vào giỏ hàng");
+          toastNotifySuccess("Bạn vừa thêm thành công sản phẩm vào giỏ hàng");
         }
         setCart(newCart);
       }
@@ -113,7 +128,7 @@ export default function Product({
   };
   const goToCart = (product) => {
     if (!user.login) {
-      alert("Bạn cần đăng nhập để mua hàng!!!");
+      toastNotifyDefault("Bạn cần đăng nhập để mua hàng!!!");
     } else {
       var products = {
         code: product.code,
@@ -123,7 +138,8 @@ export default function Product({
         color: product.color[color],
         size: product.size[size],
       };
-      if (size === 99) alert("Bạn vui lòng chọn size trước khi đặt hàng");
+      if (size === 99)
+        toastNotifyDefault("Bạn vui lòng chọn size trước khi đặt hàng");
       else {
         let newCart = [...cart];
         let itemInCart = newCart.find(

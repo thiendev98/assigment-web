@@ -1,9 +1,24 @@
 import React from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { FaTrash } from "react-icons/fa";
 import { loadAnimation } from "lottie-web";
 import { defineLordIconElement } from "lord-icon-element";
 defineLordIconElement(loadAnimation);
+export const toastNotifyError = (value) => {
+  toast.info(value, {
+    autoClose: 2000,
+    type: "error",
+    position: "top-center",
+  });
+};
+export const toastNotifySuccess = (value) => {
+  toast.info(value, {
+    autoClose: 2000,
+    type: "success",
+    position: "top-center",
+  });
+};
 export default function Cart({ cart, setCart, nextPage, onClick, user }) {
   const getTotalSum = () => {
     return cart.reduce((sum, { price, quantity }) => sum + price * quantity, 0);
@@ -43,10 +58,10 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
           .catch((error) => {
             console.log(error.response);
           });
-        alert("Đặt hàng thành công. Tiếp tục mua sắm.");
+        toastNotifySuccess("Đặt hàng thành công. Tiếp tục mua sắm.");
         setCart([]);
         nextPage("shirt");
-      }, 1000);
+      }, 1200);
   };
 
   return (

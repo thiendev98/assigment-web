@@ -19,7 +19,6 @@ import {
   FaTwitter,
   FaBars,
 } from "react-icons/fa";
-import { toast } from "react-toastify";
 import "./styles/style.css";
 import logo from "./images/logo.png";
 import shirt from "./images/shirt.jpg";
@@ -35,6 +34,7 @@ const PAGE_TSHIRT = "tshirt";
 const PAGE_SKIRT = "skirt";
 const PAGE_TROUSERS = "trousers";
 const PAGE_CART = "cart";
+
 export default function Controller() {
   const [cart, setCart] = useState([]);
   const [page, setPage] = useState(PAGE_HOME);
