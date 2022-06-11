@@ -84,7 +84,7 @@ export default function Admin() {
           <nav>
             <ul>
               <li>
-                <Link to="/admin">Trang chủ</Link>
+                <Link to="/">Trang chủ</Link>
               </li>
               <li>
                 <Link to="products">Danh sách sản phẩm</Link>

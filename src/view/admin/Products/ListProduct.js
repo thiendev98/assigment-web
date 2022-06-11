@@ -1,31 +1,30 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
-import {Link} from 'react-router-dom';
+import {Link,Outlet} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button'
+import { useParams } from "react-router-dom";
 
-
-export default function Admin({ setAdmin }) {
+export default function ListProduct() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-      getUsers();
+      getProducts();
   }, []);
 
-  function getUsers() {
+  const getProducts = () => {
       axios.get('http://localhost/assigment-web/src/php/listProducts.php/products/').then(function(response) {
-          console.log(response.data);
           setProducts(response.data);
       });
   }
 
-  const deleteUser = (id) => {
+  const deleteProduct = (id) => {
       axios.delete(`http://localhost/assigment-web/src/php/listProducts.php/product/${id}/delete`).then(function(response){
-          console.log(response.data);
-          getUsers();
+          getProducts();
       });
   }
   return (
+
     <div style={{width: "80%", margin: "0 auto"}}>
         <Table striped bordered hover size="md">
             <thead>
@@ -48,8 +47,8 @@ export default function Admin({ setAdmin }) {
                         <td>{product.price}</td>
                         <td>{product.color}</td>
                         <td>
-                            <Link className="btn btn-primary" to={`product/${product.id}/edit`} style={{marginRight: "10px"}}>Edit</Link>
-                            <Button variant="danger" onClick={() => deleteUser(product.id)}>Delete</Button>
+                            <Link className="btn btn-primary" to={product.id.toString()} style={{marginRight: "10px"}}>Edit</Link>
+                            <Button variant="danger" onClick={() => deleteProduct(product.id)}>Delete</Button>
                         </td>
                     </tr>
                 )}

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
 //import './App.css';
 import EditOrder from "./EditOrder";
 import ListOrder from "./ListOrder";
@@ -12,7 +12,7 @@ function ListOrders() {
       <nav>
         <ul>
           <li style={{ display: "inline-block", padding: "10px" }}>
-            <Link className="btn btn-primary" to="orderlist">
+            <Link className="btn btn-primary" to="list">
               List Orders
             </Link>
           </li>
@@ -23,6 +23,7 @@ function ListOrders() {
           <Route path="order/:id/edit" element={<EditOrder />} />
         </Routes>
       </BrowserRouter> */}
+      <Outlet />
     </div>
   );
 }

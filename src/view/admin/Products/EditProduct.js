@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 
-export default function ListUser() {
+export default function EditProduct() {
     const navigate = useNavigate();
 
     const [inputs, setInputs] = useState([]);
@@ -15,8 +15,8 @@ export default function ListUser() {
     }, []);
 
     function getUser() {
-        axios.get(`http://localhost/assigment-web/src/php/listProducts.php/product/${id}`).then(function(response) {
-            console.log(response.data);
+        axios.get(`http://localhost/assigment-web/src/php/listProducts.php/products/${id}`).then(function(response) {
+           
             setInputs(response.data);
         });
     }
@@ -41,10 +41,7 @@ export default function ListUser() {
         formData.append('link',inputs.link);
         formData.append('color',inputs.color);
         axios.post(`http://localhost/assigment-web/src/php/listProducts.php/product/${id}/edit`, formData).then(function(response){
-            console.log(response.data);
-            console.log("inputs");
-            console.log(inputs);
-            navigate('/');
+            navigate('/admin/products/list');
         });
         
     }

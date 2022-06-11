@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button'
 
 
-export default function Admin({ setAdmin }) {
+export default function ListOrder() {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
       getUsers();
@@ -41,11 +41,11 @@ export default function Admin({ setAdmin }) {
                     <tr key={key}>
                         <td>{order.id}</td>
                         <td>{order.name}</td>
-                        <td>{order.phone}</td>
+                        <td>0{order.phone}</td>
                         <td>{order.address}</td>
                         <td>{order.cost}</td>
                         <td>
-                            <Link className="btn btn-primary" to={`order/${order.id}/edit`} style={{marginRight: "10px"}}>Edit</Link>
+                            <Link className="btn btn-primary" to={`${order.id}`} style={{marginRight: "10px"}}>Edit</Link>
                             <Button variant="danger" onClick={() => deleteUser(order.id)}>Delete</Button>
                         </td>
                     </tr>

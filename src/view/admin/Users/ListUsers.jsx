@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
 import ListUser from "./ListUser";
 
 function ListUsers() {
@@ -9,12 +9,13 @@ function ListUsers() {
       <nav>
         <ul>
           <li style={{ display: "inline-block", padding: "10px" }}>
-            <Link className="btn btn-primary" to="personal">
+            <Link className="btn btn-primary" to="list">
               List Users
             </Link>
           </li>
         </ul>
       </nav>
+      <Outlet />
     </div>
   );
 }

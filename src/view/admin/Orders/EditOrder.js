@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 
-export default function ListUser() {
+export default function EditOrder() {
     const navigate = useNavigate();
 
     const [inputs, setInputs] = useState([]);
@@ -16,7 +16,6 @@ export default function ListUser() {
 
     function getUser() {
         axios.get(`http://localhost/assigment-web/src/php/listOrders.php/order/${id}`).then(function(response) {
-            console.log(response.data);
             setInputs(response.data);
         });
     }
@@ -34,8 +33,7 @@ export default function ListUser() {
         formData.append('address',inputs.address);
         formData.append('cost',inputs.cost);
         axios.post(`http://localhost/assigment-web/src/php/listOrders.php/order/${id}/edit`, formData).then(function(response){
-            console.log(response.data);
-            navigate('/');
+            navigate('/admin/orders/list');
         });    
     }
     return (

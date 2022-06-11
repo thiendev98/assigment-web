@@ -58,9 +58,9 @@ export default function Login({
     });
   };
 
-  // useEffect(() => {
-  //   setUserCustomer(customerData);
-  // }, [login]);
+  useEffect(() => {
+    setUserCustomer(customerData);
+  }, [login]);
 
   const checkedNameVietnamese = (name) => {
     if (name === null || name === undefined) return name;
@@ -112,7 +112,7 @@ export default function Login({
         };
 
         axios
-          .post(`http://localhost/src/php/insert.php`, obj)
+          .post(`http://localhost/assigment-web/src/php/insert.php`, obj)
           .then((res) => {})
           .catch((error) => {
             console.log(error.response);
