@@ -1565,9 +1565,10 @@
 }
 
 #EditOrderPage form tr td input[type="text"] {
-  width: 500px;
+  width: 640px;
   margin-left: 111px;
   cursor: pointer;
+  height: 32px;
   outline: none;
   border-radius: 4px;
   border: 1px solid #c1eded;
@@ -1577,6 +1578,7 @@
 #EditOrderPage form tr label {
   position: absolute;
   left: 20px;
+  margin-top: 6px;
 }
 
 #EditOrderPage form tr button {
@@ -1623,7 +1625,8 @@
 }
 
 #EditProductPage form tr td input[type="text"] {
-  width: 500px;
+  width: 640px;
+  height: 32px;
   margin-left: 111px;
   cursor: pointer;
   outline: none;
@@ -1635,15 +1638,12 @@
 #EditProductPage form tr label {
   position: absolute;
   left: 20px;
+  margin-top: 6px;
 }
 
 #EditProductPage form tr .button-btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: right;
-      -ms-flex-pack: right;
-          justify-content: right;
+  position: absolute;
+  right: 210px;
 }
 
 #EditProductPage form tr .button-btn button {
@@ -1709,7 +1709,7 @@
     display: flex;
     -webkit-box-pack: start;
         -ms-flex-pack: start;
-            justify-content: start;
+            justify-content: flex-start;
   }
 }
 
@@ -1733,7 +1733,7 @@
     display: flex;
     -webkit-box-pack: start;
         -ms-flex-pack: start;
-            justify-content: start;
+            justify-content: flex-start;
   }
   #ProductPage .product__content .detail--item .detail__img .item--img {
     width: 94%;

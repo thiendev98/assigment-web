@@ -59,7 +59,7 @@ export default function EditProduct() {
           <tbody>
             <tr>
               <th>
-                <label>Type: </label>
+                <label style={{ marginTop: "0" }}>Type: </label>
               </th>
               <td>
                 <div className="onchange__input--radio" onChange={handleChange}>
