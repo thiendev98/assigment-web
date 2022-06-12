@@ -46,7 +46,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
   const handleOrderClick = () => {
     cart.map(product => {
       productsName+=product.name;
-      productsName+='x'+product.quantity.toString()+" ";
+      productsName+=' x'+product.quantity.toString()+", ";
     })
     toastNotifySuccess("Đặt hàng thành công. Tiếp tục mua sắm.");
     user.login &&
@@ -59,10 +59,10 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
           products: productsName.toString(),
           cost: getTotalSum(),
         };
-        console.log(order.products);
+        console.log(order);
         axios
           .post(
-            `http://localhost/assigment-web-demo/src/php/insertOrder.php`,
+            `http://localhost/assigment-web/src/php/insertOrder.php`,
             order
           )
           .then((res) => {})

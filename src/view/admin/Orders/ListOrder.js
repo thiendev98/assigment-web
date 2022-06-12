@@ -31,6 +31,7 @@ export default function ListOrder() {
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
+                    <th>Products</th>
                     <th>Phone</th>
                     <th>Address</th>
                     <th>Cost</th>
@@ -41,6 +42,7 @@ export default function ListOrder() {
                     <tr key={key}>
                         <td>{order.id}</td>
                         <td>{order.name}</td>
+                        <td>{order.products}</td>
                         <td>0{order.phone}</td>
                         <td>{order.address}</td>
                         <td>{order.cost}</td>
