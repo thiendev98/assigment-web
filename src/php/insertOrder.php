@@ -14,7 +14,10 @@ if(isset($postdata) && !empty($postdata)){
     $phone = $request->phone;
     $address = $request->address;
     $cost = $request->cost;
-    $sql = "INSERT INTO orders (name,phone,address,cost) VALUES ('$name','$phone','$address','$cost')";
+    $products = $request->products; 
+    $userID = $request->userID; 
+  
+    $sql = "INSERT INTO orders (name,phone,address,cost,products,userID) VALUES ('$name','$phone','$address','$cost','$userID','$products')";
     if(mysqli_query($db,$sql)){
         http_response_code(201);
     }

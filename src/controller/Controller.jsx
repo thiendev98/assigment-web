@@ -40,7 +40,7 @@ export default function Controller() {
   const [cart, setCart] = useState([]);
   const [page, setPage] = useState(PAGE_HOME);
   const [user, setUser] = useState({
-    key: "",
+    key: Number,
     login: false,
     name: "",
     userName: "",

@@ -40,15 +40,26 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
   const removeFromCart = (productToRemove) => {
     setCart(cart.filter((product) => product !== productToRemove));
   };
+
+ var productsName="";
+
   const handleOrderClick = () => {
+    cart.map(product => {
+      productsName+=product.name;
+      productsName+='x'+product.quantity.toString()+" ";
+    })
+    toastNotifySuccess("Đặt hàng thành công. Tiếp tục mua sắm.");
     user.login &&
       setTimeout(() => {
         const order = {
           name: user.name,
           phone: user.phone,
           address: user.address,
+          userID: user.key,
+          products: productsName.toString(),
           cost: getTotalSum(),
         };
+        console.log(order.products);
         axios
           .post(
             `http://localhost/assigment-web-demo/src/php/insertOrder.php`,
@@ -58,10 +69,10 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
           .catch((error) => {
             console.log(error.response);
           });
-        toastNotifySuccess("Đặt hàng thành công. Tiếp tục mua sắm.");
+      
         setCart([]);
         nextPage("shirt");
-      }, 1200);
+      }, 4000);
   };
 
   return (
