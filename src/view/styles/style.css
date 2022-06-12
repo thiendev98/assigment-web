@@ -925,7 +925,7 @@
           align-items: center;
   text-align: center;
   line-height: 100px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
   text-transform: uppercase;
   color: #fcaf17;
@@ -999,10 +999,11 @@
 
 #UserPage .user__content--list__info li img {
   margin-right: 8px;
+  margin-top: -4px;
 }
 
 #UserPage .user__content--list__info li span {
-  font-size: 14px;
+  font-size: 18px;
   cursor: pointer;
 }
 
@@ -1023,20 +1024,22 @@
 }
 
 #UserPage .user__content--detail__title span {
-  font-size: 14px;
+  font-size: 20px;
   color: #fcaf17;
 }
 
 #UserPage .user__content--detail__title button {
   float: right;
-  width: 90px;
-  color: #fcaf17;
+  width: 100px;
   border-radius: 4px;
   border: 1px solid #fff;
-  background-color: #fff;
-  font-size: 14px;
+  background-color: #fcaf17;
+  color: #fff;
+  font-size: 16px;
   -webkit-box-shadow: 0px 1px 1px 1px #dde1ef;
           box-shadow: 0px 1px 1px 1px #dde1ef;
+  height: 32px;
+  margin-top: -6px;
 }
 
 #UserPage .user__content--detail__content {
@@ -1110,8 +1113,8 @@
 }
 
 #UserPage .user__content--detail__content .users__edit--infomation--form .infomation--form__title--title p {
-  margin: 8px 12px;
-  font-size: 14px;
+  margin: 8px 6px;
+  font-size: 16px;
   cursor: pointer;
   -webkit-transition-duration: 1.2s;
           transition-duration: 1.2s;
@@ -1135,10 +1138,10 @@
 }
 
 #UserPage .user__content--detail__content .users__edit--infomation--form .infomation--form__content--password input[type="password"] {
-  width: 80%;
+  width: 94%;
   height: 26px;
   margin-right: 12px;
-  padding: 0 6px;
+  padding: 0 8px;
   outline: none;
   cursor: pointer;
   border-radius: 4px;
@@ -1155,8 +1158,10 @@
   margin-right: 90px;
   margin-top: 12px;
   border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
   border: 1px solid #fff;
-  background-color: #fff;
+  background-color: #fcaf17;
   -webkit-box-shadow: 0px 2px 2px 2px #dde1ef;
           box-shadow: 0px 2px 2px 2px #dde1ef;
   -webkit-transition-duration: 1.2s;
@@ -1164,9 +1169,28 @@
 }
 
 #UserPage .user__content--detail__content .users__edit--infomation--form .infomation--form__content--password button:hover {
-  background-color: #98f1f1;
   -webkit-transform: translate3d(0, -3px, -2px);
           transform: translate3d(0, -3px, -2px);
+}
+
+#UserPage .user__content--detail__content .users__edit--infomation--form .infomation--form__content--info button {
+  width: 106px;
+  height: 32px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  float: right;
+  margin-right: 32px;
+  margin-top: 12px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  border: 1px solid #fff;
+  background-color: #fcaf17;
+  -webkit-box-shadow: 0px 2px 2px 2px #dde1ef;
+          box-shadow: 0px 2px 2px 2px #dde1ef;
+  -webkit-transition-duration: 1.2s;
+          transition-duration: 1.2s;
 }
 
 #UserPage .user__content--detail__content .users__edit--infomation--form .infomation--form__content--info--edit {
@@ -1199,6 +1223,45 @@
   font-weight: 500;
 }
 
+#OrderListPages {
+  font-size: 16px;
+}
+
+#OrderListPages .row {
+  margin: 0;
+  padding: 0;
+}
+
+#OrderListPages .title--empty {
+  font-size: 16px;
+}
+
+#OrderListPages .title--list {
+  font-size: 18px;
+  border-bottom: 1px solid #dde1ef;
+}
+
+#OrderListPages .title--list__name {
+  padding: 0 12px;
+}
+
+#OrderListPages .title--list__quantity, #OrderListPages .title--list__price {
+  text-align: center;
+}
+
+#OrderListPages .product--list {
+  font-size: 16px;
+  margin: 6px 0px;
+}
+
+#OrderListPages .product--list__name {
+  padding: 0 12px;
+}
+
+#OrderListPages .product--list__quantity, #OrderListPages .product--list__price {
+  text-align: center;
+}
+
 #InfomationAccount .row {
   padding: 0;
   margin: 0;
@@ -1221,15 +1284,16 @@
   padding-right: 0;
   line-height: 24px;
   text-align: left;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 #InfomationAccount .info__edit--name {
   letter-spacing: 1px;
   line-height: 24px;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 500;
   padding: 0;
+  letter-spacing: 1.2px;
 }
 
 #InfomationAccount .info__edit--icon {
@@ -1289,6 +1353,7 @@
   position: fixed;
   left: 0;
   top: 0;
+  bottom: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1297,7 +1362,6 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: 240px;
-  min-height: 600px;
   -webkit-box-shadow: 0 2px 2px 2px rgba(255, 255, 255, 0.4);
           box-shadow: 0 2px 2px 2px rgba(255, 255, 255, 0.4);
   background-color: #e6f8f8;
@@ -1444,6 +1508,27 @@
   margin: 0 auto;
   margin-top: 20px;
   overflow-y: auto;
+}
+
+.ListProductPage {
+  background-color: #f6ffff;
+  text-align: center;
+}
+
+.ListProductPage h1 {
+  font-size: 26px;
+  text-transform: uppercase;
+  padding-top: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.ListProductPage Table {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 #EditOrderPage {

@@ -38,6 +38,7 @@ const PAGE_CART = "cart";
 
 export default function Controller() {
   const [cart, setCart] = useState([]);
+  const [cartUser, setCartUser] = useState([]);
   const [page, setPage] = useState(PAGE_HOME);
   const [user, setUser] = useState({
     key: Number,
@@ -66,7 +67,6 @@ export default function Controller() {
     setSearchProduct("");
     setPage(pages);
   };
-
 
   const handleLogin = () => {
     user.login
@@ -333,6 +333,8 @@ export default function Controller() {
           <Cart
             cart={cart}
             setCart={setCart}
+            cartUser={cartUser}
+            setCartUser={setCartUser}
             nextPage={nextPage}
             onClick={handleLogin}
             user={user}
@@ -353,8 +355,8 @@ export default function Controller() {
             user={user}
             setUser={setUser}
             nextPage={nextPage}
-            cart={cart}
-            setCart={setCart}
+            cartUser={cartUser}
+            setCartUser={setCartUser}
           />
         )}
       </div>

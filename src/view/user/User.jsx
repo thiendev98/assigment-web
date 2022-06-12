@@ -1,17 +1,38 @@
 import React, { useState } from "react";
 import $ from "jquery";
+import { toast } from "react-toastify";
 import OrderList from "./OrderList";
 import Information from "./Information";
 import "../styles/style.css";
 import { FaTimes } from "react-icons/fa";
 import save from "../images/save.png";
 import cancel from "../images/cancel.png";
-export default function User({ user, setUser, nextPage, cart, setCart }) {
+import { toastNotifySuccess } from "../components/Cart";
+export default function User({
+  user,
+  setUser,
+  nextPage,
+  cartUser,
+  setCartUser,
+}) {
   const [pageInfo, setPageInfo] = useState("information");
   const [editInfo, setEditInfo] = useState("information");
   const [nameInfo, setnameInfo] = useState("Thông tin cá nhân");
   const [isEdit, setIsEdit] = useState(false);
+  const [userUpdate, setUserUpdate] = useState(user);
   const [indexEdit, setIndexEdit] = useState(99);
+  const [changePassword, setChangePassword] = useState({
+    old: "",
+    new: "",
+    confirm: "",
+  });
+  const toastNotifyError = (value) => {
+    toast.info(value, {
+      autoClose: 2000,
+      type: "error",
+      position: "top-center",
+    });
+  };
   const handleClickInfo = (index) => {
     if (index === 0) {
       setnameInfo("Thông tin cá nhân");
@@ -38,6 +59,10 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
   const handleCancelEdit = () => {
     setIsEdit(false);
     setIndexEdit(99);
+  };
+  const handleSaveClick = () => {
+    setIndexEdit(99);
+    setIsEdit(true);
   };
   const listInfomation = [
     {
@@ -81,6 +106,36 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
       title: "Đổi mật khẩu",
     },
   ];
+  const handleUserUpdateChange = (event) => {
+    if (indexEdit === 0) {
+      setUserUpdate({ ...userUpdate, name: event.target.value });
+    } else if (indexEdit === 1)
+      setUserUpdate({ ...userUpdate, phone: event.target.value });
+    else if (indexEdit === 2)
+      setUserUpdate({ ...userUpdate, phone: event.target.value });
+    else if (indexEdit === 3)
+      setUserUpdate({ ...userUpdate, address: event.target.value });
+  };
+  const checkedPasswordClick = () => {
+    const patternPassword =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9@#$%^&*]{8,15}$/;
+    if (changePassword.old !== user.password) {
+      toastNotifyError("Mật khẩu hiện tại không chính xác");
+    } else if (!patternPassword.test(changePassword.new)) {
+      toastNotifyError("Mật khẩu mới không hợp lệ");
+    } else if (changePassword.confirm !== changePassword.new) {
+      toastNotifyError("Xác nhận mật khẩu không chính xác");
+    } else {
+      setUserUpdate({ ...userUpdate, password: changePassword.new });
+      toastNotifySuccess("Thay đổi mật khẩu thành công");
+    }
+  };
+  const handleConfirmOnChange = () => {
+    setUser(userUpdate);
+    setTimeout(() => {
+      handleHideFormEdit();
+    }, 500);
+  };
   return (
     <div id="UserPage">
       <div className="user__header">
@@ -100,7 +155,7 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
                 setTimeout(() => {
                   setUser({});
                   nextPage("home");
-                  setCart([]);
+                  setCartUser([]);
                 }, 1000);
               }}
             >
@@ -129,7 +184,7 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
             {pageInfo === "information" && (
               <Information user={user} listInfomation={listInfomation} />
             )}
-            {pageInfo === "orderlist" && <OrderList user={user} />}
+            {pageInfo === "orderlist" && <OrderList cartUser={cartUser} />}
             <div className="users__edit--infomation">
               <div className="users__edit--infomation--form">
                 <FaTimes
@@ -171,9 +226,15 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
                                 <input
                                   autoFocus
                                   type="text"
-                                  value={info.name}
+                                  onChange={(event) =>
+                                    handleUserUpdateChange(event)
+                                  }
                                 />
-                                <img alt="img" src={save} />
+                                <img
+                                  alt="img"
+                                  src={save}
+                                  onClick={() => handleSaveClick()}
+                                />
                                 <img
                                   onClick={() => handleCancelEdit()}
                                   alt="img"
@@ -191,23 +252,55 @@ export default function User({ user, setUser, nextPage, cart, setCart }) {
                             )}
                           </div>
                         ))}
+                        <button onClick={() => handleConfirmOnChange()}>
+                          Xác nhận
+                        </button>
                       </div>
                     )}
                     {editInfo === "password" && (
                       <div className="infomation--form__content--password">
                         <span>Mật khẩu hiện tại:</span>
                         <p>
-                          <input type="password" />
+                          <input
+                            type="password"
+                            placeholder="Nhập mật khẩu hiện tại"
+                            onChange={(event) =>
+                              setChangePassword({
+                                ...changePassword,
+                                old: event.target.value,
+                              })
+                            }
+                          />
                         </p>
                         <span>Mật khẩu thay đổi:</span>
                         <p>
-                          <input type="password" />
+                          <input
+                            type="password"
+                            placeholder="Nhập mật khẩu muốn thay đổi"
+                            onChange={(event) =>
+                              setChangePassword({
+                                ...changePassword,
+                                new: event.target.value,
+                              })
+                            }
+                          />
                         </p>
                         <span>Xác nhận mật khẩu:</span>
                         <p>
-                          <input type="password" />
+                          <input
+                            type="password"
+                            placeholder="Xác nhận mật khẩu"
+                            onChange={(event) =>
+                              setChangePassword({
+                                ...changePassword,
+                                confirm: event.target.value,
+                              })
+                            }
+                          />
                         </p>
-                        <button>Xác nhận</button>
+                        <button onClick={() => checkedPasswordClick()}>
+                          Xác nhận
+                        </button>
                       </div>
                     )}
                   </div>

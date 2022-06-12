@@ -22,3 +22,21 @@
     overflow-y: auto;
   }
 }
+.ListProductPage {
+  background-color: #f6ffff;
+  text-align: center;
+  h1 {
+    font-size: 26px;
+    text-transform: uppercase;
+    padding-top: 20px;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  Table {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}

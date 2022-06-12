@@ -1,9 +1,15 @@
 import "../styles/style.css";
+import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import background1 from "../images/background1.jpeg";
 import background2 from "../images/background2.jpeg";
 import HomeList from "../HomeList";
+import productData from "../../php/productData.json";
 export default function Home({ nextPage }) {
+  const [listProduct, setListProduct] = useState([...productData, ...HomeList]);
+  useEffect(() => {
+    setListProduct([...productData, ...HomeList]);
+  }, []);
   const settings = {
     dots: true,
     infinite: true,
@@ -61,24 +67,38 @@ export default function Home({ nextPage }) {
       <div className="container">
         <h3>Mua gì hôm nay?</h3>
         <ul className="home__content row container-fluid">
-          {HomeList.map((product, i) => (
+          {listProduct.map((product, i) => (
             <li
               key={i}
               className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 c-12 home__content--item"
             >
               <div className="item__list">
-                <img
-                  className="list__img"
-                  alt="list__img"
-                  src={product.link[0]}
-                  onClick={() => nextPage(product.type)}
-                />
-                <img
-                  className="list__img--hover"
-                  alt="list__img--hover"
-                  src={product.link[1]}
-                  onClick={() => nextPage(product.type)}
-                />
+                {typeof product.link === "object" ? (
+                  <img
+                    className="list__img"
+                    alt="list__img"
+                    src={product.link[0]}
+                    onClick={() => nextPage(product.type)}
+                  />
+                ) : (
+                  <img
+                    className="list__img"
+                    alt="list__img"
+                    src={`http://localhost/assigment-web/src/php/image/${product.link}`}
+                    onClick={() => nextPage(product.type)}
+                  />
+                )}
+
+                {typeof product.link === "object" ? (
+                  <img
+                    className="list__img--hover"
+                    alt="list__img--hover"
+                    src={product.link[1]}
+                    onClick={() => nextPage(product.type)}
+                  />
+                ) : (
+                  ""
+                )}
               </div>
               <p onClick={() => nextPage(product.type)}>{product.name}</p>
               <span onClick={() => nextPage(product.type)}>

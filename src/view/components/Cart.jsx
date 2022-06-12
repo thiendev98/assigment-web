@@ -19,7 +19,15 @@ export const toastNotifySuccess = (value) => {
     position: "top-center",
   });
 };
-export default function Cart({ cart, setCart, nextPage, onClick, user }) {
+export default function Cart({
+  cart,
+  setCart,
+  cartUser,
+  setCartUser,
+  nextPage,
+  onClick,
+  user,
+}) {
   const getTotalSum = () => {
     return cart.reduce((sum, { price, quantity }) => sum + price * quantity, 0);
   };
@@ -41,14 +49,25 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
     setCart(cart.filter((product) => product !== productToRemove));
   };
 
- var productsName="";
+  var productsName = "";
 
   const handleOrderClick = () => {
-    cart.map(product => {
-      productsName+=product.name;
-      productsName+=' x'+product.quantity.toString()+", ";
-    })
+    cart.forEach((product) => {
+      productsName += product.name;
+      productsName += " x" + product.quantity.toString() + ", ";
+    });
+    console.log(productsName);
     toastNotifySuccess("Đặt hàng thành công. Tiếp tục mua sắm.");
+    let totalCart;
+    if (getTotalSum() >= 1000000 && getTotalSum() < 1750000) {
+      totalCart = getTotalSum() - 50000;
+    } else if (getTotalSum() >= 1750000 && getTotalSum() < 2000000) {
+      totalCart = getTotalSum() - 100000;
+    } else if (getTotalSum() >= 2000000) {
+      totalCart = getTotalSum() - 150000;
+    } else {
+      totalCart = getTotalSum();
+    }
     user.login &&
       setTimeout(() => {
         const order = {
@@ -57,18 +76,15 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
           address: user.address,
           userID: user.key,
           products: productsName.toString(),
-          cost: getTotalSum(),
+          cost: totalCart,
         };
         axios
-          .post(
-            `http://localhost/assigment-web/src/php/insertOrder.php`,
-            order
-          )
+          .post(`http://localhost/assigment-web/src/php/insertOrder.php`, order)
           .then((res) => {})
           .catch((error) => {
             console.error(error.response);
           });
-      
+        setCartUser([...cartUser, ...cart]);
         setCart([]);
         nextPage("shirt");
       }, 4000);
@@ -133,9 +149,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
                       alt="class__img"
                       className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-0"
                       src={product.link}
-                    />{
-                      product.isObject ? console.log(1) : console.log(2)
-                    }
+                    />
                     <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-12">
                       <p className="cart__products--item__name">
                         {product.name}
