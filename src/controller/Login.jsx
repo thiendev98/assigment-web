@@ -3,10 +3,9 @@ import "./styles/style.css";
 import $ from "jquery";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { v4 as uuidv4 } from "uuid";
 import { FaGooglePlusG, FaTimes } from "react-icons/fa";
 import customerData from "../php/customerData.json";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 export default function Login({
   user,
   setUser,
@@ -138,7 +137,7 @@ export default function Login({
       toastNotifySuccess("Chuẩn bị chuyển đến trang Admin!");
       setTimeout(() => {
         $("#LoginPage").css("display", "none");
-        navigate("/admin");
+        navigate("/admin/orders/list");
         setLoginAccount({});
       }, 3600);
     } else if (accountSignin) {

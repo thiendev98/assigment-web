@@ -100,6 +100,29 @@ switch($method) {
                 $response = ['status' => 0, 'message' => 'Failed to update record.'];
             }
             echo json_encode($response);
+            function get_data(){
+                $connect = mysqli_connect("localhost", "root","","test");
+                $query = "SELECT * FROM products";
+                $result = mysqli_query($connect, $query);
+                $products = array();
+                while($row = mysqli_fetch_array($result)){
+                    $products[] = array (
+                        'key' => $row["id"],
+                        'type' => $row["type"],
+                        'code'  => $row["code"],
+                        'name'   => $row["name"],
+                        'price' => $row["price"],
+                        'link' => $row["link"],
+                        'color'  => $row["color"],
+                        'size' => ["S","M","L"]
+                    );
+                }
+                return json_encode($products);
+            }
+            
+            $file_name = "productData".'.json';
+            
+            file_put_contents($file_name,get_data());
             break;
 
     case "DELETE":
@@ -115,5 +138,28 @@ switch($method) {
             $response = ['status' => 0, 'message' => 'Failed to delete record.'];
         }
         echo json_encode($response);
+            function get_data(){
+                $connect = mysqli_connect("localhost", "root","","test");
+                $query = "SELECT * FROM products";
+                $result = mysqli_query($connect, $query);
+                $products = array();
+                while($row = mysqli_fetch_array($result)){
+                    $products[] = array (
+                        'key' => $row["id"],
+                        'type' => $row["type"],
+                        'code'  => $row["code"],
+                        'name'   => $row["name"],
+                        'price' => $row["price"],
+                        'link' => $row["link"],
+                        'color'  => $row["color"],
+                        'size' => ["S","M","L"]
+                    );
+                }
+                return json_encode($products);
+            }
+            
+            $file_name = "productData".'.json';
+            
+            file_put_contents($file_name,get_data());
         break;
 }

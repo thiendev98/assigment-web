@@ -1,0 +1,24 @@
+#ListProductsPage {
+  position: fixed;
+  left: 240px;
+  right: 0;
+  top: 0;
+  background-color: #f6ffff;
+}
+#ListProductPage {
+  background-color: #f6ffff;
+  text-align: center;
+  h1 {
+    font-size: 26px;
+    text-transform: uppercase;
+    padding-top: 20px;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  Table {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+    overflow-y: auto;
+  }
+}

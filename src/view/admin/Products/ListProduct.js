@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
-import {Link,Outlet} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button'
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 export default function ListProduct() {
   const [products, setProducts] = useState([]);

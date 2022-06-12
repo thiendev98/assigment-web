@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import $ from "jquery";
 import Home from "../view/components/Home";
 import TShirt from "../view/components/TShirt";
@@ -12,6 +12,7 @@ import User from "../view/user/User";
 import Search from "../view/components/Search";
 import { loadAnimation } from "lottie-web";
 import { defineLordIconElement } from "lord-icon-element";
+import { useNavigate } from "react-router-dom";
 import {
   FaFacebook,
   FaTiktok,
@@ -52,6 +53,10 @@ export default function Controller() {
   });
   const [userCustomer, setUserCustomer] = useState([]);
   const [searchProduct, setSearchProduct] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/");
+  }, []);
   const nextPage = (pages) => {
     setSearchProduct("");
     setPage(pages);
@@ -61,6 +66,8 @@ export default function Controller() {
     setSearchProduct("");
     setPage(pages);
   };
+
+
   const handleLogin = () => {
     user.login
       ? nextPage("userInformation")
@@ -398,7 +405,7 @@ export default function Controller() {
           <ul className="col-xl-4 col-lg-4 col-md-6 col-sm-10 col-12 footer__info">
             {infoContact.map((info, index) => (
               <li key={index} className="info--item">
-                <img className="info--item__img" src={info.logo} />
+                <img alt="" className="info--item__img" src={info.logo} />
                 {info.info}
               </li>
             ))}

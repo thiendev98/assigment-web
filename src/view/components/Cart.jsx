@@ -59,7 +59,6 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
           products: productsName.toString(),
           cost: getTotalSum(),
         };
-        console.log(order);
         axios
           .post(
             `http://localhost/assigment-web/src/php/insertOrder.php`,
@@ -67,7 +66,7 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
           )
           .then((res) => {})
           .catch((error) => {
-            console.log(error.response);
+            console.error(error.response);
           });
       
         setCart([]);
@@ -134,7 +133,9 @@ export default function Cart({ cart, setCart, nextPage, onClick, user }) {
                       alt="class__img"
                       className="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-0"
                       src={product.link}
-                    />
+                    />{
+                      product.isObject ? console.log(1) : console.log(2)
+                    }
                     <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-12">
                       <p className="cart__products--item__name">
                         {product.name}

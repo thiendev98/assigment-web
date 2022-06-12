@@ -37,6 +37,7 @@ export default function Product({
   const [namePage, setNamePage] = useState(value);
   const myRefImage = useRef();
   const myRefSize = useRef();
+  const [isObjet, setIsObject] = useState(true);
   const listContent = [
     "<p>Bạn có thể thanh toán cho người giao hàng mà không cần chịu phí thu tiền hộ (COD).</p> <p>Tóm tắt chính sách giao hàng COD:</p><p>① Loza hỗ trợ được kiểm tra hàng trước khi thanh toán nhưng không mặc thử đồ</p><p>② Loza không gửi đơn hàng COD nếu bạn có đơn hàng khác sử dụng COD mà chưa nhận hàng</p><p>③ Người giao hàng (bưu tá) không phải là nhân viên của Loza, vui lòng liên hệ với Loza theo số hotline trên bì hàng để được hỗ trợ các vấn đề khác④ Sản phẩm đúng với hình ảnh và mô tả nhưng nếu không ưng ý hoặc vì lý do nào khác khiến bạn từ chối nhận hàng, vui lòng hỗ trợ Loza <b>30.000đ</b> cước phí vận chuyển chiều về qua nhân viên phát hàng, bởi thực tế giá trị cước phí Loza gửi hàng chiều đi và về lớn hơn 30k khá nhiều. Rất mong nhận được sự thông cảm! </p>",
 
@@ -94,14 +95,33 @@ export default function Product({
   const addToCart = (product) => {
     if (!user.login) toastNotifyDefault("Bạn cần đăng nhập để mua hàng!!!");
     else {
-      var products = {
-        code: product.code,
-        name: product.name,
-        price: product.price,
-        link: product.link[position],
-        color: product.color[color],
-        size: product.size[size],
-      };
+      if(typeof(product.link)=== "object"){
+        setIsObject(true);
+        var product1 = {
+          // isObjet: isObjet,
+          code: product.code,
+          name: product.name,
+          price: product.price,
+          link: product.link[position],
+          color: product.color[color],
+          size: product.size[size],
+        }
+      }
+      else{
+        setIsObject(false);
+        var product2 = {
+          // isObjet: isObjet,
+          code: product.code,
+          name: product.name,
+          price: product.price,
+          link: `http://localhost/assigment-web/src/php/image/${product.link}`,
+          color: product.color,
+          size: product.size[size],
+        }
+      }
+      var products;
+      typeof(product.link) === "object" ? product = product1 : product = product2;
+    
       if (size === 99)
         toastNotifyDefault("Bạn vui lòng chọn size trước khi đặt hàng");
       else {
@@ -131,6 +151,7 @@ export default function Product({
       toastNotifyDefault("Bạn cần đăng nhập để mua hàng!!!");
     } else {
       var products = {
+        isObjet: isObjet,
         code: product.code,
         name: product.name,
         price: product.price,
@@ -204,7 +225,6 @@ export default function Product({
     setAbout(i);
     $(".detail--service__info").css("display", "block");
   };
-
   return (
     <div id="ProductPage">
       {namePage === "search" && detail === false ? (
@@ -225,18 +245,23 @@ export default function Product({
                   className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 c-12 product__content--item"
                 >
                   <div className="item__list">
-                    <img
+                   {typeof(product.link)=== "object" ?  <img
                       className="list__img"
                       alt="list__img"
                       src={product.link[0]}
                       onClick={() => handleClick(index, product.type)}
-                    />
-                    <img
+                    /> :  <img
+                    className="list__img"
+                    alt="list__img"
+                    src={`http://localhost/assigment-web/src/php/image/${product.link}`}
+                    onClick={() => handleClick(index, product.type)}
+                  />}
+                   {typeof(product.link)==="object" ?  <img
                       className="list__img--hover"
                       alt="list__img--hover"
                       src={product.link[1]}
                       onClick={() => handleClick(index, product.type)}
-                    />
+                    /> : ""}
                   </div>
                   <p onClick={() => handleClick(index, product.type)}>
                     {product.name}
@@ -250,11 +275,18 @@ export default function Product({
                 <li key={index} className="detail--item">
                   <div className="row container-fluid">
                     <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 detail__img">
-                      <img
-                        className="item--img"
-                        alt="item--img"
-                        src={product.link[position]}
-                      />
+                   {
+                    typeof(product.link) === "object" ?  <img
+                    className="item--img"
+                    alt="item--img"
+                    src={product.link[position]}
+                  /> :  <img
+                  className="item--img"
+                  alt="item--img"
+                  src={`http://localhost/assigment-web/src/php/image/${product.link}`}
+                />
+                   }
+                     
                     </div>
 
                     <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 detail__info">
@@ -262,9 +294,9 @@ export default function Product({
                       <p className="detail__info--code">Mã : {product.code}</p>
                       <p className="detail__info--price">{product.price} đ</p>
                       <p className="detail__info--color">
-                        Màu: <span>{product.color[color]}</span>
+                        Màu: <span>{typeof(product.color) === "object" ? product.color[color] : product.color}</span>
                       </p>
-                      <div
+                    {typeof(product.link) === "object" ?   <div
                         className="row container-fluid detail__img"
                         ref={myRefImage}
                       >
@@ -277,7 +309,15 @@ export default function Product({
                             onClick={() => handleClickImages(i)}
                           />
                         ))}
-                      </div>
+                      </div> : <div
+                        className="row container-fluid detail__img"
+                        ref={myRefImage}
+                      >  <img
+                      
+                      className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 detail__info--img"
+                      src={`http://localhost/assigment-web/src/php/image/${product.link}`}
+                      alt="detail__info--img"
+                    /></div>}
                       <p className="detail__info--size">
                         Size: <span>{product.size[size]}</span>
                       </p>

@@ -12,6 +12,7 @@ import ListUsers from "../view/admin/Users/ListUsers";
 import ListUser from "../view/admin/Users/ListUser";
 
 import React from "react";
+import Controller from "./Controller";
 
 export default function Routers() {
   return (
@@ -19,12 +20,10 @@ export default function Routers() {
       <Routes>
         <Route path="/" element={<App />}></Route>
         <Route path="admin" element={<Admin />}>
-          <Route path="products" element={<ListProducts />} >
-            <Route path="create" element={<CreateProduct />}/>
-        
-           
-            <Route path="list" element={<ListProduct />}/>
-            <Route path="list/:id" element={<EditProduct />}/>
+          <Route path="products" element={<ListProducts />}>
+            <Route path="create" element={<CreateProduct />} />
+            <Route path="list" element={<ListProduct />} />
+            <Route path="list/:id" element={<EditProduct />} />
           </Route>
           <Route path="users" element={<ListUsers />}>
             <Route path="list" element={<ListUser />} />
@@ -34,6 +33,7 @@ export default function Routers() {
             <Route path="list/:id" element={<EditOrder />} />
           </Route>
         </Route>
+        <Route path="*" element={<Controller />} />
       </Routes>
     </Router>
   );
