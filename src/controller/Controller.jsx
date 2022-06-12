@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import $ from "jquery";
 import Home from "../view/components/Home";
 import TShirt from "../view/components/TShirt";
@@ -12,6 +12,7 @@ import User from "../view/user/User";
 import Search from "../view/components/Search";
 import { loadAnimation } from "lottie-web";
 import { defineLordIconElement } from "lord-icon-element";
+import { useNavigate } from "react-router-dom";
 import {
   FaFacebook,
   FaTiktok,
@@ -52,6 +53,10 @@ export default function Controller() {
   });
   const [userCustomer, setUserCustomer] = useState([]);
   const [searchProduct, setSearchProduct] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/");
+  }, []);
   const nextPage = (pages) => {
     setSearchProduct("");
     setPage(pages);
