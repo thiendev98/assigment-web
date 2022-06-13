@@ -51,7 +51,7 @@ export default function ListUser() {
               <td>{user.userName}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
-              <td>0{user.phone}</td>
+              <td>{user.phone}</td>
               <td>{user.address}</td>
               <td>
                 {/* <Link className="btn btn-primary" to={`order/${user.id}/edit`} style={{marginRight: "10px"}}>Edit</Link> */}

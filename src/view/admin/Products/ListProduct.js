@@ -57,7 +57,7 @@ export default function ListProduct() {
                 <Link
                   className="btn btn-primary"
                   to={product.id.toString()}
-                  style={{ marginRight: "10px" }}
+                  style={{ color: "#fff",marginRight: "10px" }}
                 >
                   Edit
                 </Link>

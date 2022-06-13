@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import $ from "jquery";
 import { toast } from "react-toastify";
@@ -71,7 +72,7 @@ export default function User({
     },
     {
       title: "Số điện thoại:",
-      name: `0${user.phone}`,
+      name: user.phone,
     },
     {
       title: "Địa chỉ email:",
@@ -112,7 +113,7 @@ export default function User({
     } else if (indexEdit === 1)
       setUserUpdate({ ...userUpdate, phone: event.target.value });
     else if (indexEdit === 2)
-      setUserUpdate({ ...userUpdate, phone: event.target.value });
+      setUserUpdate({ ...userUpdate, email: event.target.value });
     else if (indexEdit === 3)
       setUserUpdate({ ...userUpdate, address: event.target.value });
   };
@@ -127,10 +128,25 @@ export default function User({
       toastNotifyError("Xác nhận mật khẩu không chính xác");
     } else {
       setUserUpdate({ ...userUpdate, password: changePassword.new });
+      ///
+      axios
+      .post(
+        `http://localhost/assigment-web/src/php/insert.php/${userUpdate.key}/editpassword`,
+        userUpdate
+      )
+      .then(function (response) {console.log(response)});
       toastNotifySuccess("Thay đổi mật khẩu thành công");
     }
   };
   const handleConfirmOnChange = () => {
+    // console.log(userUpdate.key);
+    // console.log(userUpdate);
+    axios
+      .post(
+        `http://localhost/assigment-web/src/php/insert.php/${userUpdate.key}/edit`,
+        userUpdate
+      )
+      .then(function (response) {});
     setUser(userUpdate);
     setTimeout(() => {
       handleHideFormEdit();

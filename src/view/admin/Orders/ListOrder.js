@@ -50,7 +50,7 @@ export default function ListOrder() {
               <td>{order.id}</td>
               <td>{order.name}</td>
               <td>{order.products}</td>
-              <td>{`0${order.phone}`}</td>
+              <td>{order.phone}</td>
               <td>{order.address}</td>
               <td>{order.cost}</td>
               <td>
