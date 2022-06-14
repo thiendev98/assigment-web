@@ -22,7 +22,6 @@ export default function User({
   const [isEdit, setIsEdit] = useState(false);
   const [userUpdate, setUserUpdate] = useState(user);
   const [indexEdit, setIndexEdit] = useState(99);
-  const [avatarUpdate, setAvatarUpdate] = useState(userUpdate.avatar);
   const [changePassword, setChangePassword] = useState({
     old: "",
     new: "",
@@ -221,21 +220,9 @@ export default function User({
                 <div className="row container-fluid">
                   <div className="col-xl-4 infomation--form__title">
                     <div className="infomation--form__title--image">
-                      {avatarUpdate.length === 0 ? (
-                        <img
-                          alt="avatar"
-                          src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
-                        />
-                      ) : (
-                        <img alt="avatarUpdate" src={avatarUpdate} />
-                      )}
-                      <input
-                        type="file"
-                        onChange={(event) => {
-                          console.log(event.target.value);
-                          console.log(typeof event.target.value);
-                          setAvatarUpdate(event.target.value);
-                        }}
+                      <img
+                        alt="avatar"
+                        src="https://i.pinimg.com/236x/a8/3f/c7/a83fc7871e75ca709d3107e0115af253.jpg"
                       />
                     </div>
                     <div className="infomation--form__title--title">
