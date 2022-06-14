@@ -4,7 +4,7 @@ export default function OrderList({ cartUser }) {
   return (
     <div id="OrderListPages">
       {cartUser.length === 0 && (
-        <div className="col-xl-12 title--empty">Bạn chưa có đơn hàng</div>
+        <div className="col-xl-12 title--empty">Bạn chưa có đơn hàng nào</div>
       )}
       {cartUser.length !== 0 && (
         <div>

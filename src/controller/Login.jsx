@@ -14,6 +14,7 @@ export default function Login({
   nextPage,
 }) {
   const navigate = useNavigate();
+  const [accountSignin, setAccountSign] = useState();
   const [loginAccount, setLoginAccount] = useState({
     userName: "",
     password: "",
@@ -56,7 +57,6 @@ export default function Login({
       position: "top-center",
     });
   };
-  const [accountSignin, setAccountSign] = useState();
   useEffect(() => {
     setUserCustomer(customerData);
   }, [customerData]);
@@ -95,6 +95,7 @@ export default function Login({
       return false;
     } else if (!patternPhone.test(registerAccount.phone)) {
       toastNotifyError("Số điện thoại khộng hợp lệ");
+      return false;
     } else if (!patternEmail.test(registerAccount.email)) {
       toastNotifyError("Email không hợp lệ");
       return false;
@@ -130,8 +131,14 @@ export default function Login({
             console.log(error.response);
           });
         setUserCustomer(customerData);
-        //
-        setRegisterAccount({});
+        setRegisterAccount({
+          ...registerAccount,
+          name: "",
+          userName: "",
+          password: "",
+          phone: "",
+          email: "",
+        });
         setLogin(true);
       }, 4000);
   };
@@ -156,7 +163,7 @@ export default function Login({
         accountSignin.login = true;
         setUser(accountSignin);
         nextPage("home");
-        setLoginAccount({});
+        setLoginAccount({ ...loginAccount, userName: "", password: "" });
       }, 3600);
     } else {
       toastNotifyError("Tên đăng nhập hoặc mật khẩu không chính xác");
