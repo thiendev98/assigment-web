@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import $ from "jquery";
-export default function Information({ user, listInfomation }) {
+export default function Information({ listInfomation }) {
   return (
     <div id="InfomationAccount">
       <div className="row container-fluid ">

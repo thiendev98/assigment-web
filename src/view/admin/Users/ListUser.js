@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
@@ -54,7 +53,6 @@ export default function ListUser() {
               <td>{user.phone}</td>
               <td>{user.address}</td>
               <td>
-                {/* <Link className="btn btn-primary" to={`order/${user.id}/edit`} style={{marginRight: "10px"}}>Edit</Link> */}
                 <Button variant="danger" onClick={() => deleteUser(user.id)}>
                   Delete
                 </Button>

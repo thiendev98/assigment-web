@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { FaGooglePlusG, FaTimes } from "react-icons/fa";
 import customerData from "../php/customerData.json";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function Login({
   user,
   setUser,
@@ -56,11 +56,19 @@ export default function Login({
       position: "top-center",
     });
   };
-
+  const [accountSignin, setAccountSign] = useState();
   useEffect(() => {
     setUserCustomer(customerData);
   }, [customerData]);
-
+  useEffect(() => {
+    setAccountSign(
+      userCustomer.find(
+        (account) =>
+          account.userName === loginAccount.userName &&
+          account.password === loginAccount.password
+      )
+    );
+  }, [loginAccount]);
   const checkedNameVietnamese = (name) => {
     if (name === null || name === undefined) return name;
     name = name.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
@@ -111,8 +119,13 @@ export default function Login({
         };
 
         axios
-          .post(`http://localhost/assigment-web/src/php/insert.php/user/save`, obj)
-          .then((res) => {console.log(res);})
+          .post(
+            `http://localhost/assigment-web/src/php/insert.php/user/save`,
+            obj
+          )
+          .then((res) => {
+            console.log(res);
+          })
           .catch((error) => {
             console.log(error.response);
           });
@@ -128,11 +141,7 @@ export default function Login({
         account.userName === loginAccount.userName &&
         account.password === loginAccount.password
     );
-    let accountSignin = userCustomer.find(
-      (account) =>
-        account.userName === loginAccount.userName &&
-        account.password === loginAccount.password
-    );
+
     if (accountAdmin) {
       toastNotifySuccess("Chuẩn bị chuyển đến trang Admin!");
       setTimeout(() => {

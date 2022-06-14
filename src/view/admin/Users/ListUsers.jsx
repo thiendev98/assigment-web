@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
-import ListUser from "./ListUser";
+import { Outlet } from "react-router-dom";
 import "../../styles/style.css";
 function ListUsers() {
   return (

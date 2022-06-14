@@ -22,6 +22,7 @@ export default function User({
   const [isEdit, setIsEdit] = useState(false);
   const [userUpdate, setUserUpdate] = useState(user);
   const [indexEdit, setIndexEdit] = useState(99);
+  const [avatarUpdate, setAvatarUpdate] = useState(userUpdate.avatar);
   const [changePassword, setChangePassword] = useState({
     old: "",
     new: "",
@@ -68,20 +69,20 @@ export default function User({
   const listInfomation = [
     {
       title: "Họ và tên:",
-      name: user.name,
+      name: userUpdate.name,
     },
     {
       title: "Số điện thoại:",
-      name: user.phone,
+      name: userUpdate.phone,
     },
     {
       title: "Địa chỉ email:",
-      name: user.email,
+      name: userUpdate.email,
     },
 
     {
       title: "Địa chỉ giao hàng:",
-      name: user.address,
+      name: userUpdate.address,
     },
   ];
   const listInfo = [
@@ -130,11 +131,13 @@ export default function User({
       setUserUpdate({ ...userUpdate, password: changePassword.new });
       ///
       axios
-      .post(
-        `http://localhost/assigment-web/src/php/insert.php/${userUpdate.key}/editpassword`,
-        userUpdate
-      )
-      .then(function (response) {console.log(response)});
+        .post(
+          `http://localhost/assigment-web/src/php/insert.php/${userUpdate.key}/editpassword`,
+          userUpdate
+        )
+        .then(function (response) {
+          console.log(response);
+        });
       toastNotifySuccess("Thay đổi mật khẩu thành công");
     }
   };
@@ -160,11 +163,19 @@ export default function User({
       <div className="user__content row container-fluid">
         <div className="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 user__content--list">
           <div className="user__content--list__img">
-            <img
-              className="list__img--avatar"
-              src="https://i.pinimg.com/236x/a8/3f/c7/a83fc7871e75ca709d3107e0115af253.jpg"
-              alt="avatar"
-            />
+            {!user.avatar ? (
+              <img
+                className="list__img--avatar"
+                src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
+                alt="avatar"
+              />
+            ) : (
+              <img
+                className="list__img--avatar"
+                src={user.avatar}
+                alt="avatar"
+              />
+            )}
             <p>{user.name}</p>
             <button
               onClick={() => {
@@ -198,7 +209,7 @@ export default function User({
           </div>
           <div className="user__content--detail__content">
             {pageInfo === "information" && (
-              <Information user={user} listInfomation={listInfomation} />
+              <Information listInfomation={listInfomation} />
             )}
             {pageInfo === "orderlist" && <OrderList cartUser={cartUser} />}
             <div className="users__edit--infomation">
@@ -210,9 +221,21 @@ export default function User({
                 <div className="row container-fluid">
                   <div className="col-xl-4 infomation--form__title">
                     <div className="infomation--form__title--image">
-                      <img
-                        alt="avatar"
-                        src="https://i.pinimg.com/236x/a8/3f/c7/a83fc7871e75ca709d3107e0115af253.jpg"
+                      {avatarUpdate.length === 0 ? (
+                        <img
+                          alt="avatar"
+                          src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
+                        />
+                      ) : (
+                        <img alt="avatarUpdate" src={avatarUpdate} />
+                      )}
+                      <input
+                        type="file"
+                        onChange={(event) => {
+                          console.log(event.target.value);
+                          console.log(typeof event.target.value);
+                          setAvatarUpdate(event.target.value);
+                        }}
                       />
                     </div>
                     <div className="infomation--form__title--title">
