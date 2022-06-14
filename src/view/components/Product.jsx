@@ -239,16 +239,21 @@ export default function Product({
                         onClick={() => handleClick(index, product.type)}
                       />
                     )}
-                    {typeof product.link === "object" ? (
-                      <img
-                        className="list__img--hover"
-                        alt="list__img--hover"
-                        src={product.link[1]}
-                        onClick={() => handleClick(index, product.type)}
-                      />
-                    ) : (
-                      ""
-                    )}
+                 
+                {typeof product.link === "object" && product.link.length > 1 &&  (
+                  <img
+                    className="list__img--hover"
+                    alt="list__img--hover"
+                    src={product.link[1]}
+                    onClick={() => handleClick(index, product.type)}
+                  />
+                )}
+                {typeof product.link === 'object' && product.link.length === 1 ?  <img
+                    className="list__img--hover"
+                    alt="list__img--hover"
+                    src={product.link[0]}
+                    onClick={() => handleClick(index, product.type)}
+                  /> : ""}
                   </div>
                   <p onClick={() => handleClick(index, product.type)}>
                     {product.name}

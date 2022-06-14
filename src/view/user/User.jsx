@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import { toast } from "react-toastify";
 import OrderList from "./OrderList";
@@ -22,6 +22,7 @@ export default function User({
   const [isEdit, setIsEdit] = useState(false);
   const [userUpdate, setUserUpdate] = useState(user);
   const [indexEdit, setIndexEdit] = useState(99);
+  const [avatarUpdate, setAvatarUpdate] = useState()
   const [changePassword, setChangePassword] = useState({
     old: "",
     new: "",
@@ -65,6 +66,23 @@ export default function User({
     setIndexEdit(99);
     setIsEdit(true);
   };
+  const handleAvatarFileChange = (event) =>{
+      setAvatarUpdate(event.target.files[0].name)
+      const formData = new FormData();
+      formData.append("avatar", event.target.files[0]);
+      axios
+        .post(
+          `http://localhost/assigment-web/src/php/insert.php/${userUpdate.key}/editAvatar`,
+          formData
+        )
+        .then(function (response) {
+        });
+
+  }
+  useEffect(()=>{
+    setUserUpdate({...userUpdate, avatar: avatarUpdate})
+  }, [avatarUpdate])
+  
   const listInfomation = [
     {
       title: "Họ và tên:",
@@ -117,6 +135,9 @@ export default function User({
     else if (indexEdit === 3)
       setUserUpdate({ ...userUpdate, address: event.target.value });
   };
+  useEffect(()=>{
+    setUser(userUpdate);
+  }, [userUpdate.password])
   const checkedPasswordClick = () => {
     const patternPassword =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9@#$%^&*]{8,15}$/;
@@ -128,21 +149,22 @@ export default function User({
       toastNotifyError("Xác nhận mật khẩu không chính xác");
     } else {
       setUserUpdate({ ...userUpdate, password: changePassword.new });
-      ///
       axios
         .post(
           `http://localhost/assigment-web/src/php/insert.php/${userUpdate.key}/editpassword`,
-          userUpdate
+          user
         )
         .then(function (response) {
-          console.log(response);
+          console.log(response.data);
         });
-      toastNotifySuccess("Thay đổi mật khẩu thành công");
+        toastNotifySuccess("Thay đổi mật khẩu thành công");
+      setTimeout(()=>{
+       
+        $(".users__edit--infomation").fadeOut("1000")
+      }, 4000)
     }
   };
   const handleConfirmOnChange = () => {
-    // console.log(userUpdate.key);
-    // console.log(userUpdate);
     axios
       .post(
         `http://localhost/assigment-web/src/php/insert.php/${userUpdate.key}/edit`,
@@ -162,17 +184,16 @@ export default function User({
       <div className="user__content row container-fluid">
         <div className="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 user__content--list">
           <div className="user__content--list__img">
-            {!user.avatar ? (
+            {userUpdate.avatar ? (
               <img
                 className="list__img--avatar"
-                src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
+                src={`http://localhost/assigment-web/src/php/image/${userUpdate.avatar}`}
                 alt="avatar"
               />
             ) : (
               <img
                 className="list__img--avatar"
-                src={user.avatar}
-                alt="avatar"
+                src="https://toppng.com/uploads/preview/user-account-management-logo-user-icon-11562867145a56rus2zwu.png" alt="avatar_avatar"
               />
             )}
             <p>{user.name}</p>
@@ -222,8 +243,9 @@ export default function User({
                     <div className="infomation--form__title--image">
                       <img
                         alt="avatar"
-                        src="https://i.pinimg.com/236x/a8/3f/c7/a83fc7871e75ca709d3107e0115af253.jpg"
+                        src="https://toppng.com/uploads/preview/user-account-management-logo-user-icon-11562867145a56rus2zwu.png"
                       />
+                      <input type="file" name="avatar" onChange={(event)=>handleAvatarFileChange(event)}/>
                     </div>
                     <div className="infomation--form__title--title">
                       {listTiltte.map((titile, index) => (

@@ -31,11 +31,12 @@ switch($method) {
     case "POST":
         $path = explode('/', $_SERVER['REQUEST_URI']);
         $product = json_decode( file_get_contents('php://input') );     
-        $name = $product->name;
-        $email=$product->email;
-        $phone=$product->phone;
+        
         switch($path[6]) {
             case "edit":
+                $name = $product->name;
+                $email=$product->email;
+                $phone=$product->phone;
                 $address=$product->address;
                 $sql = "UPDATE users SET name ='$name', phone ='$phone', email ='$email', address ='$address', updated_at =:updated_at WHERE id = :id";
                 $stmt = $conn->prepare($sql);
@@ -44,6 +45,9 @@ switch($method) {
                 $stmt->bindParam(':updated_at', $updated_at);
                 break;
             case "save":
+                $name = $product->name;
+                $email=$product->email;
+                $phone=$product->phone;
                 $password=$product->password;
                 $userName = $product->userName;
                 $sql = "INSERT INTO users (name,userName,email,phone,password,created_at) VALUES ('$name', '$userName', '$email', '$phone', '$password', :created_at)";
@@ -59,6 +63,22 @@ switch($method) {
                 $updated_at = date('Y-m-d');
                 $stmt->bindParam(':updated_at', $updated_at);
                 break;
+            case "editAvatar":
+                $avatar=$_FILES["avatar"]["name"];
+                $tempname = $_FILES["avatar"]["tmp_name"];
+                $folder = "./image/" . $avatar;
+                $sql = "UPDATE users SET avatar='$avatar', updated_at =:updated_at WHERE id = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':id', $path[5]);
+                $updated_at = date('Y-m-d');
+                $stmt->bindParam(':updated_at', $updated_at);
+                if (move_uploaded_file($tempname, $folder)) {
+                    echo "<h3>  Image uploaded successfully!</h3>";
+                } else {
+                    echo "<h3>  Failed to upload image!</h3>";
+                }
+                break;
+
         }
         
         if($stmt->execute()) {

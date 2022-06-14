@@ -67,7 +67,7 @@ export default function EditProduct() {
                   <input
                     type="radio"
                     name="type"
-                    value="trouser"
+                    value="trousers"
                   /> Trouser <br></br>
                   <input type="radio" name="type" value="shirt" /> Shirt{" "}
                   <br></br>

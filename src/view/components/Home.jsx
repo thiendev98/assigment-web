@@ -89,16 +89,20 @@ export default function Home({ nextPage }) {
                   />
                 )}
 
-                {typeof product.link === "object" ? (
+                {typeof product.link === "object" && product.link.length > 1 &&  (
                   <img
                     className="list__img--hover"
                     alt="list__img--hover"
                     src={product.link[1]}
                     onClick={() => nextPage(product.type)}
                   />
-                ) : (
-                  ""
                 )}
+                {typeof product.link === 'object' && product.link.length === 1 ?  <img
+                    className="list__img--hover"
+                    alt="list__img--hover"
+                    src={product.link[0]}
+                    onClick={() => nextPage(product.type)}
+                  /> : ""}
               </div>
               <p onClick={() => nextPage(product.type)}>{product.name}</p>
               <span onClick={() => nextPage(product.type)}>

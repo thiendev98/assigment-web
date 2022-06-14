@@ -50,7 +50,7 @@ export default function CreateProduct() {
               <td>
                 <div onChange={handleChange}>
                   <input type="radio" name="type" value="vest" /> Vest <br></br>
-                  <input type="radio" name="type" value="trouser"/> Trouser <br></br>
+                  <input type="radio" name="type" value="trousers"/> Trouser <br></br>
                   <input type="radio" name="type" value="shirt" /> Shirt{" "}
                   <br></br>
                   <input type="radio" name="type" value="tshirt" /> Tshirt{" "}
