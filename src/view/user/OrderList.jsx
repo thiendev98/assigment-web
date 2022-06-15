@@ -1,6 +1,25 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Table from "react-bootstrap/Table";
+import { useNavigate, useParams } from "react-router-dom";
+export default function OrderList({ cartUser, user }) {
 
-export default function OrderList({ cartUser }) {
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    getOrders();
+  }, []);
+
+  function getOrders() {
+    axios
+      .post(`http://localhost/assigment-web/src/php/selectOrder.php/orders/${user.key}`)
+      .then(function (response) {
+        setOrders(response.data); 
+        console.log(response.data);
+      });
+  }
+
   return (
     <div id="OrderListPages">
       {cartUser.length === 0 && (
@@ -28,6 +47,7 @@ export default function OrderList({ cartUser }) {
           </div>
         </div>
       )}
+
     </div>
   );
 }

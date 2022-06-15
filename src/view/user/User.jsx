@@ -163,8 +163,9 @@ export default function User({
     };
   }, [isLoading]);
   useEffect(() => {
-    if (isChangePassword)
+    if (isChangePassword){
       setUserUpdate({ ...userUpdate, password: changePassword.new });
+    }
     return () => {
       setIsChangePassword(false);
     };
@@ -185,6 +186,8 @@ export default function User({
     const patternPassword =
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9@#$%^&*]{8,15}$/;
     if (changePassword.old !== user.password) {
+      console.log(changePassword.old);
+      console.log(user.password);
       toastNotifyError("Mật khẩu hiện tại không chính xác");
     } else if (!patternPassword.test(changePassword.new)) {
       toastNotifyError("Mật khẩu mới không hợp lệ");
@@ -274,7 +277,7 @@ export default function User({
             {pageInfo === "information" && (
               <Information listInfomation={listInfomation} />
             )}
-            {pageInfo === "orderlist" && <OrderList cartUser={cartUser} />}
+            {pageInfo === "orderlist" && <OrderList cartUser={cartUser} user={user}/>}
             <div className="users__edit--infomation">
               <div className="users__edit--infomation--form">
                 <FaTimes
