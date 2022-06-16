@@ -1396,6 +1396,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: 240px;
+  min-height: 758px;
   -webkit-box-shadow: 0 2px 2px 2px rgba(255, 255, 255, 0.4);
           box-shadow: 0 2px 2px 2px rgba(255, 255, 255, 0.4);
   background-color: #e6f8f8;
@@ -1462,11 +1463,9 @@
 }
 
 #ListUsersPage {
-  position: fixed;
-  left: 240px;
-  right: 0;
-  top: 0;
+  margin-left: 240px;
   background-color: #f6ffff;
+  margin-bottom: 36px;
 }
 
 #ListUserPage {
@@ -1490,11 +1489,9 @@
 }
 
 #ListOrdersPage {
-  position: fixed;
-  left: 240px;
-  right: 0;
-  top: 0;
+  margin-left: 240px;
   background-color: #f6ffff;
+  margin-bottom: 36px;
 }
 
 #ListOrderPage {
@@ -1517,10 +1514,8 @@
 }
 
 #ListProductsPage {
-  position: fixed;
-  left: 240px;
-  right: 0;
-  top: 0;
+  margin-left: 240px;
+  margin-bottom: 36px;
   background-color: #f6ffff;
 }
 
@@ -1566,11 +1561,8 @@
 }
 
 #EditOrderPage {
-  position: fixed;
   background-color: #f6ffff;
-  left: 240px;
-  right: 0;
-  top: 0;
+  margin-left: 240px;
 }
 
 #EditOrderPage h1 {
@@ -1622,10 +1614,7 @@
 
 #EditProductPage {
   background-color: #f6ffff;
-  position: fixed;
-  left: 240px;
-  right: 0;
-  top: 0;
+  margin-left: 240px;
 }
 
 #EditProductPage h1 {

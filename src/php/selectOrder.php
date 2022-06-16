@@ -1,40 +1,51 @@
 <?php
-require 'connect.php';
-
-header("Access-Control-Allow-Origin: *");
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
-// if(isset($postdata) && !empty($postdata)){
-//     $request = json_decode($postdata);
-     
-     
-//     $name = $request->name;
-//     $userName = $request->userName;
-//     $email = $request->email;
-//     $phone = $request->phone;
-//     $password = $request->password;
-//     $sql = "INSERT INTO users (name,userName,email,phone,password) VALUES ('$name','$userName','$email','$phone','$password')";
-//     if(mysqli_query($db,$sql)){
-//         http_response_code(201);
-//     }
-//     else{
-//         http_response_code(422); 
-//     }
-         
-// }
-$path = explode('/', $_SERVER['REQUEST_URI']);
+/*$path = explode('/', $_SERVER['REQUEST_URI']);
 $userID=$path[6];
-$sql = "SELECT * FROM orders WHERE userName='$userID'";
-$result = $db->query($sql);
+$connect = mysqli_connect("localhost", "root","","test");
+$query = "SELECT * FROM orders";
+$result = mysqli_query($connect, $query);
 $orders = array();
 while($row = mysqli_fetch_array($result)){
     $orders[] = array (
         'products' => $row["products"],
         'cost' => $row["cost"],
+        
     );
 }
+echo json_encode($orders );*/
+
+
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Methods: *");
+
+include 'DbConnect.php';
+$objDb = new DbConnect;
+$conn = $objDb->connect();
+
+$method = $_SERVER['REQUEST_METHOD'];
+    
+$sql = "SELECT products, cost, created_at FROM orders";
+$path = explode('/', $_SERVER['REQUEST_URI']);
+if(isset($path[6]) && is_numeric($path[6])) {
+    $sql .= " WHERE userID = :userID";
+    $stmt = $conn->prepare($sql);
+    //while( $order = $stmt->fetch(PDO::FETCH_ASSOC)){
+    $stmt->bindParam(':userID', $path[6]);
+    $stmt->execute();
+    //$order = $stmt->fetch(PDO::FETCH_ASSOC);
+    //}
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $order = $stmt->fetchAll();
+ 
+} else {
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $order = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 echo json_encode($order);
-
-
 ?>
