@@ -1,9 +1,6 @@
 #EditOrderPage {
-  position: fixed;
   background-color: #f6ffff;
-  left: 240px;
-  right: 0;
-  top: 0;
+  margin-left: 240px;
   h1 {
     font-size: 26px;
     text-align: center;
@@ -46,10 +43,7 @@
 }
 #EditProductPage {
   background-color: #f6ffff;
-  position: fixed;
-  left: 240px;
-  right: 0;
-  top: 0;
+  margin-left: 240px;
   h1 {
     font-size: 26px;
     text-align: center;
