@@ -1,6 +1,5 @@
 #EditOrderPage {
   background-color: #f6ffff;
-  margin-left: 240px;
   h1 {
     font-size: 26px;
     text-align: center;
@@ -35,6 +34,8 @@
         margin-top: 6px;
       }
       button {
+        position: absolute;
+        right: 240px;
         width: 120px;
         margin-top: 24px;
       }
@@ -43,7 +44,6 @@
 }
 #EditProductPage {
   background-color: #f6ffff;
-  margin-left: 240px;
   h1 {
     font-size: 26px;
     text-align: center;
@@ -82,13 +82,12 @@
         left: 20px;
         margin-top: 6px;
       }
-      .button-btn {
+      button {
         position: absolute;
-        right: 210px;
-        button {
-          width: 120px;
-          margin-top: 24px;
-        }
+        right: 275px;
+        width: 120px;
+        height: 32px;
+        line-height: 20px;
       }
     }
   }

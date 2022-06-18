@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import "./styles/style.css";
+import { useEffect, useState } from "react";
 import $ from "jquery";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -124,12 +123,8 @@ export default function Login({
             `http://localhost/assigment-web/src/php/insert.php/user/save`,
             obj
           )
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
+          .then((res) => {})
+          .catch((error) => {});
         setUserCustomer(customerData);
         setRegisterAccount({
           ...registerAccount,

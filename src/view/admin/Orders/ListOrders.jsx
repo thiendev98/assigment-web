@@ -1,7 +1,4 @@
-import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
-//import './App.css';
-import EditOrder from "./EditOrder";
-import ListOrder from "./ListOrder";
+import { Outlet } from "react-router-dom";
 
 function ListOrders() {
   return (

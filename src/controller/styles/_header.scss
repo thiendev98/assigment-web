@@ -64,8 +64,20 @@
     &__user {
       display: flex;
       justify-content: space-evenly;
+      .user--customer {
+        img {
+          width: 32px;
+          height: 32px;
+          cursor: pointer;
+        }
+      }
       .user--cart {
         position: relative;
+        img {
+          width: 32px;
+          height: 32px;
+          background: transparent;
+        }
         span {
           position: absolute;
           background-color: $button--color;

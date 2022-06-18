@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import OrderList from "./OrderList";
 import Information from "./Information";
 import { toastNotifySuccess } from "../components/Cart";
-import "../styles/style.css";
 import { FaTimes } from "react-icons/fa";
 import save from "../images/save.png";
 import cancel from "../images/cancel.png";
@@ -163,32 +162,32 @@ export default function User({
       setIsLoading(false);
     };
   }, [isLoading]);
-  
+
+  useEffect(() => {
+    if (isChangePassword) {
+      setUser({ ...user, password: changePassword.new });
+      setUserUpdate({ ...userUpdate, password: changePassword.new });
+    }
+    return () => {
+      setIsChangePassword(false);
+    };
+  }, [isChangePassword]);
+
   const handleUserUpdateChange = (event) => {
     if (indexEdit === 0) {
       setUserUpdate({ ...userUpdate, name: event.target.value });
     } else if (indexEdit === 1)
-    setUserUpdate({ ...userUpdate, phone: event.target.value });
+      setUserUpdate({ ...userUpdate, phone: event.target.value });
     else if (indexEdit === 2)
-    setUserUpdate({ ...userUpdate, email: event.target.value });
+      setUserUpdate({ ...userUpdate, email: event.target.value });
     else if (indexEdit === 3)
-    setUserUpdate({ ...userUpdate, address: event.target.value });
+      setUserUpdate({ ...userUpdate, address: event.target.value });
   };
-  useEffect(() => {
-    if (isChangePassword)
-    {
-      setUser({ ...user, password: changePassword.new });
-    }    return () => {
-      setIsChangePassword(false);
-    };
-  }, [isChangePassword]);
-  
+
   const checkedPasswordClick = () => {
     const patternPassword =
-    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9@#$%^&*]{8,15}$/;
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9@#$%^&*]{8,15}$/;
     if (changePassword.old !== user.password) {
-      console.log(changePassword.old);
-      console.log(user.password);
       toastNotifyError("Mật khẩu hiện tại không chính xác");
     } else if (!patternPassword.test(changePassword.new)) {
       toastNotifyError("Mật khẩu mới không hợp lệ");
@@ -196,23 +195,23 @@ export default function User({
       toastNotifyError("Xác nhận mật khẩu không chính xác");
     } else {
       const password = {
-        password: changePassword.new
-      }
+        password: changePassword.new,
+      };
       axios
-      .post(
-        `http://localhost/assigment-web/src/php/insert.php/${userUpdate.key}/editpassword`,
-        password
+        .post(
+          `http://localhost/assigment-web/src/php/insert.php/${userUpdate.key}/editpassword`,
+          password
         )
         .then(function (response) {});
-        setIsChangePassword(true);
-        toastNotifySuccess("Thay đổi mật khẩu thành công");
-        setTimeout(() => {
-          setChangePassword({ ...changePassword, old: "", new: "", confirm: "" });
-          $(".users__edit--infomation").fadeOut("1000");
-        }, 4000);
-      }
-    };
-    const handleConfirmOnChange = () => {
+      setIsChangePassword(true);
+      toastNotifySuccess("Thay đổi mật khẩu thành công");
+      setTimeout(() => {
+        setChangePassword({ ...changePassword, old: "", new: "", confirm: "" });
+        $(".users__edit--infomation").fadeOut("1000");
+      }, 4000);
+    }
+  };
+  const handleConfirmOnChange = () => {
     axios
       .post(
         `http://localhost/assigment-web/src/php/insert.php/${userUpdate.key}/edit`,
@@ -281,7 +280,7 @@ export default function User({
             {pageInfo === "information" && (
               <Information listInfomation={listInfomation} />
             )}
-            {pageInfo === "orderlist" && <OrderList cartUser={cartUser} user={user}/>}
+            {pageInfo === "orderlist" && <OrderList user={user} />}
             <div className="users__edit--infomation">
               <div className="users__edit--infomation--form">
                 <FaTimes
