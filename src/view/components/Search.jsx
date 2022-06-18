@@ -1,6 +1,10 @@
-import React from "react";
-import "../styles/style.css";
-import HomeList from "../HomeList";
+import React, { useEffect, useState } from "react";
+import ShirtList from "../../php/listProduct/ShirtList";
+import SkirtList from "../../php/listProduct/SkirtList";
+import VestList from "../../php/listProduct/VestList";
+import TrousersList from "../../php/listProduct/TrousersList";
+import TShirtList from "../../php/listProduct/TShirtList";
+import productData from "../../php/productData.json";
 import Product from "./Product";
 export default function SearchPage({
   cart,
@@ -10,8 +14,20 @@ export default function SearchPage({
   searchProduct,
   setSearchProduct,
 }) {
+  const listData = [
+    ...productData,
+    ...ShirtList,
+    ...SkirtList,
+    ...VestList,
+    ...TrousersList,
+    ...TShirtList,
+  ];
+  const [listProduct, setListProduct] = useState(listData);
+  useEffect(() => {
+    setListProduct(listData);
+  }, []);
   const getProducts = () => {
-    return HomeList.filter((product) =>
+    return listProduct.filter((product) =>
       product.name
         .toLocaleLowerCase()
         .includes(searchProduct.toLocaleLowerCase())
@@ -34,8 +50,8 @@ export default function SearchPage({
         <div className="search__empty">
           <img
             className="search__empty--image"
-            alt="search__empty--image"
             src="https://bizweb.dktcdn.net/100/438/408/themes/848101/assets/search-page.svg?1646731994406"
+            alt="search__empty--image"
           />
           <p className="search__empty--result">
             Tìm kiếm <span>{searchProduct}</span> của bạn không có kết quả phù

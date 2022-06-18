@@ -118,8 +118,20 @@
           justify-content: space-evenly;
 }
 
+#header .navbar__user .user--customer img {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
 #header .navbar__user .user--cart {
   position: relative;
+}
+
+#header .navbar__user .user--cart img {
+  width: 32px;
+  height: 32px;
+  background: transparent;
 }
 
 #header .navbar__user .user--cart span {

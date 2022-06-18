@@ -31,7 +31,7 @@
   }
   .cart__products {
     min-height: 364px;
-    header {
+    .order_for_you {
       margin-left: 12px;
       span {
         opacity: 0.6;
@@ -123,6 +123,11 @@
         @include centerItem();
         flex-direction: column;
         min-height: 140px;
+        img {
+          width: 44px;
+          height: 44px;
+          cursor: pointer;
+        }
         p {
           margin: 0;
           padding: 0;

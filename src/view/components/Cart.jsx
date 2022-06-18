@@ -19,15 +19,7 @@ export const toastNotifySuccess = (value) => {
     position: "top-center",
   });
 };
-export default function Cart({
-  cart,
-  setCart,
-  cartUser,
-  setCartUser,
-  nextPage,
-  onClick,
-  user,
-}) {
+export default function Cart({ cart, setCart, nextPage, onClick, user }) {
   const getTotalSum = () => {
     return cart.reduce((sum, { price, quantity }) => sum + price * quantity, 0);
   };
@@ -52,11 +44,19 @@ export default function Cart({
   var productsName = "";
 
   const handleOrderClick = () => {
-    cart.forEach((product) => {
-      productsName += product.name;
-      productsName += " x" + product.quantity.toString() + ", ";
+    cart.forEach((product, index) => {
+      if (index < cart.length - 1) {
+        productsName += product.name;
+        productsName += ` màu ${product.color} `;
+        productsName += `size ${product.size}`;
+        productsName += " x" + product.quantity.toString() + ", ";
+      } else {
+        productsName += product.name;
+        productsName += ` màu ${product.color} `;
+        productsName += `size ${product.size}`;
+        productsName += " x" + product.quantity.toString();
+      }
     });
-    console.log(productsName);
     toastNotifySuccess("Đặt hàng thành công. Tiếp tục mua sắm.");
     let totalCart;
     if (getTotalSum() >= 1000000 && getTotalSum() < 1750000) {
@@ -81,10 +81,7 @@ export default function Cart({
         axios
           .post(`http://localhost/assigment-web/src/php/insertOrder.php`, order)
           .then((res) => {})
-          .catch((error) => {
-            console.error(error.response);
-          });
-        setCartUser([...cartUser, ...cart]);
+          .catch((error) => {});
         setCart([]);
         nextPage("shirt");
       }, 4000);
@@ -100,17 +97,17 @@ export default function Cart({
             src="https://bizweb.dktcdn.net/100/438/408/themes/848101/assets/blank_cart.svg?1646575637708"
           />
           {user.login ? (
-            <>
+            <div>
               <p>Giỏ hàng của bạn trống</p>
               <button onClick={() => nextPage("shirt")}>
                 Tiếp tục mua sắm
               </button>
-            </>
+            </div>
           ) : (
-            <>
+            <div>
               <p>Bạn cần đăng nhập để mua hàng</p>
               <button onClick={onClick}>Đăng nhập ngay</button>
-            </>
+            </div>
           )}
         </div>
       )}
@@ -118,25 +115,23 @@ export default function Cart({
         <div className="cart__products">
           <div className="row container-fluid">
             <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-              <header>
-                <h5>
+              <div className="odrer_for_you">
+                <p>
                   Đơn hàng của bạn <span>({cart.length}) Sản phẩm</span>
-                </h5>
-              </header>
+                </p>
+              </div>
               <div className="cart__products--header row container-fluid ">
                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-7 col-6">
                   Sản phẩm
                 </div>
                 <div className="col-xl-2 col-lg-2 col-md-2 col-sm-0 col-0 cart__products--header__price">
-                  Đơn giá{" "}
+                  Đơn giá
                 </div>
                 <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-3">
-                  {" "}
-                  Số lượng{" "}
+                  Số lượng
                 </div>
                 <div className="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-3">
-                  {" "}
-                  Thành tiền{" "}
+                  Thành tiền
                 </div>
               </div>
               {cart.map((product, idx) => (
@@ -153,7 +148,7 @@ export default function Cart({
                     <div className="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-12">
                       <p className="cart__products--item__name">
                         {product.name}
-                        <p>{product.price} đ</p>
+                        {/* <span>{product.price} đ</span> */}
                       </p>
 
                       <div className="cart__products--item__size">
@@ -198,6 +193,11 @@ export default function Cart({
             <div className="col-xl-0 col-lg-0 col-md-3 col-sm-2 col-2"></div>
             <div className="cart__products--payment col-xl-3 col-lg-3 col-md-6 col-sm-8 col-8">
               <div className="payment--title">
+                {/* <img
+                  className="icon__truck--kun"
+                  alt="truck-kun"
+                  src="https://c8.alamy.com/comp/T9DMAB/delivery-truck-sign-icon-in-transparent-style-van-vector-illustration-on-isolated-background-cargo-car-business-concept-T9DMAB.jpg"
+                /> */}
                 <lord-icon
                   className="icon__truck--kun"
                   trigger="loop"

@@ -1,11 +1,7 @@
-import "../styles/style.css";
 import $ from "jquery";
 import { FaTimes } from "react-icons/fa";
-import { loadAnimation } from "lottie-web";
-import { defineLordIconElement } from "lord-icon-element";
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
-defineLordIconElement(loadAnimation);
 export const toastNotifyDefault = (value) => {
   toast.info(value, {
     autoClose: 2000,
@@ -156,8 +152,9 @@ export default function Product({
           };
           newCart.push(itemInCart);
         }
-        setCart(newCart);
+
         setTimeout(() => {
+          setCart(newCart);
           nextPage("cart");
         }, 1000);
       }
@@ -216,189 +213,193 @@ export default function Product({
       )}
       <ul className="product__content row container-fluid">
         {ProductList.map((product, index) => {
-          return (
-            <>
-              {current === 0 && detail === false && (
-                <li
-                  key={index}
-                  className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 c-12 product__content--item"
-                >
-                  <div className="item__list">
-                    {typeof product.link === "object" ? (
+          if (current === 0 && detail === false)
+            return (
+              <li
+                key={index}
+                className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 c-12 product__content--item"
+              >
+                <div className="item__list">
+                  {typeof product.link === "object" ? (
+                    <img
+                      className="list__img"
+                      alt="list__img"
+                      src={product.link[0]}
+                      onClick={() => handleClick(index, product.type)}
+                    />
+                  ) : (
+                    <img
+                      className="list__img"
+                      alt="list__img"
+                      src={`http://localhost/assigment-web/src/php/image/${product.link}`}
+                      onClick={() => handleClick(index, product.type)}
+                    />
+                  )}
+
+                  {typeof product.link === "object" &&
+                    product.link.length > 1 && (
                       <img
-                        className="list__img"
-                        alt="list__img"
-                        src={product.link[0]}
-                        onClick={() => handleClick(index, product.type)}
-                      />
-                    ) : (
-                      <img
-                        className="list__img"
-                        alt="list__img"
-                        src={`http://localhost/assigment-web/src/php/image/${product.link}`}
+                        className="list__img--hover"
+                        alt="list__img--hover"
+                        src={product.link[1]}
                         onClick={() => handleClick(index, product.type)}
                       />
                     )}
-                 
-                {typeof product.link === "object" && product.link.length > 1 &&  (
-                  <img
-                    className="list__img--hover"
-                    alt="list__img--hover"
-                    src={product.link[1]}
-                    onClick={() => handleClick(index, product.type)}
-                  />
-                )}
-                {typeof product.link === 'object' && product.link.length === 1 ?  <img
-                    className="list__img--hover"
-                    alt="list__img--hover"
-                    src={product.link[0]}
-                    onClick={() => handleClick(index, product.type)}
-                  /> : ""}
+                  {typeof product.link === "object" &&
+                  product.link.length === 1 ? (
+                    <img
+                      className="list__img--hover"
+                      alt="list__img--hover"
+                      src={product.link[0]}
+                      onClick={() => handleClick(index, product.type)}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <p onClick={() => handleClick(index, product.type)}>
+                  {product.name}
+                </p>
+                <span onClick={() => handleClick(index, product.type)}>
+                  {product.price} đ
+                </span>
+              </li>
+            );
+          if (current === index && detail === true)
+            return (
+              <li key={index} className="detail--item">
+                <div className="row container-fluid">
+                  <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 detail__img">
+                    {typeof product.link === "object" ? (
+                      <img
+                        className="item--img"
+                        alt="item--img"
+                        src={product.link[position]}
+                      />
+                    ) : (
+                      <img
+                        className="item--img"
+                        alt="item--img"
+                        src={`http://localhost/assigment-web/src/php/image/${product.link}`}
+                      />
+                    )}
                   </div>
-                  <p onClick={() => handleClick(index, product.type)}>
-                    {product.name}
-                  </p>
-                  <span onClick={() => handleClick(index, product.type)}>
-                    {product.price} đ
-                  </span>
-                </li>
-              )}
-              {current === index && detail === true && (
-                <li key={index} className="detail--item">
-                  <div className="row container-fluid">
-                    <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 detail__img">
-                      {typeof product.link === "object" ? (
+
+                  <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 detail__info">
+                    <h3>{product.name}</h3>
+                    <p className="detail__info--code">Mã : {product.code}</p>
+                    <p className="detail__info--price">{product.price} đ</p>
+                    <p className="detail__info--color">
+                      Màu:{" "}
+                      <span>
+                        {typeof product.color === "object"
+                          ? product.color[color]
+                          : product.color}
+                      </span>
+                    </p>
+                    {typeof product.link === "object" ? (
+                      <div
+                        className="row container-fluid detail__img"
+                        ref={myRefImage}
+                      >
+                        {product.link.map((img, i) => (
+                          <img
+                            key={i}
+                            className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 detail__info--img"
+                            src={img}
+                            alt="detail__info--img"
+                            onClick={() => handleClickImages(i)}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <div
+                        className="row container-fluid detail__img"
+                        ref={myRefImage}
+                      >
+                        {" "}
                         <img
-                          className="item--img"
-                          alt="item--img"
-                          src={product.link[position]}
-                        />
-                      ) : (
-                        <img
-                          className="item--img"
-                          alt="item--img"
+                          className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 detail__info--img"
                           src={`http://localhost/assigment-web/src/php/image/${product.link}`}
+                          alt="detail__info--img"
                         />
-                      )}
+                      </div>
+                    )}
+                    <p className="detail__info--size">
+                      Size: <span>{product.size[size]}</span>
+                    </p>
+                    <ul className="detail__info--size__list" ref={myRefSize}>
+                      {product.size.map((s, i) => (
+                        <li
+                          key={i}
+                          className="item--size"
+                          onClick={() => handleClickSize(i)}
+                        >
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="detail__info--button row container-fluid">
+                      <button
+                        className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 c-12 btn--add__cart"
+                        onClick={() => addToCart(product)}
+                      >
+                        Thêm vào giỏ hàng
+                      </button>
+                      <button
+                        className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 c-12 btn--buy__now"
+                        onClick={() => goToCart(product)}
+                      >
+                        Mua ngay
+                      </button>
                     </div>
 
-                    <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 detail__info">
-                      <h3>{product.name}</h3>
-                      <p className="detail__info--code">Mã : {product.code}</p>
-                      <p className="detail__info--price">{product.price} đ</p>
-                      <p className="detail__info--color">
-                        Màu:{" "}
-                        <span>
-                          {typeof product.color === "object"
-                            ? product.color[color]
-                            : product.color}
-                        </span>
-                      </p>
-                      {typeof product.link === "object" ? (
+                    <div className="detail--item__info row container-fluid">
+                      {listSevice.map((service, i) => (
                         <div
-                          className="row container-fluid detail__img"
-                          ref={myRefImage}
+                          key={i}
+                          className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 row container-fluid information--item"
                         >
-                          {product.link.map((img, i) => (
-                            <img
-                              key={i}
-                              className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 detail__info--img"
-                              src={img}
-                              alt="detail__info--img"
-                              onClick={() => handleClickImages(i)}
-                            />
-                          ))}
-                        </div>
-                      ) : (
-                        <div
-                          className="row container-fluid detail__img"
-                          ref={myRefImage}
-                        >
-                          {" "}
                           <img
-                            className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 detail__info--img"
-                            src={`http://localhost/assigment-web/src/php/image/${product.link}`}
-                            alt="detail__info--img"
+                            alt="service__img"
+                            className="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 service__img"
+                            src={service.img}
                           />
-                        </div>
-                      )}
-                      <p className="detail__info--size">
-                        Size: <span>{product.size[size]}</span>
-                      </p>
-                      <ul className="detail__info--size__list" ref={myRefSize}>
-                        {product.size.map((s, i) => (
-                          <li
-                            key={i}
-                            className="item--size"
-                            onClick={() => handleClickSize(i)}
-                          >
-                            {s}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="detail__info--button row container-fluid">
-                        <button
-                          className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 c-12 btn--add__cart"
-                          onClick={() => addToCart(product)}
-                        >
-                          Thêm vào giỏ hàng
-                        </button>
-                        <button
-                          className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 c-12 btn--buy__now"
-                          onClick={() => goToCart(product)}
-                        >
-                          Mua ngay
-                        </button>
-                      </div>
-
-                      <div className="detail--item__info row container-fluid">
-                        {listSevice.map((service, i) => (
-                          <div
-                            key={i}
-                            className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 row container-fluid information--item"
-                          >
-                            <img
-                              alt="service__img"
-                              className="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 service__img"
-                              src={service.img}
-                            />
-                            <div className="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
-                              <p>
-                                <b>{service.title}</b>
-                              </p>
-                              <p
-                                onClick={() => handleShowInfo(i)}
-                                style={{
-                                  color: "cadetblue",
-                                }}
-                              >
-                                {service.text}
-                              </p>
-                              <div className="detail--service__info">
-                                <div className="detail--service__info--item">
-                                  <FaTimes
-                                    className="icon__cancel"
-                                    onClick={() => handleHideInfo()}
-                                    style={{ cursor: "pointer" }}
-                                  />
-                                  <p
-                                    style={{ cursor: "none" }}
-                                    dangerouslySetInnerHTML={{
-                                      __html: listContent[about],
-                                    }}
-                                  ></p>
-                                </div>
+                          <div className="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+                            <p>
+                              <b>{service.title}</b>
+                            </p>
+                            <p
+                              onClick={() => handleShowInfo(i)}
+                              style={{
+                                color: "cadetblue",
+                              }}
+                            >
+                              {service.text}
+                            </p>
+                            <div className="detail--service__info">
+                              <div className="detail--service__info--item">
+                                <FaTimes
+                                  className="icon__cancel"
+                                  onClick={() => handleHideInfo()}
+                                  style={{ cursor: "pointer" }}
+                                />
+                                <p
+                                  style={{ cursor: "none" }}
+                                  dangerouslySetInnerHTML={{
+                                    __html: listContent[about],
+                                  }}
+                                ></p>
                               </div>
                             </div>
                           </div>
-                        ))}
-                      </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </li>
-              )}
-            </>
-          );
+                </div>
+              </li>
+            );
         })}
       </ul>
     </div>

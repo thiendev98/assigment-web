@@ -6,7 +6,6 @@
   padding: 0;
   text-decoration: none;
   list-style-type: none;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 #HomePage {
@@ -254,11 +253,11 @@
   min-height: 364px;
 }
 
-#CartPage .cart__products header {
+#CartPage .cart__products .order_for_you {
   margin-left: 12px;
 }
 
-#CartPage .cart__products header span {
+#CartPage .cart__products .order_for_you span {
   opacity: 0.6;
 }
 
@@ -386,6 +385,12 @@
       -ms-flex-direction: column;
           flex-direction: column;
   min-height: 140px;
+}
+
+#CartPage .cart__products .cart__products--payment .payment--title img {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
 }
 
 #CartPage .cart__products .cart__products--payment .payment--title p {
@@ -1285,7 +1290,9 @@
 
 #OrderListPages .product--list {
   font-size: 16px;
-  margin: 6px 0px;
+  margin: 4px 0;
+  padding: 4px 0;
+  border-bottom: 1px solid #dde1ef;
 }
 
 #OrderListPages .product--list__name {
@@ -1304,6 +1311,7 @@
 #InfomationAccount .info__edit {
   margin: 6px 0;
   height: 24px;
+  padding: 26px 0;
 }
 
 #InfomationAccount .info__edit input {
@@ -1326,7 +1334,7 @@
   line-height: 24px;
   font-size: 18px;
   font-weight: 500;
-  padding: 0;
+  padding: 0 12px;
   letter-spacing: 1.2px;
 }
 
@@ -1491,7 +1499,7 @@
 #ListOrdersPage {
   margin-left: 240px;
   background-color: #f6ffff;
-  margin-bottom: 36px;
+  min-height: 758px;
 }
 
 #ListOrderPage {
@@ -1562,7 +1570,6 @@
 
 #EditOrderPage {
   background-color: #f6ffff;
-  margin-left: 240px;
 }
 
 #EditOrderPage h1 {
@@ -1608,13 +1615,14 @@
 }
 
 #EditOrderPage form tr button {
+  position: absolute;
+  right: 240px;
   width: 120px;
   margin-top: 24px;
 }
 
 #EditProductPage {
   background-color: #f6ffff;
-  margin-left: 240px;
 }
 
 #EditProductPage h1 {
@@ -1664,14 +1672,12 @@
   margin-top: 6px;
 }
 
-#EditProductPage form tr .button-btn {
+#EditProductPage form tr button {
   position: absolute;
-  right: 210px;
-}
-
-#EditProductPage form tr .button-btn button {
+  right: 275px;
   width: 120px;
-  margin-top: 24px;
+  height: 32px;
+  line-height: 20px;
 }
 
 #CreateProductPage h1 {
@@ -2217,13 +2223,13 @@
        object-fit: contain;
   }
   #HomePage .home__content--item .item__list .list__img {
-    height: 202px;
+    height: auto;
     width: 182px;
     cursor: pointer;
   }
   #HomePage .home__content--item .list__img--hover {
     position: absolute;
-    height: 202px;
+    height: auto;
     width: 182px;
     left: 0;
     right: 0;
@@ -2269,13 +2275,13 @@
        object-fit: contain;
   }
   #ProductPage .product__content--item .item__list .list__img {
-    height: 202px;
+    height: auto;
     width: 182px;
     cursor: pointer;
   }
   #ProductPage .product__content--item .list__img--hover {
     position: absolute;
-    height: 202px;
+    height: auto;
     width: 182px;
     left: 0;
     right: 0;
@@ -2483,13 +2489,13 @@
        object-fit: contain;
   }
   #HomePage .home__content--item .item__list .list__img {
-    height: 202px;
+    height: auto;
     width: 182px;
     cursor: pointer;
   }
   #HomePage .home__content--item .list__img--hover {
     position: absolute;
-    height: 202px;
+    height: auto;
     width: 182px;
     left: 0;
     right: 0;
@@ -2552,13 +2558,13 @@
        object-fit: contain;
   }
   #ProductPage .product__content--item .item__list .list__img {
-    height: 202px;
+    height: auto;
     width: 182px;
     cursor: pointer;
   }
   #ProductPage .product__content--item .list__img--hover {
     position: absolute;
-    height: 202px;
+    height: auto;
     width: 182px;
     left: 0;
     right: 0;

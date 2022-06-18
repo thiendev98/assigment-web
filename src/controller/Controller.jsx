@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import $ from "jquery";
+import cart_user from "./images/cart.png";
 import Home from "../view/components/Home";
 import TShirt from "../view/components/TShirt";
 import Shirt from "../view/components/Shirt";
@@ -10,8 +11,6 @@ import Trousers from "../view/components/Trousers";
 import Login from "./Login";
 import User from "../view/user/User";
 import Search from "../view/components/Search";
-import { loadAnimation } from "lottie-web";
-import { defineLordIconElement } from "lord-icon-element";
 import { useNavigate } from "react-router-dom";
 import {
   FaFacebook,
@@ -20,14 +19,12 @@ import {
   FaTwitter,
   FaBars,
 } from "react-icons/fa";
-import "./styles/style.css";
 import logo from "./images/logo.png";
 import shirt from "./images/shirt.jpg";
 import skirt from "./images/skirt.jpg";
 import trousers from "./images/trousers.jpg";
 import vest from "./images/vest.jpg";
 import tshirt from "./images/tshirt.jpg";
-defineLordIconElement(loadAnimation);
 const PAGE_HOME = "home";
 const PAGE_VEST = "vest";
 const PAGE_SHIRT = "shirt";
@@ -38,7 +35,6 @@ const PAGE_CART = "cart";
 
 export default function Controller() {
   const [cart, setCart] = useState([]);
-  const [cartUser, setCartUser] = useState([]);
   const [page, setPage] = useState(PAGE_HOME);
   const [user, setUser] = useState({
     key: Number,
@@ -224,11 +220,11 @@ export default function Controller() {
           </div>
           <ul className="navbar__user col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2">
             <li className="user--customer">
-              <lord-icon
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
                 onClick={() => handleLogin()}
-                trigger=""
-                src="https://cdn.lordicon.com/dxjqoygy.json"
-              ></lord-icon>
+                alt="user"
+              />
               <Login
                 user={user}
                 setUser={setUser}
@@ -238,11 +234,11 @@ export default function Controller() {
               />
             </li>
             <li className="user--cart">
-              <lord-icon
-                src="https://cdn.lordicon.com/slkvcfos.json"
-                trigger="hover"
+              <img
+                src={cart_user}
+                alt="cart"
                 onClick={() => nextPage(PAGE_CART)}
-              ></lord-icon>
+              />
               <span>{cart.length}</span>
             </li>
           </ul>
@@ -333,8 +329,6 @@ export default function Controller() {
           <Cart
             cart={cart}
             setCart={setCart}
-            cartUser={cartUser}
-            setCartUser={setCartUser}
             nextPage={nextPage}
             onClick={handleLogin}
             user={user}
@@ -351,13 +345,7 @@ export default function Controller() {
           />
         )}
         {page === "userInformation" && (
-          <User
-            user={user}
-            setUser={setUser}
-            nextPage={nextPage}
-            cartUser={cartUser}
-            setCartUser={setCartUser}
-          />
+          <User user={user} setUser={setUser} nextPage={nextPage} />
         )}
       </div>
       {/*  */}
