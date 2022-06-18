@@ -8,7 +8,8 @@ import productData from "../../php/productData.json";
 export default function Home({ nextPage }) {
   const [listProduct, setListProduct] = useState([...productData, ...HomeList]);
   useEffect(() => {
-    setListProduct([...productData, ...HomeList]);
+    const dataProductList = productData.reverse();
+    setListProduct([...dataProductList, ...HomeList])
   }, []);
   const settings = {
     dots: true,
