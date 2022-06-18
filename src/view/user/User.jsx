@@ -156,25 +156,14 @@ export default function User({
       .then(function (response) {});
     setIsLoading(true);
   };
+
   useEffect(() => {
     if (isLoading) setUserUpdate({ ...userUpdate, avatar: avatarUpdate });
     return () => {
       setIsLoading(false);
     };
   }, [isLoading]);
-<<<<<<< HEAD
   
-=======
-  useEffect(() => {
-    if (isChangePassword){
-      setUserUpdate({ ...userUpdate, password: changePassword.new });
-    }
-    return () => {
-      setIsChangePassword(false);
-    };
-  }, [isChangePassword]);
-
->>>>>>> e4d67936d4edd3aac0b201a6c939e4c3a8cc481e
   const handleUserUpdateChange = (event) => {
     if (indexEdit === 0) {
       setUserUpdate({ ...userUpdate, name: event.target.value });
